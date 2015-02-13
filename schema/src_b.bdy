@@ -20,7 +20,7 @@ create or replace package body src_b is
 		v_proc varchar2(99);
 		v_sts  boolean := false;
 	begin
-		t.split(v_prog, r.getc('p'), '.');
+		t.split(v_prog, r.getc('p', 'src_b.proc'), '.');
 		v_pack := upper(v_prog(1));
 		-- v_proc := chr(9) || 'procedure ' || v_prog(2) || ' is' || chr(10);
 		v_proc := chr(9) || 'procedure ' || v_prog(2) || '%' || chr(10);
