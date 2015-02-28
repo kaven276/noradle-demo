@@ -1,4 +1,4 @@
-create or replace package body post_file_b is
+﻿create or replace package body post_file_b is
 
 	procedure upload_form is
 	begin
@@ -29,17 +29,21 @@ create or replace package body post_file_b is
 		x.p('  <label>', 'your password' || x.v('<input type=password,name=pass>', r.getc('pass')));
 		x.t('  <br/>');
 		x.s('  <input type=hidden,name=_file,value=test/>');
-		x.s('  <input type=file,name=file,size=30,height=5,multiple=true>');
-		x.s('  <input type=file,name=file,size=30,height=5,multiple=true>');
-		x.t('  <br/>');
+		x.t('  <br/>single');
+		x.s('  <input type=file,name=file,size=30,height=5>');
+		x.t('  <br/>multiple');
+		x.s('  <input multiple type=file,name=file,size=30,height=5>');
+		x.t('  <br/>image');
 		x.s('  <input type=hidden,name=_file2,value=test2/specified/>');
-		x.s('  <input type=file,name=file2,size=30,height=5,multiple=true>');
-		x.t('  <br/>');
-		x.s('  <input type=file,name=file3,size=30,height=5,multiple=true>');
+		x.s('  <input capture type=file,accept=image/*,name=file2,size=30,height=5>');
+		x.t('  <br/>video');
+		x.s('  <input type=file,accept=video/*,name=file3,size=30,height=5>');
 		x.t('  <br/>');
 		x.s('  <input type=submit>');
 		x.c('</form>');
 		x.c('</fieldset>');
+		x.p('<canvas>','');
+		x.j('<script>', '*.js');
 	end;
 
 	procedure ajax_post is
