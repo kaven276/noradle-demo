@@ -3,11 +3,12 @@
  */
 
 module.exports = {
-  http_port : 8888,
-  oracle_port : 1522,
-  oracle_keep_alive : 60,
-  demo_dbu : 'demo1',
-  static_url : '/',
-  static_root : __dirname + '/static',
-  upload_dir : __dirname + '/upload'
+  http_port: parseInt(process.argv[3] || 8080),
+  oracle_port: parseInt(process.argv[2] || 9008),
+  oracle_addr: (process.argv[2] || '').split(':'),
+  oracle_keep_alive: 60,
+  demo_dbu: 'demo1',
+  static_url: '/',
+  static_root: __dirname + '/static',
+  upload_dir: __dirname + '/upload'
 }

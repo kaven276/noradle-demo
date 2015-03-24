@@ -11,11 +11,22 @@ var cfg = require('./cfg.js')
   , port = cfg.http_port
   , port2 = port + 1000
   , y$static = cfg.static_url + cfg.demo_dbu + '/'
+  , reverse = (cfg.oracle_addr.length === 1)
+  , dbPool
   ;
 
-var dbPool = new noradle.DBPool(cfg.oracle_port, {
-  oracle_keep_alive : cfg.oracle_keep_alive
-});
+if (reverse) {
+  dbPool = new noradle.DBPool(cfg.oracle_port, {
+    oracle_keep_alive: cfg.oracle_keep_alive
+  });
+} else {
+  if (cfg.oracle_addr[1] === '') {
+    delete cfg.oracle_addr[1];
+  }
+  dbPool = noradle.DBPool.connect(cfg.oracle_addr, 3, {
+    FreeConnTimeout: cfg.oracle_keep_alive
+  });
+}
 
 function ReqBaseC(req){
   this.y$static = y$static;
