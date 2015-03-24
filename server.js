@@ -33,7 +33,7 @@ function ReqBaseC(req){
 }
 
 // set url routes
-{
+function set_route(){
 
   app.use(noradle.handlerHTTP(dbPool, ReqBaseC, {
     check_session_hijack: false,
@@ -59,6 +59,7 @@ function ReqBaseC(req){
 http.createServer(app).listen(port, function(){
   console.log('http server is listening at ' + port);
 });
+set_route();
 
 /**
  * You can watch DBPool status at another http server instance
