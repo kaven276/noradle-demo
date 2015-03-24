@@ -35,17 +35,17 @@ function ReqBaseC(req){
 // set url routes
 {
 
-  app.use(noradle.servlet(dbPool, ReqBaseC, {
-    check_session_hijack : false,
-    NoneBrowserPattern : /^$/,
-    static_url : cfg.static_url,
-    upload_dir : cfg.upload_dir,
-    favicon_url : y$static + 'favicon.ico'
+  app.use(noradle.handlerHTTP(dbPool, ReqBaseC, {
+    check_session_hijack: false,
+    NoneBrowserPattern: /^$/,
+    static_url: cfg.static_url,
+    upload_dir: cfg.upload_dir,
+    favicon_url: y$static + 'favicon.ico'
   }));
 
   app.use(y$static, connect.static(cfg.static_root, {
-    maxAge : cfg.oneDay,
-    redirect : false
+    maxAge: cfg.oneDay,
+    redirect: false
   }));
 
   app.use(y$static, harp.mount(cfg.static_root));
