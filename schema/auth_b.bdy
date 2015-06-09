@@ -126,11 +126,15 @@ create or replace package body auth_b is
 
 	procedure check_maxidle is
 	begin
-		if r.getn('s$IDLE') > to_number(r.getn('s$maxidle')) * 1000 then
+		if r.getn('s$IDLE') > r.getn('s$maxidle') * 1000 then
 			pc.h;
-			x.p('<p>', 'You logged in session is timeout for idle more than 15s, session is removed.');
-			x.p('<p>', 'last access time : ' || to_char(r.lat, 'hh:mm:ss'));
-			x.p('<p>', 'current time : ' || to_char(sysdate, 'hh:mm:ss'));
+			x.p('<p>',
+					'You logged in session is timeout for idle more than ' || r.getn('s$maxidle') || 's, session is removed.');
+			x.p('<p>', 'last access time : ' || to_char(r.lat, 'hh24:mi:ss'));
+			x.p('<p>', 'last access time : ' || to_char(sysdate - r.getn('s$IDLE') / 1000 / 24 / 60 / 60, 'hh24:mi:ss'));
+			x.p('<p>', 'current time : ' || to_char(sysdate, 'hh24:mi:ss'));
+			x.p('<p>', 'idle time : ' || to_char(r.getn('s$IDLE')));
+			x.p('<p>', 'idle time : ' || (sysdate - r.lat) * 24 * 60 * 60 * 1000);
 			x.p('<p>', 'max idle threshold : ' || r.getn('s$maxidle') || ' seconds');
 			auth_s.logout;
 			g.cancel;
@@ -142,8 +146,8 @@ create or replace package body auth_b is
 		if auth_s.login_time + r.getn('s$maxlive') / 24 / 60 / 60 < sysdate then
 			pc.h;
 			x.p('<p>', 'You logged in session lived for too long, that is more than 1 minute, session is removed.');
-			x.p('<p>', 'login time : ' || to_char(auth_s.login_time, 'hh:mm:ss'));
-			x.p('<p>', 'current time : ' || to_char(sysdate, 'hh:mm:ss'));
+			x.p('<p>', 'login time : ' || to_char(auth_s.login_time, 'hh24:mi:ss'));
+			x.p('<p>', 'current time : ' || to_char(sysdate, 'hh24:mi:ss'));
 			x.p('<p>', 'max live threshold : ' || r.getn('s$maxlive') || ' seconds');
 			auth_s.logout;
 			g.cancel;
@@ -170,12 +174,13 @@ create or replace package body auth_b is
 		x.t('<br/>');
 		x.p('<p>', 'This page show how to deal with login/logout fair, instead of using k_filter.before.');
 		x.p('<p>',
-				t.ps('You are :1 at :4, You have are logged in at :2 with method(:3).',
-						 st(auth_s.user_name, t.dt2s(auth_s.login_time), r.getc('s$method'), r.getc('s$company'))));
+				t.ps('You are :1 at :2, You have are logged in at :4 with method(:3).',
+						 st(auth_s.user_name, r.getc('s$company'), r.getc('s$method'), t.dt2s(auth_s.login_time))));
+		x.p('<p>', 'login time : ' || t.dt2s(auth_s.login_time));
+		x.p('<p>', 'login time : ' || r.getc('s$ltime'));
 		x.p('<p>', 'some example session attribute include');
 		x.p('<p>', 'attr1 = ' || r.getc('s$attr1'));
 		x.p('<p>', 'attr2 = ' || r.getc('s$attr2'));
-		x.p('<p>', 'session in demo_profile');
 		x.p('<p>', 'scheme = ' || profile_s.get_scheme);
 		x.p('<p>', 'rows per page = ' || profile_s.get_rows_per_page);
 		x.a('<a>', 'relogin', '@b.cookie_gac');
