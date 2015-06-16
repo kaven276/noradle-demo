@@ -20,11 +20,9 @@ if (reverse) {
     oracle_keep_alive: cfg.oracle_keep_alive
   });
 } else {
-  if (cfg.oracle_addr[1] === '') {
-    delete cfg.oracle_addr[1];
-  }
-  dbPool = noradle.DBPool.connect(cfg.oracle_addr, 3, {
-    FreeConnTimeout: cfg.oracle_keep_alive
+  var dbPool = noradle.DBDriver.connect(cfg.oracle_addr, {
+    cid: 'test',
+    passwd: 'test'
   });
 }
 
