@@ -9,7 +9,6 @@ var cfg = require('./cfg.js')
   , connect = require('connect')
   , app = connect.createServer()
   , port = cfg.http_port
-  , port2 = port + 1000
   , y$static = cfg.static_url + cfg.demo_dbu + '/'
   , reverse = (cfg.oracle_addr.length === 1)
   , dbPool
@@ -58,10 +57,3 @@ http.createServer(app).listen(port, function(){
   console.log('http server is listening at ' + port);
 });
 set_route();
-
-/**
- * You can watch DBPool status at another http server instance
- */
-http.createServer(noradle.poolMonitor.showStatus).listen(port2, function(){
-  console.log('http monitor server is listening at ' + port2);
-});
