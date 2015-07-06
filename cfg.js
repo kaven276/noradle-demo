@@ -4,7 +4,6 @@
 
 module.exports = {
   http_port: parseInt(process.argv[3] || 8080),
-  oracle_port: parseInt(process.argv[2] || 9008),
   oracle_addr: (process.argv[2] || '').split(':'),
   oracle_keep_alive: 60,
   demo_dbu: 'demo1',

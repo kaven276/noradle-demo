@@ -10,20 +10,10 @@ var cfg = require('./cfg.js')
   , app = connect.createServer()
   , port = cfg.http_port
   , y$static = cfg.static_url + cfg.demo_dbu + '/'
-  , reverse = (cfg.oracle_addr.length === 1)
-  , dbPool
-  ;
-
-if (reverse) {
-  dbPool = new noradle.DBPool(cfg.oracle_port, {
-    oracle_keep_alive: cfg.oracle_keep_alive
-  });
-} else {
-  var dbPool = noradle.DBDriver.connect(cfg.oracle_addr, {
+  , dbPool = noradle.DBDriver.connect(cfg.oracle_addr, {
     cid: 'test',
     passwd: 'test'
   });
-}
 
 function ReqBaseC(req){
   this.y$static = y$static;
