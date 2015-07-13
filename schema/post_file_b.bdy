@@ -1,4 +1,4 @@
-﻿create or replace package body post_file_b is
+create or replace package body post_file_b is
 
 	procedure upload_form is
 	begin
@@ -42,7 +42,7 @@
 		x.s('  <input type=submit>');
 		x.c('</form>');
 		x.c('</fieldset>');
-		x.p('<canvas>','');
+		x.p('<canvas>', '');
 		x.j('<script>', '*.js');
 	end;
 
