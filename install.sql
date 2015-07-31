@@ -1,6 +1,7 @@
 set echo off
 spool install.log replace
-pause install log will write to "install.log", please check it after the script run
+prompt install log will write to "install.log", please check it after the script run
+pause press enter to continue
 
 prompt Are you sure that you are in the noradle-demo project's root directory,
 pause if not, break(CTRL-C) and cd it and retry ...
@@ -32,8 +33,7 @@ whenever sqlerror exit
 
 prompt noradle-demo bundle in oracle db part have been installed successfully!
 prompt Please follow the steps below to learn from demo
-prompt 1. config server_config_t, let oracle known where to reverse connect nodejs
-prompt 2. run nodejs server, quick start with default cfg by "cd demo", "npm start"
-prompt 3. in oracle psp schema, exec "k_pmon.run_job" to start processes to serv.
-prompt 4. in your browser, access "http://localhost:8888/demo" (for example) to see the demo
+prompt 1. config server_config_t, start oracle processes and dispatcher process as in noradle document/wiki
+prompt 2. run `noradle-demo [dispatcher_addr:=1522] [http_listen_addr:=8888]`
+prompt 3. in your browser, access "http://localhost:8888/demo" (for example) to see the demo
 spool off
