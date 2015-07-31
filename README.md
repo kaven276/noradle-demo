@@ -1,5 +1,10 @@
 noradle official demo app show how to use http servlet, NDBC, call-out(with socket.io) with oracle PL/SQL.
 
+# introduction
+
+  "noradle-demo" is originally a part from "[noradle](https://github.com/kaven276/noradle)" project as "./demo" sub directory,
+now, the demo app in [noradle](https://www.npmjs.com/package/noradle) is a independent project.
+
 # install
 
 npm -g install noradle-demo
@@ -8,11 +13,15 @@ cd "project root"
 
 sqlplus "/ as sysdba" @install.sql
 
-In oracle database, configure server_control_t, add a record point to listening address of this demo server.
+In oracle database, configure server_control_t, and run noradle dispatcher to listen for client connection.
 
-`npm start` or `node ./server.js` to start the demo.
+`npm start [dispatcher_addr:=1522] [http_listen_addr:=8888]` to start the demo.
 
-If oracle server for noradle is not started, in noradle core user(PSP), run `exec k_pmon.run_job` to start.
+or
+
+run `noradle-demo [dispatcher_addr:=1522] [http_listen_addr:=8888]`
+
+how to start noradle server, see <https://github.com/kaven276/noradle>
 
 Check http://127.0.0.1:8888/demo to see if demo web app is working.
 
