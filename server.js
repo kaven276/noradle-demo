@@ -10,10 +10,8 @@ var cfg = require('./cfg.js')
   , app = connect.createServer()
   , port = cfg.http_port
   , y$static = cfg.static_url + cfg.demo_dbu + '/'
-  , dbPool = noradle.DBDriver.connect(cfg.oracle_addr, {
-    cid: 'test',
-    passwd: 'test'
-  });
+  , dbPool = noradle.DBDriver.connect(cfg.dispatcher_addr, cfg.client_auth)
+  ;
 
 function ReqBaseC(req){
   this.y$static = y$static;
