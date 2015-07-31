@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * Created by cuccpkfs on 14-12-17.
  */
