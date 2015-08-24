@@ -40,9 +40,37 @@ create or replace package body cache_b is
 		end loop;
 	end;
 
+	procedure last_scn is
+	begin
+		h.expires_now;
+		select max(ora_rowscn) into tmp.scn from user_t a;
+		h.last_scn(tmp.scn);
+		h.check_if_none_match_scn;
+		--h.header_close; -- It's required to avoid executing the main code.
+	
+		pc.h;
+		src_b.link_proc;
+		x.p('<p>', 'When this page is accessed, It may return 304 not modified for the entire day until mid-night.');
+		x.p('<p>',
+				'But if you modified/compiled some of the schema objeccts, It will detect the change and return the current version');
+		x.p('<p>',
+				'The last-modified-time will be max of the 00:00 in the morning or last-ddl-time of the schema objects.');
+		x.p('<p>',
+				'You can call h.last_modified multiple times, then call h.header_close, ' || '
+		the last-modified header will be set the lasted date value of them, ' ||
+				'So if the page have many parts, you can call h.last_modified for each part''s last modified time.');
+		x.t(' <br/>');
+	
+		for i in (select * from user_t a) loop
+			x.p('<p>', t.dt2s(i.ctime) || ' > ' || i.name);
+		end loop;
+	end;
+
 	procedure etag_md5 is
 		--v_charset varchar2(30) := nls_charset_name(nls_charset_id('CHAR_CS'));
 	begin
+		h.content_md5_on;
+		h.content_encoding_identity;
 		h.etag_md5_on;
 		pc.h;
 		src_b.link_proc;

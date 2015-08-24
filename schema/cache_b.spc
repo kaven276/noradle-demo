@@ -4,6 +4,8 @@ create or replace package cache_b is
 
 	procedure last_modified;
 
+	procedure last_scn;
+
 	procedure etag_md5;
 
 	procedure report_by_hour;

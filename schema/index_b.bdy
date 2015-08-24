@@ -126,6 +126,7 @@ create or replace package body index_b is
 		x.p('<dt>', 'cache_b');
 		x.p('<dd>', x.a('<a>', 'expires', 'cache_b.expires'));
 		x.p('<dd>', x.a('<a>', 'last_modified', 'cache_b.last_modified'));
+		x.p('<dd>', x.a('<a>', 'last_scn', 'cache_b.last_scn'));
 		x.p('<dd>', x.a('<a>', 'etag_md5', 'cache_b.etag_md5'));
 		x.p('<dd>', x.a('<a>', 'report_by_hour', 'cache_b.report_by_hour'));
 	
