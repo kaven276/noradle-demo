@@ -26,6 +26,8 @@ function set_route(){
     NoneBrowserPattern: /^$/,
     static_url: cfg.static_url,
     upload_dir: cfg.upload_dir,
+    template_dir: cfg.template_dir,
+    template_engine: cfg.template_engine,
     favicon_url: y$static + 'favicon.ico'
   }));
 

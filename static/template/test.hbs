@@ -1,0 +1,21 @@
+<html>
+<body>
+<table rules="all">
+  <caption>
+    <a href="http://handlebarsjs.com/" target="handlebars">learn handlebars</a>
+    |
+    <a href="./template/test.hbs">template source</a>
+  </caption>
+  <tbody>
+  {{#objects.rows}}
+    <tr>
+      <td>{{object_name}}</td>
+      <td>{{subobject_name}}</td>
+      <td>{{object_type}}</td>
+      <td>{{created}}</td>
+    </tr>
+  {{/objects.rows}}
+  </tbody>
+</table>
+</body>
+</html>

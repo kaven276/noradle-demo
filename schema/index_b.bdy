@@ -147,6 +147,11 @@ create or replace package body index_b is
 	
 		x.p('<dt>', 'db_src_b');
 		x.p('<dd>', x.a('<a>', 'example', 'db_src_b.example'));
+		x.p('<dd>', x.a('<a>', 'example(jade)', 'db_src_b.example?template=test.jade'));
+		x.p('<dd>', x.a('<a>', 'example(mustache)', 'db_src_b.example?template=test.mst'));
+		x.p('<dd>', x.a('<a>', 'example(handlebars)', 'db_src_b.example?template=test.hbs'));
+		x.p('<dd>', x.a('<a>', 'example(swig)', 'db_src_b.example?template=test.swig'));
+		x.p('<dd>', x.a('<a>', 'example(ejs)', 'db_src_b.example?template=test.ejs'));
 	
 		x.p('<dt>', 'proformance test');
 		x.p('<dd>', x.a('<a>', 'css_prof_b', 'css_prof_b.main'));

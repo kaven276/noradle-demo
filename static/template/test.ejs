@@ -1,0 +1,21 @@
+<html>
+<body>
+<table rules="all" cellpadding=>
+<caption>
+ <a href="https://github.com/tj/ejs" target="ejs">learn ejs</a>
+ |
+ <a href="./template/test.ejs"> template source
+</caption>
+<tbody>
+  <% objects.rows.forEach(function(o){ %>
+   <tr>
+    <td><%=o.object_name %></td>
+    <td><%=o.subobject_name %></td>
+    <td><%=o.object_type %></td>
+    <td><%=o.created %></td>
+   </tr>
+  <% }) %>
+</tbody>
+</table>
+</body>
+</html>

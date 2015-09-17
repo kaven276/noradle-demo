@@ -6,6 +6,10 @@ create or replace package body db_src_b is
 		v2  number := 123456;
 		v3  date := date '1976-10-26';
 	begin
+		if not r.is_null('template') then
+			h.convert_json_template(r.getc('template'), r.getc('engine'));
+		end if;
+	
 		rs.use_remarks;
 		h.line('# a stardard psp.web result sets example page');
 		h.line('# It can be used in browser or NodeJS');

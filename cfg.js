@@ -9,6 +9,8 @@ module.exports = {
   static_url: '/',
   static_root: __dirname + '/static',
   upload_dir: __dirname + '/upload',
+  template_dir: __dirname + '/static/template',
+  template_engine: 'jade',
   client_auth: {
     cid: 'demo',
     passwd: 'demo'

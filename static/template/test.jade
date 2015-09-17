@@ -1,0 +1,15 @@
+doctype html
+html
+  body
+    table(rules="all")
+      caption
+        a(href="http://jade-lang.com/",target="jade") learn jade
+        | |
+        a(href="./template/test.jade") template source
+      tbody
+        each o in objects.rows
+          tr
+            td= o.object_name
+            td= o.subobject_name
+            td= o.object_type
+            td= o.created
