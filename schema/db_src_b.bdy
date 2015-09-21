@@ -27,6 +27,15 @@ create or replace package body db_src_b is
 			select v1 as name, v2 as val, v3 as ctime, r.getc('param1') p1, r.getc('param2') p2, r.getc('__parse') pnull
 				from dual;
 		rs.print('namevals', cur);
+	
+	end;
+	procedure scalars is
+	begin
+		h.convert_json;
+		rs.nv('name', 'kaven276');
+		rs.nv('age', 39);
+		rs.nv('birth', sysdate - 39);
+		rs.nv('married', true);
 	end;
 
 end db_src_b;
