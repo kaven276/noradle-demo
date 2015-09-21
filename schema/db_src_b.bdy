@@ -29,6 +29,26 @@ create or replace package body db_src_b is
 		rs.print('namevals', cur);
 	
 	end;
+
+	procedure pack_proc is
+		cur sys_refcursor;
+	begin
+		open cur for
+			select a.object_name pack, a.created, a.status
+				from user_objects a
+			 where a.object_type = 'PACKAGE'
+			 order by 1 asc;
+		rs.print('packages', cur);
+	
+		open cur for
+			select a.object_name pack, a.procedure_name "_"
+				from user_procedures a
+			 where a.object_type = 'PACKAGE'
+				 and a.procedure_name is not null
+			 order by a.object_name asc, a.subprogram_id asc;
+		--rs.print('procedures', cur);
+		rs.print('procedures/pack|packages/pack', cur);
+	end;
 	procedure scalars is
 	begin
 		h.convert_json;
