@@ -41,7 +41,7 @@ create or replace package body db_src_b is
 		rs.print('packages', cur);
 	
 		open cur for
-			select a.object_name pack, a.procedure_name proc
+			select a.object_name pack, a.procedure_name proc, a.subprogram_id
 				from user_procedures a
 			 where a.object_type = 'PACKAGE'
 				 and a.procedure_name is not null
