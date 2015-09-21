@@ -41,13 +41,21 @@ create or replace package body db_src_b is
 		rs.print('packages', cur);
 	
 		open cur for
+			select a.object_name pack, a.procedure_name proc
+				from user_procedures a
+			 where a.object_type = 'PACKAGE'
+				 and a.procedure_name is not null
+			 order by a.object_name asc, a.subprogram_id asc;
+		rs.print('procedures/pack|packages/pack', cur);
+	
+		open cur for
 			select a.object_name pack, a.procedure_name "_"
 				from user_procedures a
 			 where a.object_type = 'PACKAGE'
 				 and a.procedure_name is not null
 			 order by a.object_name asc, a.subprogram_id asc;
-		--rs.print('procedures', cur);
-		rs.print('procedures/pack|packages/pack', cur);
+		rs.print('procs|packages', cur);
+	end;
 	end;
 	procedure scalars is
 	begin
