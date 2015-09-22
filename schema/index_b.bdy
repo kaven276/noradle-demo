@@ -146,12 +146,18 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a target=_blank>', 'ajaxload containver', 'po_ajaxload_b.main'));
 	
 		x.p('<dt>', 'db_src_b');
-		x.p('<dd>', x.a('<a>', 'example', 'db_src_b.example'));
-		x.p('<dd>', x.a('<a>', 'example(jade)', 'db_src_b.example?template=test.jade'));
-		x.p('<dd>', x.a('<a>', 'example(mustache)', 'db_src_b.example?template=test.mst'));
-		x.p('<dd>', x.a('<a>', 'example(handlebars)', 'db_src_b.example?template=test.hbs'));
-		x.p('<dd>', x.a('<a>', 'example(swig)', 'db_src_b.example?template=test.swig'));
-		x.p('<dd>', x.a('<a>', 'example(ejs)', 'db_src_b.example?template=test.ejs'));
+		x.p('<dd>', x.a('<a>', 'example', 'db_src_b.basic'));
+		x.p('<dd>', x.a('<a>', 'example(jade)', 'db_src_b.basic?template=test.jade'));
+		x.p('<dd>', x.a('<a>', 'example(mustache)', 'db_src_b.basic?template=test.mst'));
+		x.p('<dd>', x.a('<a>', 'example(handlebars)', 'db_src_b.basic?template=test.hbs'));
+		x.p('<dd>', x.a('<a>', 'example(swig)', 'db_src_b.basic?template=test.swig'));
+		x.p('<dd>', x.a('<a>', 'example(ejs)', 'db_src_b.basic?template=test.ejs'));
+		x.p('<dd>', x.a('<a>', 'scalar data types(SQL)', 'db_src_b.scalars_sql'));
+		x.p('<dd>', x.a('<a>', 'scalar data types(API)', 'db_src_b.scalars_direct'));
+		x.p('<dd>', x.a('<a>', 'scalar array', 'db_src_b.scalar_array'));
+		x.p('<dd>', x.a('<a>', 'parent-children data', 'db_src_b.pack_proc'));
+		x.p('<dd>', x.a('<a>', 'key-value', 'db_src_b.pack_kv'));
+		x.p('<dd>', x.a('<a>', 'key-value(child)', 'db_src_b.pack_kv_child'));
 	
 		x.p('<dt>', 'proformance test');
 		x.p('<dd>', x.a('<a>', 'css_prof_b', 'css_prof_b.main'));
