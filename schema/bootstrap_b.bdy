@@ -20,7 +20,7 @@ create or replace package body bootstrap_b is
 		x.p(' <li.:1>', x.a('<a>', 'packages', '@b.packages'), st(x.b2c(p_type = 'packages', 'active')));
 		x.p(' <li.:1>', x.a('<a>', 'tables', '@b.tables'), st(x.b2c(p_type = 'tables', 'active')));
 		x.o(' <li.dropdown.:1>', st(x.b2c(p_type = 'images', 'active')));
-		x.a('  <a.dropdown-toggle `toggle=dropdown>', 'images ' || x.s('<span.caret>'), '@b.images');
+		x.a('  <a.dropdown-toggle ^toggle=dropdown>', 'images ' || x.s('<span.caret>'), '@b.images');
 		x.o('  <ul.dropdown-menu>');
 		x.p('   <li>', x.a('<a>', '1', '@b.images?cols=1'));
 		x.p('   <li>', x.a('<a>', '2', '@b.images?cols=2'));
@@ -115,7 +115,7 @@ create or replace package body bootstrap_b is
 	begin
 		use_lib;
 		x.o('<div.dropdown.pull-right style=display:inline-block;>');
-		x.p(' <button.btn.btn-default.dropdown-toggle `toggle=dropdown>', 'navigate ' || x.s('<span.caret>'));
+		x.p(' <button.btn.btn-default.dropdown-toggle ^toggle=dropdown>', 'navigate ' || x.s('<span.caret>'));
 		x.o(' <ul.dropdown-menu.dropdown-menu-right>');
 		x.p('  <li>', x.a('<a>', 'go spec', '#spec'));
 		x.p('  <li>', x.a('<a>', 'go body', '#body'));
