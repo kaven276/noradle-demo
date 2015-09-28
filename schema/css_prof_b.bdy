@@ -22,7 +22,6 @@ create or replace package body css_prof_b is
 		v_loop_cnt pls_integer := ceil(p_dom_cnt / (p_nest_cnt + 1));
 		p_rule_pat varchar2(1000) := r.getc('rule_pat', '.class:1{background-color:yellow;}');
 	begin
-		h.force_stream;
 		x.t('<!DOCTYPE html>');
 		x.o('<html>');
 		x.o(' <head>');
@@ -30,6 +29,7 @@ create or replace package body css_prof_b is
 		x.p('  <script>', 'var t_head = Number(new Date());');
 		x.o('  <style>');
 		x.t('   label{display:block;}#topmost{display::1;}', st(t.tf(p_paint, 'block', 'none')));
+		h.flush;
 		for i in 1 .. p_rule_cnt loop
 			x.t(p_rule_pat, st(i));
 		end loop;
