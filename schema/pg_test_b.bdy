@@ -140,7 +140,7 @@ create or replace package body pg_test_b is
 		x.o('<fieldset>');
 		x.p(' <legend>', 'sys_refcursor to simple fill ul list');
 		x.o(' <ul>');
-		m.c('  <li><b>@</b><small> - (@)</small></li>', v);
+		m.prc('<li><b>@</b><small> - (@)</small></li>', v);
 		x.c(' </ul>');
 		x.c('</fieldset>');
 	
@@ -149,15 +149,15 @@ create or replace package body pg_test_b is
 		x.o('<fieldset>');
 		x.p(' <legend>', 'sys_refcursor to simple fill table rows');
 		x.o(' <table rules=all>');
-		m.c('  <tr><td>@</td><td>@</td><td><input name="a" type="text" value="@"/></td></tr>', v);
+		m.prc('<tr><td>@</td><td>@</td><td><input name="a" type="text" value="@"/></td></tr>', v);
 		x.c(' </table>');
 		x.c('</fieldset>');
 	
 		open v for
 			select rownum rid, a.object_name, a.object_type from user_objects a where rownum < 10;
 		x.o('<fieldset>');
-		x.p(' <legend>', 'm.tpl_cur support sys_refcursor, SQL itself do col order/format, high preformance');
-		m.c('  @ - <label><input name="a" type="checkbox" value="@"/>@</label><br/>', v);
+		x.p(' <legend>', 'm.prc support sys_refcursor, SQL itself do col order/format, high preformance');
+		m.prc('@ - <label><input name="a" type="checkbox" value="@"/>@</label><br/>', v);
 		x.c('</fieldset>');
 	
 		x.o('<fieldset>');
@@ -203,27 +203,27 @@ create or replace package body pg_test_b is
 		open cur for
 			select a.object_id, a.object_name from user_objects a where rownum < 10;
 		x.o('<select multiple name=select,size=6>');
-		m.w(' <option ?selected value="@"/>@</option>', cur, sv);
+		m.nv('<option ?selected value="@"/>@</option>', cur, sv);
 		x.c('</select>');
 		x.t('<br/>');
 	
 		open cur for
 			select a.object_id, a.object_name from user_objects a where rownum < 10;
-		x.p('<select name=select>', m.w('<option ?selected value="@"/>@</option>', cur, sv));
+		x.p('<select name=select>', m.nv('<option ?selected value="@"/>@</option>', cur, sv));
 		x.t('<br/>');
 	
 		open cur for
 			select a.object_id, a.object_name from user_objects a where rownum < 10;
 		x.o('<fieldset>');
 		x.p(' <legend>', 'radio groups');
-		m.w(' <label><input ?checked type="radio" name="single" value="@"/>@</label><br/>', cur, sv);
+		m.nv('<label><input ?checked type="radio" name="single" value="@"/>@</label><br/>', cur, sv);
 		x.c('</fieldset>');
 	
 		open cur for
 			select a.object_id, a.object_name from user_objects a where rownum < 10;
 		x.o('<fieldset>');
 		x.p(' <legend>', 'checkbox groups');
-		m.w(' <label><input ?checked type="checkbox" name="single" value="@"/>@</label><br/>', cur, sv);
+		m.nv(' <label><input ?checked type="checkbox" name="single" value="@"/>@</label><br/>', cur, sv);
 		x.c('</fieldset>');
 	end;
 

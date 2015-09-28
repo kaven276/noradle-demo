@@ -54,7 +54,7 @@ create or replace package body error_b is
 			x.o(' <select name=pack>');
 			x.p('  <option value=NONE>', 'NONE');
 			open cur for select a.object_name, a.object_name from user_objects a where a.object_type = 'PACKAGE BODY';
-			m.w('  <option ?selected value="@">@</option>', cur, '');
+			m.nv('<option ?selected value="@">@</option>', cur, '');
 			x.c(' </select>');
 			x.s(' <input type=submit>');
 			x.c('</form>');

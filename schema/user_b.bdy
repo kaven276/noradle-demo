@@ -34,7 +34,7 @@ create or replace package body user_b is
 	
 		tmp.stv := st('Y', 'N');
 		x.p(' <label>', 'need feedback: ');
-		m.w(' <input type="radio" name="fb" ?checked value="@"/><label>@</label>', tmp.stv, tmp.stv, 'Y');
+		m.nv('<input type="radio" name="fb" ?checked value="@"/><label>@</label>', tmp.stv, tmp.stv, 'Y');
 		x.t(' <br/>');
 	
 		x.s(' <input type=reset,value=reset form>');

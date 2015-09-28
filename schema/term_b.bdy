@@ -35,12 +35,12 @@ create or replace package body term_b is
 		t.split(tmp.stv, 'red,blue,green,silver,gray', ',');
 		x.p('<label>', 'background-color');
 		x.o('<select name=bgcolor>');
-		m.w(' <option ?selected value="@">@</options>', tmp.stv, tmp.stv, rcpv.term_row.bgcolor);
+		m.nv('<option ?selected value="@">@</options>', tmp.stv, tmp.stv, rcpv.term_row.bgcolor);
 		x.c('</select>');
 		x.t('<br/>');
 		x.p('<label>', 'foreground-color');
 		x.o('<select name=fgcolor>');
-		m.w(' <option ?selected value="@">@</options>', tmp.stv, tmp.stv, rcpv.term_row.fgcolor);
+		m.nv('<option ?selected value="@">@</options>', tmp.stv, tmp.stv, rcpv.term_row.fgcolor);
 		x.c('</select>');
 		x.t('<br/>');
 		x.s(' <input type=submit>');

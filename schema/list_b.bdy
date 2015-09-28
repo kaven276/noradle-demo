@@ -54,7 +54,7 @@ create or replace package body list_b is
 		x.p(' <caption>', 'table list format API example');
 		tb.cfg_cols_thead;
 		x.o(' <tbody>');
-		m.c('  <tr><td>@</td><td>@</td></tr>', cur);
+		m.prc('<tr><td>@</td><td>@</td></tr>', cur);
 		x.c(' </tbody>');
 		x.c('</table>');
 	end;
