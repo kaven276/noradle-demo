@@ -6,42 +6,41 @@ create or replace package body tree_b is
 		x.o('<html>');
 		x.o('<body>');
 		src_b.link_proc;
-		x.p('<h2>', 'use m.p, m.ro, tree.content(sys_refcursor), m.rc to print tree');
 	
-		x.o('<ul>');
-		m.p(' <li class="xing-@"><a href="see?pid=@">@</a>|</li>', '<ul>', tmp.stv);
-		m.ro(true);
+		x.p('<h2>', 'use tree.rc(sys_refcursor) to print tree');
 		open cur for
 			select level, substr(a.name, 1, 1), a.pid, a.name
 				from emp_t a
 			 start with a.name = 'Li Xinyan'
 			connect by a.ppid = prior a.pid;
-		tree.cur(tmp.stv, cur);
-		m.rc(tmp.stv);
+		x.o('<ul>');
+		tr.p(' <li class="xing-@"><a href="see?pid=@">@</a>|<ul>|</ul>|</li>', tmp.stv);
+		tr.o(true);
+		tr.rc(tmp.stv, cur);
+		tr.c(tmp.stv);
+		x.c('</ul>');
 	
-		m.p(' <li class="xing-@"><b>@</b>|</li>', '<ul>', tmp.stv);
-		m.ro(pretty => true);
+		x.p('<h2>', 'use tree.prc(sys_refcursor) to print tree');
 		open cur for
 			select level, substr(a.name, 1, 1), a.name
 				from emp_t a
 			 start with a.name = 'Li Xinyan'
 			connect by a.ppid = prior a.pid;
-		tree.cur(tmp.stv, cur);
-		m.rc(tmp.stv);
+		x.o('<ul>');
+		tr.prc('<li class="xing-@"><b>@</b>|<ul>|</ul>|</li>', cur);
 		x.c('</ul>');
 	end;
 
 	procedure emp_hier_nodes is
 		cur sys_refcursor;
 	begin
-		-- h.content_type('text/plain');
 		x.o('<html>');
 		x.o('<body>');
 		src_b.link_proc;
-		x.p('<h2>', 'use m.p, tree.o, tree.n(by level), tree.c to print tree');
+		x.p('<h2>', 'use tree.p, tree.o, tree,r, tree.n(by level), tree.c to print tree');
 	
 		x.o('<ul>');
-		m.p(' <li class="xing-@"><a href="see?pid=@">@</a>', tmp.stv);
+		tr.p(' <li class="xing-@"><a href="see?pid=@">@</a>|<ul>|</ul>|</li>', tmp.stv);
 		tr.o(true);
 		for a in (select level, substr(a.name, 1, 1), a.pid, a.name
 								from emp_t a
@@ -50,13 +49,27 @@ create or replace package body tree_b is
 			tr.n(a.level, m.r(tmp.stv, st(substr(a.name, 1, 1), a.pid, a.name)));
 		end loop;
 		tr.c;
+		x.c('</ul>');
+	end;
+
+	procedure emp_hier_render is
+		cur sys_refcursor;
+	begin
+		x.o('<html>');
+		x.o('<body>');
+		src_b.link_proc;
+		x.p('<h2>', 'use tree.p, tree.o, tree,r, tree.n(by level), tree.c to print tree');
 	
-		m.p(' <li class="xing-@"><b>@</b>', tmp.stv);
-		tree.o(pretty => true);
-		for a in (select level, a.name from emp_t a start with a.name = 'Li Xinyan' connect by a.ppid = prior a.pid) loop
-			tree.n(a.level, m.r(tmp.stv, st(substr(a.name, 1, 1), a.name)));
+		x.o('<ul>');
+		tr.p(' <li class="xing-@"><a href="see?pid=@">@</a>|<ul>|</ul>|</li>', tmp.stv);
+		tr.o(true);
+		for a in (select level, substr(a.name, 1, 1), a.pid, a.name
+								from emp_t a
+							 start with a.name = 'Li Xinyan'
+							connect by a.ppid = prior a.pid) loop
+			tr.r(a.level, tmp.stv, st(substr(a.name, 1, 1), a.pid, a.name));
 		end loop;
-		tree.c;
+		tr.c;
 		x.c('</ul>');
 	end;
 
