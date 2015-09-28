@@ -192,30 +192,6 @@ create or replace package body pg_test_b is
 		m.w('<col class="@"/>', 'col1,col2,col3');
 	end;
 
-	procedure tree is
-	begin
-		x.o('<html>');
-		x.o('<body>');
-		src_b.link_proc;
-		x.p('<h2>', 'use m.p, m.ro, m.r(in for SQL loop), m.rc to print tree');
-	
-		x.o('<ul>');
-		m.p(' <li class="xing-@"><a href="see?pid=@">@</a>|</li>', '<ul>', tmp.stv);
-		m.ro(true);
-		for i in (select level, a.* from emp_t a start with a.name = 'Li Xinyan' connect by a.ppid = prior a.pid) loop
-			m.r(tmp.stv, i.level, st(substr(i.name, 1, 1), i.pid, i.name));
-		end loop;
-		m.rc(tmp.stv);
-	
-		m.p(' <li class="xing-@"><b>@</b>|</li>', '<ul>', tmp.stv);
-		m.ro(pretty => true);
-		for i in (select level, a.* from emp_t a start with a.name = 'Li Xinyan' connect by a.ppid = prior a.pid) loop
-			m.r(tmp.stv, i.level, st(substr(i.name, 1, 1), i.name));
-		end loop;
-		m.rc(tmp.stv);
-		x.c('</ul>');
-	end;
-
 	procedure form is
 		cur sys_refcursor;
 		sv  varchar2(4000) := r.getc('sv', '');

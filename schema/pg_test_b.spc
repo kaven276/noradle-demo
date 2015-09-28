@@ -8,7 +8,5 @@ create or replace package pg_test_b is
 
 	procedure form;
 
-	procedure tree;
-
 end pg_test_b;
 /
