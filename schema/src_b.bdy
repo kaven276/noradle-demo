@@ -57,5 +57,34 @@ create or replace package body src_b is
 								st(nvl(proc, r.prog))));
 	end;
 
+	procedure header is
+	begin
+		if r.is_lack('inspect') then
+			link_proc;
+			x.a('<a target=_blank>', 'inspect ' || r.prog, r.url || t.tf(r.qstr is null, '?', '&') || 'inspect');
+			return;
+		end if;
+		h.content_type('text/plain');
+	
+		r.setc('p', r.getc('x$prog'));
+		h.line('```plsql');
+		src_b.proc;
+		h.line('```');
+	
+		h.set_line_break(chr(10));
+		h.line;
+		h.line;
+		h.line('produce');
+		h.line;
+		h.line('```html');
+	end;
+
+	procedure footer is
+	begin
+		if not r.is_lack('inspect') then
+			h.line('```');
+		end if;
+	end;
+
 end src_b;
 /
