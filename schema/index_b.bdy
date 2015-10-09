@@ -67,6 +67,13 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'nv_form_radios', 'm_multi_b.nv_form_radios'));
 		x.p('<dd>', x.a('<a>', 'nv_form_checkboxes', 'm_multi_b.nv_form_checkboxes'));
 	
+		x.p('<dt>', 'ul/li tree printing');
+		x.p('<dd>', x.a('<a>', 'parse_render_in_loop', 'tree_b.parse_render_in_loop'));
+		x.p('<dd>', x.a('<a>', 'parse_open_render_cur_close', 'tree_b.parse_open_render_cur_close'));
+		x.p('<dd>', x.a('<a>', 'parse_render_cur_united', 'tree_b.parse_render_cur_united'));
+		x.p('<dd>', x.a('<a>', 'hier_node_level_in_loop', 'tree_b.hier_node_level_in_loop'));
+		x.p('<dd>', x.a('<a>', 'hier_node_all_types', 'tree_b.hier_node_all_types'));
+	
 		x.p('<dt>', 'table list formating/printing');
 		x.p('<dd>', x.a('<a>', 'for loop print', 'list_b.user_objects'));
 		x.p('<dd>', x.a('<a>', 'multi.c print', 'list_b.user_objects_cur'));
