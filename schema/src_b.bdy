@@ -37,7 +37,7 @@ create or replace package body src_b is
 				end if;
 			end if;
 			if v_sts then
-				h.line(replace(i.text, chr(9), '  '));
+				h.line(substrb(replace(i.text, chr(9), '  '), 3));
 				if i.text = chr(9) || 'end;' || chr(10) then
 					exit;
 				end if;
@@ -53,18 +53,28 @@ create or replace package body src_b is
 
 	procedure link_proc(proc varchar2 := null) is
 	begin
-		h.line(t.ps('<a href="src_b.proc?p=:1" target=":1">view pl/sql source proc ":1" in new window</a></br>',
+		h.line(t.ps('<a href="src_b.proc?p=:1" target=":1">view pl/sql source proc ":1" in new window</a><br/><br/>',
 								st(nvl(proc, r.prog))));
 	end;
 
 	procedure header is
 	begin
 		if r.is_lack('inspect') then
-			link_proc;
-			x.a('<a target=_blank>', 'inspect ' || r.prog, r.url || t.tf(r.qstr is null, '?', '&') || 'inspect');
+			--link_proc;
+			x.a('<a target=_blank>', 'inspect(plain) ' || r.prog, r.url || t.tf(r.qstr is null, '?', '&') || 'inspect');
+      x.t('<br/><br/>');
+      x.a('<a target=_blank>', 'inspect(highlight) ' || r.prog, r.url || t.tf(r.qstr is null, '?', '&') || 'inspect&markdown');
+			x.t('<br/><br/>');
 			return;
 		end if;
 		h.content_type('text/plain');
+		if not r.is_lack('markdown') then
+			h.header('_convert', 'marked');
+			x.o('<head>');
+			x.l('<link>', 'http://highlightjs.org/static/styles.css');
+			x.l('<link>', 'http://highlightjs.org/static/styles/railscasts.css');
+			x.c('</head>');
+		end if;
 	
 		r.setc('p', r.getc('x$prog'));
 		h.line('```plsql');

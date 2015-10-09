@@ -7,8 +7,8 @@ var cfg = require('./cfg.js')
   , http = require('http')
   , noradle = require('noradle')
   , harp = require('harp')
-  , connect = require('connect')
-  , app = connect.createServer()
+  , express = require('express')
+  , app = express()
   , port = cfg.http_port
   , y$static = cfg.static_url + cfg.demo_dbu + '/'
   , dbPool = noradle.DBDriver.connect(cfg.dispatcher_addr, cfg.client_auth)
@@ -31,7 +31,7 @@ function set_route(){
     favicon_url: y$static + 'favicon.ico'
   }));
 
-  app.use(y$static, connect.static(cfg.static_root, {
+  app.use(y$static, express.static(cfg.static_root, {
     maxAge: cfg.oneDay,
     redirect: false
   }));
