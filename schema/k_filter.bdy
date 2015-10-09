@@ -30,6 +30,9 @@ create or replace package body k_filter is
 			x.p('<h3>', 'k_filter.after write here. Exiting?');
 			x.p('<h3>', 'k_filter.after can be used to do logging using autonomous_transaction');
 		end if;
+    if not r.is_lack('inspect') then
+      src_b.footer;
+    end if;
 	end;
 
 end k_filter;
