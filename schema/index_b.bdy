@@ -57,6 +57,15 @@ create or replace package body index_b is
 	
 		x.p('<dt>', 'css in HTML API(embeded or linked)');
 		x.p('<dd>', x.a('<a>', 'basic', 'style_b.d'));
+		x.p('<dt>', 'm(multi) print');
+		x.p('<dd>', x.a('<a>', 'wrap_each_array_value', 'm_multi_b.wrap_each_array_value'));
+		x.p('<dd>', x.a('<a>', 'wrap_array_in_loop', 'm_multi_b.wrap_array_in_loop'));
+		x.p('<dd>', x.a('<a>', 'parse_render_st', 'm_multi_b.parse_render_st'));
+		x.p('<dd>', x.a('<a>', 'parse_render_st_boolean', 'm_multi_b.parse_render_st_boolean'));
+		x.p('<dd>', x.a('<a>', 'parse_render_cursor', 'm_multi_b.parse_render_cursor'));
+		x.p('<dd>', x.a('<a>', 'nv_form_select_options', 'm_multi_b.nv_form_select_options'));
+		x.p('<dd>', x.a('<a>', 'nv_form_radios', 'm_multi_b.nv_form_radios'));
+		x.p('<dd>', x.a('<a>', 'nv_form_checkboxes', 'm_multi_b.nv_form_checkboxes'));
 	
 		x.p('<dt>', 'table list formating/printing');
 		x.p('<dd>', x.a('<a>', 'for loop print', 'list_b.user_objects'));
