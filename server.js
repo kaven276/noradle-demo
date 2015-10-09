@@ -2,6 +2,25 @@
 /**
  * Created by cuccpkfs on 14-12-17.
  */
+var marked = require('marked');
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false,
+  highlight: function(code){
+    return require('highlight.js').highlightAuto(code).value;
+  },
+  _highlight: function(code, lang, callback){
+    require('pygmentize-bundled')({lang: lang, format: 'html'}, code, function(err, result){
+      callback(err, result.toString());
+    });
+  }
+});
 
 var cfg = require('./cfg.js')
   , http = require('http')
@@ -28,7 +47,10 @@ function set_route(){
     upload_dir: cfg.upload_dir,
     template_dir: cfg.template_dir,
     template_engine: cfg.template_engine,
-    favicon_url: y$static + 'favicon.ico'
+    favicon_url: y$static + 'favicon.ico',
+    converters: {
+      marked: marked
+    }
   }));
 
   app.use(y$static, express.static(cfg.static_root, {
