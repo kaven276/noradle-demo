@@ -205,5 +205,17 @@ create or replace package body easy_url_b is
 		x.a('<a>', 'link to "{y$static}../" with "\" prefix', replace('\{app}/img/larry.jpg', '{app}', r.dbu));
 	end;
 
+	procedure link_configured_url is
+	begin
+		src_b.header;
+		x.l('<link>', '[bootstrap]/css/bootstrap.min.css');
+		x.j('<script>', '[jquery]/jquery.min.js');
+		--x.j('<script>', '[bootstrap]/js/bootstrap.min.js');
+		x.p('<p>', 'url like "[key]subpath", "[key]" will be replaced with value in view "ext_url_v" ');
+		x.p('<p>', 'the following demo use boostrap css UI');
+		x.a('<a#tar.btn.btn-primary>', 'noradle url link document', '[url_link_doc]');
+    x.p('<script>','$("#tar").fadeOut().fadeIn()');
+	end;
+
 end easy_url_b;
 /

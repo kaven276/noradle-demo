@@ -101,6 +101,7 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'link_static_for_pack', 'easy_url_b.link_static_for_pack'));
 		x.p('<dd>', x.a('<a>', 'link_static_for_me', 'easy_url_b.link_static_for_me'));
 		x.p('<dd>', x.a('<a>', 'link_other_parallel_app_static', 'easy_url_b.link_other_parallel_app_static'));
+		x.p('<dd>', x.a('<a>', 'link_configured_url', 'easy_url_b.link_configured_url'));
 		x.p('<dd>', x.a('<a>', './url_test1_b', './url_test1_b'));
 		x.p('<dd>', x.a('<a>', './url_test2_b', './url_test2_b'));
 	
