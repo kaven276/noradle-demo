@@ -14,5 +14,7 @@ create or replace package m_multi_b is
 
 	procedure nv_form_radios;
 
+	procedure nv_form_checkboxes;
+
 end m_multi_b;
 /
