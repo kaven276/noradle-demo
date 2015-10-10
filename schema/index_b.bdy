@@ -50,6 +50,7 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'parent-children data', 'db_src_b.pack_proc?inspect&markdown'));
 		x.p('<dd>', x.a('<a>', 'key-value', 'db_src_b.pack_kv?inspect&markdown'));
 		x.p('<dd>', x.a('<a>', 'key-value(child)', 'db_src_b.pack_kv_child?inspect&markdown'));
+		x.p('<dd>', x.a('<a>', 'direct_json', 'db_src_b.direct_json?inspect&markdown'));
 	
 		x.p('<dt>', 'html_b');
 		x.p('<dd>', x.a('<a>', 'd', 'html_b.d'));

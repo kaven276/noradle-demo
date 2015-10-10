@@ -123,5 +123,15 @@ create or replace package body db_src_b is
 		rs.nv('married', true);
 	end;
 
+	procedure direct_json is
+		cur sys_refcursor;
+	begin
+		h.content_type('application/json');
+		src_b.header;
+		open cur for
+			select a.object_name, a.object_type from user_objects a where rownum <= 3;
+		rs.json(cur);
+	end;
+
 end db_src_b;
 /

@@ -14,5 +14,7 @@ create or replace package db_src_b is
 
 	procedure pack_kv_child;
 
+	procedure direct_json;
+
 end db_src_b;
 /
