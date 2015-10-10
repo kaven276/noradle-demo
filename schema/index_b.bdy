@@ -107,9 +107,19 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'register', 'user_b.register'));
 	
 		x.p('<dt>', 'easy_url_b');
+		x.p('<dt>', 'link to url');
 		x.p('<dd>', x.a('<a>', 'd', 'easy_url_b.d'));
 		x.p('<dd>', x.a('<a>', 'proc1', 'easy_url_b.proc1'));
 		x.p('<dd>', x.a('<a>', 'proc2', 'easy_url_b.proc2'));
+		x.p('<dd>', x.a('<a>', 'link_transparent', 'easy_url_b.link_transparent'));
+		x.p('<dd>', x.a('<a>', 'link_equal_to', 'easy_url_b.link_equal_to'));
+		x.p('<dd>', x.a('<a>', 'link_proc_in_same_pack', 'easy_url_b.link_proc_in_same_pack'));
+		x.p('<dd>', x.a('<a>', 'link_proc_in_any_pack', 'easy_url_b.link_proc_in_any_pack'));
+		x.p('<dd>', x.a('<a>', 'link_standalone_proc', 'easy_url_b.link_standalone_proc'));
+		x.p('<dd>', x.a('<a>', 'link_static_for_site', 'easy_url_b.link_static_for_site'));
+		x.p('<dd>', x.a('<a>', 'link_static_for_pack', 'easy_url_b.link_static_for_pack'));
+		x.p('<dd>', x.a('<a>', 'link_static_for_me', 'easy_url_b.link_static_for_me'));
+		x.p('<dd>', x.a('<a>', 'link_other_parallel_app_static', 'easy_url_b.link_other_parallel_app_static'));
 		x.p('<dd>', x.a('<a>', './url_test1_b', './url_test1_b'));
 		x.p('<dd>', x.a('<a>', './url_test2_b', './url_test2_b'));
 	

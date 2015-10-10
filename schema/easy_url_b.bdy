@@ -128,5 +128,82 @@ create or replace package body easy_url_b is
 		x.a('<a>', 'home', 'd');
 	end;
 
+	procedure link_transparent is
+	begin
+		src_b.header;
+		x.a('<a>',
+				'transparently(untouched) link to url without any particular prefix symbol in "=@*^\"',
+				'ora_good_b.entry');
+	end;
+
+	procedure link_equal_to is
+	begin
+		src_b.header;
+		x.a('<a>', 'link to url with "=" prefix', '=ora_good_b.entry');
+	end;
+
+	procedure link_proc_in_same_pack is
+	begin
+		src_b.header;
+		x.p('<p>', 'prefix "@" will be replaced by package name "x$pack" with last suffix character trimmed');
+		x.a('<a>', 'link to procedure in the same package using "@x.xxx" pattern', '@b.proc1');
+	end;
+
+	procedure link_proc_in_any_pack is
+	begin
+		src_b.header;
+		x.a('<a>', 'link to procedure in any other package directly', 'easy_url_b.proc2');
+	end;
+
+	procedure link_standalone_proc is
+	begin
+		src_b.header;
+		x.a('<a>', 'link to standalone procedure directly', 'url_test1_b');
+	end;
+
+	procedure link_static_for_site is
+	begin
+		src_b.header;
+		x.p('<p>', 'prefix "^" will be replaced by r.getc(y$static)');
+		x.p('<p>', '"^path/file.ext" will expand to "{y$static}path/file.ext"');
+		x.p('<p>', 'y$static=' || r.get('y$static', './'));
+		x.i('<img>', '^GER.gif');
+		x.i('<img>', '^img/nations/USA.gif');
+	end;
+
+	procedure link_static_for_pack is
+	begin
+		src_b.header;
+		x.p('<p>', 'prefix "@" will be replaced by package name "x$pack" with last suffix character trimmed');
+		x.p('<p>', '"@x/file" indicate static file reference belong to this package/procedure only');
+		x.p('<p>', '"@x/file" will expand to "{y$static}/packs/{x$pack?}/file"');
+		x.p('<p>', 'y$static=' || r.get('y$static', './'));
+		x.p('<p>', 'x$pack=' || r.get('x$pack', './'));
+		x.i('<img>', '@b/CHN.gif');
+	end;
+
+	procedure link_static_for_me is
+	begin
+		--x.l('<link type=image/gif>', '*.gif', 'icon');
+		x.l('<link type=image/x-icon>', '*.ico', 'icon');
+		src_b.header;
+		x.p('<p>', 'prefix * will be replaced by "{x$pack}/{x$proc}"');
+		x.p('<p>', '"*.suffix" indicate static file reference belong to this package, and named this procedure only');
+		x.p('<p>', '"*.suffix" will expand to "{y$static}packs/{x$pack}/{x$proc}.suffix"');
+		x.p('<p>', 'y$static=' || r.get('y$static', './'));
+		x.p('<p>', 'x$pack=' || r.get('x$pack', './'));
+		x.p('<p>', 'x$proc=' || r.get('x$proc', './'));
+		x.i('<img>', '*.gif');
+		x.l('<link>', '*.css');
+		x.j('<script>', '*.js');
+	end;
+
+	procedure link_other_parallel_app_static is
+	begin
+		src_b.header;
+		x.p('<p>', 'sometimes, we need to refer to other parallel static app''s url that provide common static files');
+		x.a('<a>', 'link to "{y$static}../" with "\" prefix', replace('\{app}/img/larry.jpg', '{app}', r.dbu));
+	end;
+
 end easy_url_b;
 /
