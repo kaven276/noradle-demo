@@ -58,12 +58,28 @@ create or replace package body src_b is
 	end;
 
 	procedure header is
+		v_pos  pls_integer;
+		v_type varchar2(100) := h.header('Content-Type');
 	begin
+		v_pos := instrb(v_type, ';');
+		if v_pos > 1 then
+			v_type := substrb(v_type, 1, v_pos - 1);
+		end if;
+		v_pos  := instrb(v_type, '/');
+		v_type := substrb(v_type, v_pos + 1);
+		if r.pack = 'db_src_b' then
+			v_type := 'text'; -- text/resultsets
+		end if;
 		if r.is_lack('inspect') then
 			--link_proc;
+			if v_type != 'html' then
+				return;
+			end if;
 			x.a('<a target=_blank>', 'inspect(plain) ' || r.prog, r.url || t.tf(r.qstr is null, '?', '&') || 'inspect');
-      x.t('<br/><br/>');
-      x.a('<a target=_blank>', 'inspect(highlight) ' || r.prog, r.url || t.tf(r.qstr is null, '?', '&') || 'inspect&markdown');
+			x.t('<br/><br/>');
+			x.a('<a target=_blank>',
+					'inspect(highlight) ' || r.prog,
+					r.url || t.tf(r.qstr is null, '?', '&') || 'inspect&markdown');
 			x.t('<br/><br/>');
 			return;
 		end if;
@@ -71,9 +87,10 @@ create or replace package body src_b is
 		if not r.is_lack('markdown') then
 			h.header('_convert', 'marked');
 			x.o('<head>');
-			x.l('<link>', 'http://highlightjs.org/static/styles.css');
+			--x.l('<link>', 'http://highlightjs.org/static/styles.css');
 			x.l('<link>', 'http://highlightjs.org/static/styles/railscasts.css');
 			x.c('</head>');
+			x.p('<p>', x.a('<a>', 'execute', r.prog));
 		end if;
 	
 		r.setc('p', r.getc('x$prog'));
@@ -86,13 +103,14 @@ create or replace package body src_b is
 		h.line;
 		h.line('produce');
 		h.line;
-		h.line('```html');
+		h.line('```' || v_type);
 	end;
 
 	procedure footer is
 	begin
 		if not r.is_lack('inspect') then
 			h.line('```');
+			h.content_type('text/plain');
 		end if;
 	end;
 
