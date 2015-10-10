@@ -38,18 +38,18 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'content_md5', 'http_b.content_md5'));
 	
 		x.p('<dt>', 'data service');
-		x.p('<dd>', x.a('<a>', 'example', 'db_src_b.basic'));
+		x.p('<dd>', x.a('<a>', 'example', 'db_src_b.basic?inspect&markdown'));
 		x.p('<dd>', x.a('<a>', 'example(jade)', 'db_src_b.basic?template=test.jade'));
 		x.p('<dd>', x.a('<a>', 'example(mustache)', 'db_src_b.basic?template=test.mst'));
 		x.p('<dd>', x.a('<a>', 'example(handlebars)', 'db_src_b.basic?template=test.hbs'));
 		x.p('<dd>', x.a('<a>', 'example(swig)', 'db_src_b.basic?template=test.swig'));
 		x.p('<dd>', x.a('<a>', 'example(ejs)', 'db_src_b.basic?template=test.ejs'));
-		x.p('<dd>', x.a('<a>', 'scalar data types(SQL)', 'db_src_b.scalars_sql'));
-		x.p('<dd>', x.a('<a>', 'scalar data types(API)', 'db_src_b.scalars_direct'));
-		x.p('<dd>', x.a('<a>', 'scalar array', 'db_src_b.scalar_array'));
-		x.p('<dd>', x.a('<a>', 'parent-children data', 'db_src_b.pack_proc'));
-		x.p('<dd>', x.a('<a>', 'key-value', 'db_src_b.pack_kv'));
-		x.p('<dd>', x.a('<a>', 'key-value(child)', 'db_src_b.pack_kv_child'));
+		x.p('<dd>', x.a('<a>', 'scalar data types(SQL)', 'db_src_b.scalars_sql?inspect&markdown'));
+		x.p('<dd>', x.a('<a>', 'scalar data types(API)', 'db_src_b.scalars_direct?inspect&markdown'));
+		x.p('<dd>', x.a('<a>', 'scalar array', 'db_src_b.scalar_array?inspect&markdown'));
+		x.p('<dd>', x.a('<a>', 'parent-children data', 'db_src_b.pack_proc?inspect&markdown'));
+		x.p('<dd>', x.a('<a>', 'key-value', 'db_src_b.pack_kv?inspect&markdown'));
+		x.p('<dd>', x.a('<a>', 'key-value(child)', 'db_src_b.pack_kv_child?inspect&markdown'));
 	
 		x.p('<dt>', 'html_b');
 		x.p('<dd>', x.a('<a>', 'd', 'html_b.d'));
