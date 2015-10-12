@@ -107,20 +107,21 @@ create or replace package body easy_url_b is
 	procedure link_equal_to is
 	begin
 		src_b.header;
-		x.a('<a>', 'link to url with "=" prefix', '=ora_good_b.entry');
+		x.p('<p>', x.a('<a>', 'link to url with "=" prefix', '=ora_good_b.entry'));
+		x.p('<p>', x.a('<a>', 'back', 'javascript:history.back();'));
 	end;
 
 	procedure link_proc_in_same_pack is
 	begin
 		src_b.header;
 		x.p('<p>', 'prefix "@" will be replaced by package name "x$pack" with last suffix character trimmed');
-		x.a('<a>', 'link to procedure in the same package using "@x.xxx" pattern', '@b.proc1');
+		x.a('<a>', 'link to procedure in the same package using "@x.xxx" pattern', '@b.link_equal_to');
 	end;
 
 	procedure link_proc_in_any_pack is
 	begin
 		src_b.header;
-		x.a('<a>', 'link to procedure in any other package directly', 'easy_url_b.proc2');
+		x.a('<a>', 'link to procedure in any other package directly', 'ora_good_b.entry');
 	end;
 
 	procedure link_standalone_proc is
