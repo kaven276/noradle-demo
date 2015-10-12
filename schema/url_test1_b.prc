@@ -2,7 +2,6 @@ create or replace procedure url_test1_b is
 begin
 	x.o('<html>');
 	x.o('<head>');
-	x.l(' <link>', '^packs/url_b/d.css');
 	x.l(' <link>', '.css');
 	x.j(' <script>', '.js');
 	x.c('</head>');
