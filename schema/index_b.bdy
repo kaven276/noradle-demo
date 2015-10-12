@@ -89,9 +89,6 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'sys_refcursor print', 'list_b.user_procedures'));
 	
 		x.p('<dt>', 'link to url');
-		x.p('<dd>', x.a('<a>', 'd', 'easy_url_b.d'));
-		x.p('<dd>', x.a('<a>', 'proc1', 'easy_url_b.proc1'));
-		x.p('<dd>', x.a('<a>', 'proc2', 'easy_url_b.proc2'));
 		x.p('<dd>', x.a('<a>', 'link_transparent', 'easy_url_b.link_transparent'));
 		x.p('<dd>', x.a('<a>', 'link_equal_to', 'easy_url_b.link_equal_to'));
 		x.p('<dd>', x.a('<a>', 'link_proc_in_same_pack', 'easy_url_b.link_proc_in_same_pack'));
@@ -102,8 +99,9 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'link_static_for_me', 'easy_url_b.link_static_for_me'));
 		x.p('<dd>', x.a('<a>', 'link_other_parallel_app_static', 'easy_url_b.link_other_parallel_app_static'));
 		x.p('<dd>', x.a('<a>', 'link_configured_url', 'easy_url_b.link_configured_url'));
-		x.p('<dd>', x.a('<a>', './url_test1_b', './url_test1_b'));
-		x.p('<dd>', x.a('<a>', './url_test2_b', './url_test2_b'));
+		x.p('<dd>', x.a('<a>', 'use_base_url_for_static', 'easy_url_b.use_base_url_for_static'));
+		x.p('<dd>', x.a('<a>', 'all patterns', 'easy_url_b.d'));
+		x.p('<dd>', x.a('<a>', 'links in standalone procedure', './url_test1_b'));
 	
 		x.p('<dt>', 'css in HTML API(embeded or linked)');
 		x.p('<dd>', x.a('<a>', 'basic', 'style_b.d'));

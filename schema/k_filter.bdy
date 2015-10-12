@@ -8,7 +8,7 @@ create or replace package body k_filter is
 	
 		-- url [jquery] is alwarys available
 		r.setc('[jquery]', l('^bower_lib/jquery/dist/jquery.min.js'));
-		r.setc('[myself]', '^');
+		r.setc('[myself]', l('^'));
 	
 		-- h.set_line_break(null);
 		pv.id  := 'liyong';
