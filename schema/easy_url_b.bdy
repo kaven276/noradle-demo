@@ -96,38 +96,6 @@ create or replace package body easy_url_b is
 		x.c('</html>');
 	end;
 
-	procedure proc1 is
-		n varchar2(100);
-		v varchar2(999);
-	begin
-		pc.h;
-		src_b.link_proc;
-		x.o('<form name=f,action=proc2>');
-		x.s(' <input type=text,name=p1>');
-		x.c('</form>');
-	
-		x.p('<h4>', 'http headers');
-		x.o('<pre>');
-		n := ra.params.first;
-		loop
-			exit when n is null;
-			v := ra.params(n) (1);
-			h.line(n || ' : ' || v);
-			n := ra.params.next(n);
-		end loop;
-		x.c('</pre>');
-	end;
-
-	procedure proc2 is
-	begin
-		pc.h;
-		src_b.link_proc;
-		x.p('<style>', 'a{display:block;}');
-		x.p('<p>', r.getc('p1', '[null]'));
-		x.a('<a>', 'back', 'javascript:history.back();');
-		x.a('<a>', 'home', 'd');
-	end;
-
 	procedure link_transparent is
 	begin
 		src_b.header;
