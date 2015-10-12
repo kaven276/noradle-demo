@@ -215,6 +215,18 @@ create or replace package body easy_url_b is
 		x.p('<p>', 'the following demo use boostrap css UI');
 		x.a('<a#tar.btn.btn-primary>', 'noradle url link document', '[url_link_doc]');
     x.p('<script>','$("#tar").fadeOut().fadeIn()');
+
+	procedure use_base_url_for_static is
+	begin
+		src_b.header;
+		--x.s('<base href=:1>', st(l('^')));
+		--x.b('<base>','^');
+		x.b('<base>');
+		x.p('<p>', 'base url set to static foot url');
+		x.p('<p>', 'reference servlet by ./pack.proc or @x.proc pattern for relative path');
+		x.p('<p>', x.a('<a>', 'link to static(image)', 'img/larry.jpg'));
+		x.p('<p>', x.a('<a>', 'link to servlet(to self)', './easy_url_b.use_base_url_for_static'));
+		x.p('<p>', x.a('<a>', 'link to servlet(to self)', '@b.use_base_url_for_static'));
 	end;
 
 end easy_url_b;
