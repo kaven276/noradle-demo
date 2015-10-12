@@ -6,6 +6,10 @@ create or replace package body k_filter is
 			h.go(r.dir || '/');
 		end if;
 	
+		-- url [jquery] is alwarys available
+		r.setc('[jquery]', l('^bower_lib/jquery/dist/jquery.min.js'));
+		r.setc('[myself]', '^');
+	
 		-- h.set_line_break(null);
 		pv.id  := 'liyong';
 		pv.now := sysdate;
@@ -30,9 +34,9 @@ create or replace package body k_filter is
 			x.p('<h3>', 'k_filter.after write here. Exiting?');
 			x.p('<h3>', 'k_filter.after can be used to do logging using autonomous_transaction');
 		end if;
-    if not r.is_lack('inspect') then
-      src_b.footer;
-    end if;
+		if not r.is_lack('inspect') then
+			src_b.footer;
+		end if;
 	end;
 
 end k_filter;
