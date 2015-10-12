@@ -60,17 +60,15 @@ create or replace package body easy_url_b is
 		x.p('<p>', '>>> Links to other dynamic pages.');
 		x.a('<a>', 'proc1 in @x.proc form', '@b.proc1');
 		x.a('<a>', 'easy_url_b.proc2 in pack.proc form', 'easy_url_b.proc2?p_b=ab.c&p1=LiYong');
-		x.a('<a>', 'to standalone proc 1', 'url_test1_b');
-		x.a('<a>', 'to standalone proc 2', 'url_test2_b');
 		x.a('<a>', 'easy_url_b.proc2 in =pack.proc form', 'easy_url_b.proc2?p_b=ab.c&p1=LiYong');
-		x.a('<a>', 'to standalone proc in =proc', '=url_test1_b');
+		x.a('<a>', 'to standalone proc', './url_test1_b');
+		x.a('<a>', 'to standalone proc in =proc', '=./url_test1_b');
 	
 		x.t('<br/>');
 		x.p('<p>', '>>> Links to static files.');
 		x.p('<p>', 'this is myself''s img (CHN.gif)' || x.i('<img>', '@b/CHN.gif'));
 		x.p('<p>', 'this is url_b''s img (url_b/CHN.gif)' || x.i('<img>', '^packs/url_b/CHN.gif'));
 		x.p('<p>', 'this is url_test1_b''s img (url_test1_b/USA.gif)' || x.i('<img>', '^packs/url_test1_b/USA.gif'));
-		x.p('<p>', 'this is url_test2_b''s img (url_test2_b/RUS.gif)' || x.i('<img>', '^packs/url_test2_b/RUS.gif'));
 		x.p('<p>', 'this is ico/''s img (ico/google.ico)' || x.i('<img>', '^ico/google.ico'));
 		x.p('<p>', 'this is img/nations/''s img (img/nations/JPN.gif)' || x.i('<img>', '^img/nations/JPN.gif'));
 		x.p('<p>', 'this is app/dad''s root/''s img (./GER.gif)' || x.i('<img>', '^GER.gif'));
