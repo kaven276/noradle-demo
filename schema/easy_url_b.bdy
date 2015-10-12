@@ -202,7 +202,7 @@ create or replace package body easy_url_b is
 	begin
 		src_b.header;
 		x.p('<p>', 'sometimes, we need to refer to other parallel static app''s url that provide common static files');
-		x.a('<a>', 'link to "{y$static}../" with "\" prefix', replace('\{app}/img/larry.jpg', '{app}', r.dbu));
+		x.a('<a>', 'link to "{y$static}../some_other_app/path_to_file.ext" ', '^../demo1/img/larry.jpg');
 	end;
 
 	procedure link_configured_url is
