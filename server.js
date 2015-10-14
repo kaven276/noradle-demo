@@ -37,6 +37,15 @@ function ReqBaseC(req){
   this.y$static = y$static;
 }
 
+function adjust_env(rb, req){
+  if (rb.x$dbu === '') {
+    rb.x$dbu = cfg.demo_dbu;
+    rb.location = '/demo/';
+  } else if (rb.x$dbu === 'demo') {
+    rb.x$dbu = cfg.demo_dbu;
+  }
+}
+
 // set url routes
 function set_route(){
 
@@ -55,6 +64,7 @@ function set_route(){
     template_dir : cfg.template_dir,
     template_engine : cfg.template_engine,
     favicon_url : y$static + 'favicon.ico',
+    adjust_env_func : adjust_env,
     converters : {
       marked : marked
     }

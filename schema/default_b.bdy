@@ -2,7 +2,11 @@ create or replace package body default_b is
 
 	procedure d is
 	begin
-		h.redirect('index_b.frame');
+		if r.is_lack('location') then
+			h.redirect('index_b.frame');
+		else
+			h.redirect(r.getc('location'));
+		end if;
 		return;
 		x.t('<!DOCTYPE html>');
 		x.o('<html>');
