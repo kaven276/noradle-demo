@@ -37,15 +37,6 @@ function ReqBaseC(req){
   this.y$static = y$static;
 }
 
-function adjust_env(rb, req){
-  if (rb.x$dbu === '') {
-    rb.x$dbu = cfg.demo_dbu;
-    rb.location = '/demo/';
-  } else if (rb.x$dbu === 'demo') {
-    rb.x$dbu = cfg.demo_dbu;
-  }
-}
-
 // set url routes
 function set_route(){
 
@@ -57,17 +48,20 @@ function set_route(){
   app.use(y$static, harp.mount(cfg.static_root));
 
   app.use(noradle.handlerHTTP(dbPool, ReqBaseC, {
-    check_session_hijack : false,
-    NoneBrowserPattern : /^$/,
+    url_pattern : '/x$prog',
+    x$dbu : cfg.demo_dbu,
+    x$prog : 'index_b.frame',
     static_url : cfg.static_url,
     upload_dir : cfg.upload_dir,
     template_dir : cfg.template_dir,
     template_engine : cfg.template_engine,
     favicon_url : y$static + 'favicon.ico',
-    adjust_env_func : adjust_env,
+    adjust_env_func1 : adjust_env,
     converters : {
       marked : marked
-    }
+    },
+    check_session_hijack : false,
+    NoneBrowserPattern : /^$/
   }));
 
 }
