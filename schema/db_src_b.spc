@@ -16,5 +16,7 @@ create or replace package db_src_b is
 
 	procedure direct_json;
 
+	procedure set_mime_no_convert;
+
 end db_src_b;
 /

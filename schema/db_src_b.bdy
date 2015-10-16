@@ -28,7 +28,7 @@ create or replace package body db_src_b is
 	procedure pack_proc is
 		cur sys_refcursor;
 	begin
-    src_b.header;
+		src_b.header;
 		open cur for
 			select a.object_name pack, a.created, a.status
 				from user_objects a
@@ -56,7 +56,7 @@ create or replace package body db_src_b is
 	procedure scalar_array is
 		cur sys_refcursor;
 	begin
-    src_b.header;
+		src_b.header;
 		open cur for
 			select a.object_name "-" from user_objects a where a.object_type = 'PACKAGE' order by 1 asc;
 		rs.print('packages', cur);
@@ -65,7 +65,7 @@ create or replace package body db_src_b is
 	procedure pack_kv is
 		cur sys_refcursor;
 	begin
-    src_b.header;
+		src_b.header;
 		open cur for
 			select a.object_name pack, a.created, a.status
 				from user_objects a
@@ -77,7 +77,7 @@ create or replace package body db_src_b is
 	procedure pack_kv_child is
 		cur sys_refcursor;
 	begin
-    src_b.header;
+		src_b.header;
 		open cur for
 			select a.object_name pack, a.created, a.status
 				from user_objects a
@@ -106,7 +106,7 @@ create or replace package body db_src_b is
 		v2  number := 123456;
 		v3  date := date '1976-10-26';
 	begin
-    src_b.header;
+		src_b.header;
 		open cur for
 			select v1 as name, v2 as val, v3 as ctime, r.getc('param1') p1, r.getc('param2') p2, r.getc('__parse') pnull
 				from dual;
@@ -115,7 +115,7 @@ create or replace package body db_src_b is
 
 	procedure scalars_direct is
 	begin
-    src_b.header;
+		src_b.header;
 		h.convert_json;
 		rs.nv('name', 'kaven276');
 		rs.nv('age', 39);
@@ -131,6 +131,19 @@ create or replace package body db_src_b is
 		open cur for
 			select a.object_name, a.object_type from user_objects a where rownum <= 3;
 		rs.json(cur);
+	end;
+
+	procedure set_mime_no_convert is
+		cur sys_refcursor;
+	begin
+		h.content_type('text/plain');
+		src_b.header;
+		h.line('set mime other than default "text/html",');
+		h.line('rs.print will not set mime to "text/resultsets",');
+		h.line('and not cause conversion to JSON format.');
+		open cur for
+			select a.object_name, a.object_type from user_objects a where rownum <= 3;
+		rs.print(cur);
 	end;
 
 end db_src_b;

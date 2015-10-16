@@ -1,4 +1,4 @@
-create or replace package body index_b is
+﻿create or replace package body index_b is
 
 	procedure frame is
 	begin
@@ -51,6 +51,7 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'key-value', 'db_src_b.pack_kv?inspect&markdown'));
 		x.p('<dd>', x.a('<a>', 'key-value(child)', 'db_src_b.pack_kv_child?inspect&markdown'));
 		x.p('<dd>', x.a('<a>', 'direct_json', 'db_src_b.direct_json?inspect&markdown'));
+		x.p('<dd>', x.a('<a>', 'set_mime_no_convert', 'db_src_b.set_mime_no_convert?inspect&markdown'));
 	
 		x.p('<dt>', 'html_b');
 		x.p('<dd>', x.a('<a>', 'd', 'html_b.d'));
