@@ -22,41 +22,33 @@ marked.setOptions({
   }
 });
 
-var cfg = require('./cfg.js')
-  , http = require('http')
+var http = require('http')
   , noradle = require('noradle')
   , harp = require('harp')
   , express = require('express')
   , app = express()
-  , port = cfg.http_port
-  , y$static = cfg.static_url + cfg.demo_dbu + '/'
-  , dbPool = noradle.DBDriver.connect(cfg.dispatcher_addr, cfg.client_auth)
+  , http_port = parseInt(process.argv[3] || 8888)
+  , dispatcher_addr = (process.argv[2] || '1522').split(':')
+  , y$static = '/demo/'
+  , dbPool = noradle.DBDriver.connect(dispatcher_addr, {
+    cid : 'demo',
+    passwd : 'demo'
+  })
   ;
-
-function ReqBaseC(req){
-  this.y$static = y$static;
-}
 
 // set url routes
 function set_route(){
 
-  app.use(y$static, express.static(cfg.static_root, {
-    maxAge : cfg.oneDay,
-    redirect : false
-  }));
-
-  app.use(y$static, harp.mount(cfg.static_root));
-
-  app.use(noradle.handlerHTTP(dbPool, ReqBaseC, {
-    url_pattern : '/x$prog',
-    x$dbu : cfg.demo_dbu,
+  app.use(noradle.handlerHTTP(dbPool, {
+    url_pattern : '/x$app/x$prog',
+    x$dbu : 'demo',
     x$prog : 'index_b.frame',
-    static_url : cfg.static_url,
-    upload_dir : cfg.upload_dir,
-    template_dir : cfg.template_dir,
-    template_engine : cfg.template_engine,
+    u$location : '/demo/',
+    y$static : y$static,
     favicon_url : y$static + 'favicon.ico',
-    adjust_env_func1 : adjust_env,
+    upload_dir : __dirname + '/upload',
+    template_dir : __dirname + '/static/template',
+    template_engine : 'jade',
     converters : {
       marked : marked
     },
@@ -64,13 +56,20 @@ function set_route(){
     NoneBrowserPattern : /^$/
   }));
 
+  app.use(y$static, express.static(__dirname + '/static', {
+    maxAge : 24 * 60 * 60,
+    redirect : false
+  }));
+
+  app.use(y$static, harp.mount(__dirname + '/static'));
+
 }
 
 /**
  * start a combined http server, which inlucde
  * plsql servlet, static file, harp compiler
  */
-http.createServer(app).listen(port, function(){
-  console.log('http server is listening at ' + port);
+http.createServer(app).listen(http_port, function(){
+  console.log('http server is listening at ' + http_port);
 });
 set_route();
