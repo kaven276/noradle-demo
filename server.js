@@ -40,7 +40,6 @@ app.use(noradle.handlerHTTP(dbPool, {
   x$prog : 'index_b.frame',
   u$location : '/demo/',
   y$static : y$static,
-  favicon_url : y$static + 'favicon.ico',
   upload_dir : __dirname + '/upload',
   template_dir : __dirname + '/static/template',
   template_engine : 'jade',
@@ -57,6 +56,10 @@ app.use(y$static, express.static(__dirname + '/static', {
 }));
 
 app.use(y$static, harp.mount(__dirname + '/static'));
+
+app.get('/favicon.ico', function(req, res){
+  res.redirect(301, y$static + 'favicon.ico');
+});
 
 /**
  * start a combined http server, which inclucde
