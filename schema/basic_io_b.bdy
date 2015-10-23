@@ -10,17 +10,21 @@ create or replace package body basic_io_b is
 		h.line('<pre>');
 	
 		h.line('[ This is the basic request info derived from http request line and host http header ]');
+		h.line('');
 		h.line('r.url_full : ' || r.url_full);
 		h.line('r.dir_full : ' || r.dir_full);
+		h.line('');
 		h.line('r.method : ' || r.method);
 		h.line('r.protocol : ' || r.protocol);
+		h.line('r.url : ' || r.url);
+		h.line('');
 		h.line('r.site : ' || r.site);
 		h.line('r.host : ' || r.host);
 		h.line('r.hostname : ' || r.hostname);
+		h.line('r.port : ' || r.port);
 		h.line('r.sdns : ' || r.sdns);
 		h.line('r.pdns : ' || r.pdns);
-		h.line('r.port : ' || r.port);
-		h.line('r.url : ' || r.url);
+		h.line('');
 		h.line('r.pathname : ' || r.pathname);
 		h.line('r.dir : ' || r.dir);
 		h.line('r.prog : ' || r.prog);
