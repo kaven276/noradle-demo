@@ -31,6 +31,7 @@ create or replace package body basic_io_b is
 		h.line('r.pack : ' || r.pack);
 		h.line('r.proc : ' || r.proc);
 		h.line('r.subpath : ' || r.subpath);
+		h.line('r.search : ' || r.search);
 		h.line('r.qstr : ' || r.qstr);
 	
 		h.line;
