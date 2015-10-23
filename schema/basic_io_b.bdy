@@ -40,6 +40,7 @@ create or replace package body basic_io_b is
 		h.line('r.referer : ' || r.referer);
 		h.line('r.bsid : ' || r.bsid);
 		h.line('r.msid : ' || r.msid);
+		h.line('r.xhr : ' || t.tf(r.xhr, 'true', 'false'));
 	
 		h.line;
 		h.line('[ This is about client/server address]');
