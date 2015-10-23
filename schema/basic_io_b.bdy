@@ -92,7 +92,11 @@ create or replace package body basic_io_b is
 		loop
 			exit when n is null;
 			va := ra.params(n);
-			h.line(n || ' : ' || t.join(va, ', '));
+			if va.count = 1 then
+				h.line(n || ' : ' || va(1));
+			else
+				h.line(n || ' : [' || t.join(va, ', ') || ']');
+			end if;
 			n := ra.params.next(n);
 		end loop;
 	
