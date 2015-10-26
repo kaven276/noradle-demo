@@ -2,9 +2,6 @@ create or replace package body k_filter is
 
 	procedure before is
 	begin
-		if substrb(r.dir, -1) != '/' then
-			h.go(r.dir || '/');
-		end if;
 	
 		-- url [jquery] is alwarys available
 		r.setc('[jquery]', l('^bower_lib/jquery/dist/jquery.min.js'));
