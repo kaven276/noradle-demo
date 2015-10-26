@@ -82,14 +82,14 @@ xhr.send("<p>abedefg</p>\n\
 		x.p('<p>', 'origin: ' || r.header('origin'));
 		x.p('<p>', 'xhr: ' || t.tf(r.xhr, 'true', 'false'));
 		x.p('<p>', 'rb.mime_type: ' || rb.mime_type);
+		x.p('<p>', 'rb.mime_type(major): ' || t.left(rb.mime_type));
+		x.p('<p>', 'rb.mime_type(minor): ' || t.right(rb.mime_type));
 		x.p('<p>', 'rb.charset_http: ' || rb.charset_http);
 		x.p('<p>', 'rb.charset_db: ' || rb.charset_db);
 		x.p('<p>', 'rb.length: ' || rb.length);
 		x.p('<p>', 'length(rb.blob_entity): ' || dbms_lob.getlength(rb.blob_entity));
 		r.body2clob;
 		x.p('<p>', 'length(rb.clob_entity): ' || dbms_lob.getlength(rb.clob_entity));
-		x.t('<hr/>');
-		k_debug.req_info;
 		x.t('<hr/>');
 		x.p('<h3>', 'ajax request request entity content');
 		h.write(rb.clob_entity);
