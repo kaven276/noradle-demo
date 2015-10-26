@@ -74,41 +74,25 @@ xhr.send("<p>abedefg</p>\n\
 	begin
 		h.allow('POST');
 		h.content_type('text/plain');
-	
-		case 2
-			when 1 then
-				h.line(r.method);
-				h.line(r.header('content-type'));
-				h.line(r.header('content-length'));
-				h.line(rb.charset_http);
-				h.line(rb.charset_db);
-				h.line(dbms_lob.getlength(rb.blob_entity));
-				r.body2clob;
-				h.line(dbms_lob.getlength(rb.clob_entity));
-			when 2 then
-				r.body2clob;
-				h.write(rb.clob_entity);
-			when 3 then
-				r.body2clob;
-				pc.h;
-				r.read_line_init(chr(10));
-				for i in 1 .. 5 loop
-					r.read_line(v_line);
-					h.line(i);
-					h.line(v_line);
-					exit when r.read_line_no_more;
-				end loop;
-			when 4 then
-				r.body2nclob;
-				pc.h;
-				r.read_line_init(chr(10));
-				for i in 1 .. 5 loop
-					r.read_nline(v_nline);
-					h.line(i);
-					h.line(v_nline);
-					exit when r.read_line_no_more;
-				end loop;
-		end case;
+		x.p('<h3>', 'ajax request meta info');
+		x.p('<p>', 'r.method: ' || r.method);
+		x.p('<p>', 'content-type: ' || r.header('content-type'));
+		x.p('<p>', 'content-length: ' || r.header('content-length'));
+		x.p('<p>', 'x-requested-with: ' || r.header('x-requested-with'));
+		x.p('<p>', 'origin: ' || r.header('origin'));
+		x.p('<p>', 'xhr: ' || t.tf(r.xhr, 'true', 'false'));
+		x.p('<p>', 'rb.mime_type: ' || rb.mime_type);
+		x.p('<p>', 'rb.charset_http: ' || rb.charset_http);
+		x.p('<p>', 'rb.charset_db: ' || rb.charset_db);
+		x.p('<p>', 'rb.length: ' || rb.length);
+		x.p('<p>', 'length(rb.blob_entity): ' || dbms_lob.getlength(rb.blob_entity));
+		r.body2clob;
+		x.p('<p>', 'length(rb.clob_entity): ' || dbms_lob.getlength(rb.clob_entity));
+		x.t('<hr/>');
+		k_debug.req_info;
+		x.t('<hr/>');
+		x.p('<h3>', 'ajax request request entity content');
+		h.write(rb.clob_entity);
 	end;
 
 end post_file_b;

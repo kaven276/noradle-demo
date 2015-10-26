@@ -135,6 +135,8 @@ create or replace package body pg_test_b is
 	
 		x.p('<div#letters>', x.w('Noradle') || ' is easy coding web tech!');
 	
+		x.p('<div>', m.w('<input value="@"/>', 'node,oracle,noradle'));
+	
 		open v for
 			select a.object_name, a.object_type from user_objects a where rownum < 10;
 		x.o('<fieldset>');
@@ -225,6 +227,28 @@ create or replace package body pg_test_b is
 		x.p(' <legend>', 'checkbox groups');
 		m.nv(' <label><input ?checked type="checkbox" name="single" value="@"/>@</label><br/>', cur, sv);
 		x.c('</fieldset>');
+	end;
+
+	procedure reorder is
+	begin
+		--src_b.header;
+		x.o('<html>');
+		x.o('<head>');
+		x.o('<script#component1 type=text/component>');
+		x.p(' <p>', 'component 1');
+		x.c('</script>');
+		x.o('<script#component2 type=text/component>');
+		x.p(' <p>', 'component 2');
+		x.c('</script>');
+		x.c('</head>');
+		x.o('<body>');
+		x.p('<div#c1>', '');
+		x.p('<div#c2>', '');
+		x.c('</body>');
+		x.p('<script>', 'document.getElementById("c1").innerHTML =document.getElementById("component1").innerHTML;');
+		x.p('<script>', 'document.getElementById("c2").innerHTML =document.getElementById("component2").innerHTML;');
+		x.c('</html>');
+		--src_b.footer;
 	end;
 
 end pg_test_b;
