@@ -209,6 +209,7 @@ create or replace package body basic_io_b is
 		v_chunk varchar2(1024) := rpad('H', 1024, '.');
 	begin
 		k_debug.set_run_comment('size:' || v_size);
+		h.content_encoding_identity;
 		for i in 1 .. v_size loop
 			h.write(v_chunk);
 		end loop;
