@@ -3,6 +3,12 @@ create or replace package body cache_b is
 	procedure expires is
 	begin
 		h.expires(sysdate + 1);
+		cache.max_age(60);
+		cache.s_maxage(30);
+		cache.set_public;
+		--cache.no_cache;
+		cache.must_revalidate;
+		cache.proxy_revlidate;
 		pc.h;
 		src_b.link_proc;
 		x.p('<p>', 'Now is at ' || t.dt2s(sysdate) || '.');
@@ -15,7 +21,13 @@ create or replace package body cache_b is
 
 	procedure last_modified is
 	begin
-		h.expires_now;
+		cache.set_private;
+		cache.set_public;
+		cache.must_revalidate;
+		cache.max_age(10);
+		cache.s_maxage(20);
+		--cache.no_cache;
+		h.expires_as_maxage;
 		h.last_modified(trunc(sysdate));
 		select max(a.last_ddl_time) into tmp.dt from user_objects a;
 		h.last_modified(tmp.dt);
@@ -43,6 +55,7 @@ create or replace package body cache_b is
 	procedure last_scn is
 	begin
 		h.expires_now;
+		cache.set_public;
 		select max(ora_rowscn) into tmp.scn from user_t a;
 		h.last_scn(tmp.scn);
 		h.check_if_none_match_scn;
@@ -72,6 +85,7 @@ create or replace package body cache_b is
 		h.content_md5_on;
 		h.content_encoding_identity;
 		h.etag_md5_on;
+		cache.set_public;
 		pc.h;
 		src_b.link_proc;
 		x.p('<p>', to_char(nls_charset_id('CHAR_CS')));
