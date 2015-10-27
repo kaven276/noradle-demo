@@ -23,7 +23,6 @@ marked.setOptions({
 });
 
 var noradle = require('noradle')
-  , harp = require('harp')
   , express = require('express')
   , app = express()
   , y$static = '/demo/'
@@ -55,7 +54,7 @@ app.use(y$static, express.static(__dirname + '/static', {
   redirect : false
 }));
 
-app.use(y$static, harp.mount(__dirname + '/static'));
+//app.use(y$static, require('harp').mount(__dirname + '/static'));
 
 app.get('/favicon.ico', function(req, res){
   res.redirect(301, y$static + 'favicon.ico');
