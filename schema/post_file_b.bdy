@@ -80,7 +80,7 @@ xhr.send("<p>abedefg</p>\n\
 		x.p('<p>', 'content-length: ' || r.header('content-length'));
 		x.p('<p>', 'x-requested-with: ' || r.header('x-requested-with'));
 		x.p('<p>', 'origin: ' || r.header('origin'));
-		x.p('<p>', 'xhr: ' || t.tf(r.xhr, 'true', 'false'));
+		x.p('<p>', 'is_xhr: ' || t.tf(r.is_xhr, 'true', 'false'));
 		x.p('<p>', 'rb.mime_type: ' || rb.mime_type);
 		x.p('<p>', 'rb.mime_type(major): ' || t.left(rb.mime_type));
 		x.p('<p>', 'rb.mime_type(minor): ' || t.right(rb.mime_type));
