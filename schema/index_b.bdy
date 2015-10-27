@@ -1,4 +1,4 @@
-﻿create or replace package body index_b is
+create or replace package body index_b is
 
 	procedure frame is
 	begin
@@ -115,6 +115,7 @@
 	
 		x.p('<dt>', 'negotiation_b');
 		x.p('<dd>', x.a('<a>', 'lang_versions', 'negotiation_b.languages_by_browser'));
+		x.p('<dd>', x.a('<a>', 'accepts_best_match', 'negotiation_b.accepts_best_match'));
 	
 		x.p('<dt>', 'file_dl_b');
 		x.p('<dd>', x.a('<a>', 'd', 'file_dl_b.d'));

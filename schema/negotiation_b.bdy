@@ -26,5 +26,50 @@ create or replace package body negotiation_b is
 		x.p('<p>', 'set your browser language to have zh(chinese), el(greece) to see versions of the page.');
 	end;
 
+	procedure accepts_best_match is
+	begin
+		x.p('<style>', 'dl{line-height:1.5em;}');
+	
+		x.p('<h3>', 'accept');
+		x.o('<dl>');
+		x.p('<dt>', 'r.header(''accept'')');
+		x.p('<dd>', r.header('accept'));
+		x.p('<dt>', 'r.dump(''h$accepts'')');
+		x.p('<dd>', r.dump('h$accepts'));
+		x.p('<dt>', 'r.negotiation(''h$accepts'', ''text/xml'')');
+		x.p('<dd>', r.negotiation('h$accepts', 'text/xml'));
+		x.c('</dl>');
+	
+		x.p('<h3>', 'accept-charset');
+		x.o('<dl>');
+		x.p('<dt>', 'r.header(''accept-charset'')');
+		x.p('<dd>', nvl(r.header('accept-charset'), 'none'));
+		x.p('<dt>', 'r.dump(''h$accept-charsets'')');
+		x.p('<dd>', r.dump('h$accept-charsets'));
+		x.p('<dt>', 'r.negotiation(''h$accept-charsets'', ''zhs'')');
+		x.p('<dd>', r.negotiation('h$accept-charsets', 'zhs'));
+		x.c('</dl>');
+	
+		x.p('<h3>', 'accept-language');
+		x.o('<dl>');
+		x.p('<dt>', 'r.header(''accept-language'')');
+		x.p('<dd>', nvl(r.header('accept-language'), 'none'));
+		x.p('<dt>', 'r.dump(''h$accept-languages'')');
+		x.p('<dd>', r.dump('h$accept-languages'));
+		x.p('<dt>', 'r.negotiation(''h$accept-languages'', ''zh'')');
+		x.p('<dd>', r.negotiation('h$accept-languages', 'zh'));
+		x.c('</dl>');
+	
+		x.p('<h3>', 'accept-encoding');
+		x.o('<dl>');
+		x.p('<dt>', 'r.header(''accept-encoding'')');
+		x.p('<dd>', nvl(r.header('accept-encoding'), 'none'));
+		x.p('<dt>', 'r.dump(''h$accept-encodings'')');
+		x.p('<dd>', r.dump('h$accept-encodings'));
+		x.p('<dt>', 'r.negotiation(''h$accept-encodings'', ''deflate'')');
+		x.p('<dd>', r.negotiation('h$accept-encodings', 'deflate'));
+		x.c('</dl>');
+	end;
+
 end negotiation_b;
 /
