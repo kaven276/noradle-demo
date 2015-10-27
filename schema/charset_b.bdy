@@ -107,6 +107,12 @@ create or replace package body charset_b is
 		-- h.content_encoding_try_zip;
 		h.content_encoding_identity;
 		pc.h;
+		x.p('<p>', v_liyong);
+		x.a('<a>', v_liyong, '@b.test?name=' || v_liyong);
+		x.o('<form action=:1,method=get>', st(l('@b.test')));
+		x.v(' <input type=submit,name=name>', v_liyong);
+		x.c('</form>');
+		return;
 		for i in 1 .. 1000 loop
 			for j in 1 .. 20 loop
 				x.p('<p>', v_liyong);
