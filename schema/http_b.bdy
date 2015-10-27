@@ -80,8 +80,8 @@ create or replace package body http_b is
 	procedure long_job is
 	begin
 		h.set_line_break(chr(10));
+		h.content_encoding_identity;
 		h.header_close;
-		-- h.auto_chunk_max_idle(0.5, 10);
 	
 		src_b.link_proc;
 		h.line('<h3>This a long-running page that use chunked transfer and flush by section to response early</h3>');
