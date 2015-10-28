@@ -38,7 +38,7 @@ app.use(noradle.handlerHTTP(dbPool, {
   x$dbu : 'demo',
   x$prog : 'index_b.frame',
   u$location : '/demo/',
-  y$static : y$static,
+  l$ : y$static,
   upload_dir : __dirname + '/upload',
   template_dir : __dirname + '/static/template',
   template_engine : 'jade',
