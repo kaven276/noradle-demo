@@ -1,5 +1,18 @@
 create or replace package body basic_io_b is
 
+	function name_pattern(name varchar2) return varchar2 is
+	begin
+		if substrb(name, 2, 2) = '$$' then
+			return substrb(name, 1, 3);
+		elsif substrb(name, 2, 1) = '$' then
+			return substrb(name, 1, 2);
+		elsif substrb(name, 1, 1) = '[' then
+			return '[]';
+		else
+			return '*';
+		end if;
+	end;
+
 	procedure req_info is
 		n  varchar2(100);
 		v  varchar2(999);
@@ -8,6 +21,7 @@ create or replace package body basic_io_b is
 	begin
 		h.set_line_break(chr(10));
 		src_b.link_proc;
+		x.p('<style>', 'hr{margin:2em 0 1em;}');
 		h.line('<pre>');
 	
 		h.line('## basic request info derived from http request line and http header host');
@@ -39,16 +53,89 @@ create or replace package body basic_io_b is
 		h.line(' r.search : ' || r.search);
 		h.line(' r.qstr : ' || r.qstr);
 	
+		x.t('<hr/>');
+		h.line('## core excution NV');
 		h.line;
-		h.line('## basic request info derived from http header');
-		h.line('r.ua : ' || r.ua);
-		h.line('r.referer : ' || r.referer);
+		h.line('x$dbu|r.dbu : ' || r.dbu);
+		h.line('x$prog|r.prog : ' || r.prog);
+		h.line('x$before : ' || r.getc('x$before'));
+		h.line('x$after : ' || r.getc('x$after'));
+	
+		x.t('<hr/>');
+		h.line('## session related info');
+		h.line;
+		x.a('<a>', 'link to protected page who require logged-in session', './auth_b.protected_page');
 		h.line('r.bsid : ' || r.bsid);
 		h.line('r.msid : ' || r.msid);
-		h.line('r.is_xhr : ' || t.tf(r.is_xhr, 'true', 'false'));
+		h.line('r.gid : ' || r.gid);
+		h.line('r.uid : ' || r.uid);
+		h.line('s$ : ' || r.getc('s$'));
+		h.line('r.idle : ' || r.idle);
+		h.line('r.lat : ' || r.lat);
+		n := ra.params.first;
+		loop
+			exit when n is null;
+			if substrb(n, 1, 3) like 's$_' then
+				tmp.stv := ra.params(n);
+				h.line(sn || n || ' : [' || t.join(tmp.stv, ', ') || ']');
+			end if;
+			n := ra.params.next(n);
+		end loop;
 	
+		x.t('<hr/>');
+		h.line('## file/link related info');
 		h.line;
-		h.line('## client/server address');
+		h.line('r.file : if static url mapped to lob stored in oracle database other than external filesystem file' ||
+					 r.file);
+		n := ra.params.first;
+		loop
+			exit when n is null;
+			if n like 'l$%' then
+				h.line(sn || n || ' : ' || r.getc(n));
+			end if;
+			n := ra.params.next(n);
+		end loop;
+	
+		/*
+    h.line;
+    h.line('## charset related');
+    h.line('r.req_charset_db : ' || t.tf(r.req_charset_db));
+    h.line('r.req_charset_ndb : ' || t.tf(r.req_charset_ndb));
+    h.line('r.req_charset_utf8 : ' || t.tf(r.req_charset_utf8));
+    */
+	
+		x.t('<hr/>');
+		h.line('## infrastucture info');
+		h.line;
+		h.line('r.database_role : ' || r.database_role);
+		h.line('r.db_unique_name : ' || r.db_unique_name);
+		h.line('r.instance : ' || r.instance);
+		h.line('r.cfg : ' || r.cfg);
+		h.line('r.slot : ' || r.slot);
+		h.line('r.cid|b$cid : ' || r.cid);
+		h.line('r.cslot|b$cslot : ' || r.cslot);
+	
+		h.header('etag', '"BASIC_IO_B.V1"');
+		h.last_modified((sysdate));
+		x.t('<hr/>');
+		h.line('## basic request info derived from http header');
+		h.line;
+		x.a('<a>', 'link to page who require http basic authorization', './auth_b.basic');
+		h.line(q'|r.header('authorization') : |' || r.header('authorization'));
+		h.line(q'|r.getc('h$authorization') : |' || r.getc('h$authorization'));
+		h.line('r.user : ' || r.user);
+		h.line('r.pass : ' || r.pass);
+		h.line('r.ua : ' || r.ua);
+		h.line('r.referer : ' || r.referer);
+		h.line('r.referer2 : ' || r.referer2);
+		h.line('r.is_xhr : ' || t.tf(r.is_xhr, 'true', 'false'));
+		h.line('r.is_readonly : ' || t.tf(r.is_readonly, 'true', 'false'));
+		h.line('r.etag : ' || r.etag);
+		h.line('r.lmt : ' || r.lmt);
+	
+		x.t('<hr/>');
+		h.line('## client/server address from TCP socket or x-forwarded-* headers');
+		h.line;
 		h.line('r.client_addr(false) : ' || r.client_addr(false));
 		h.line('r.client_port(false) : ' || r.client_port(false));
 		h.line('r.client_addr(true) : ' || r.client_addr(true));
@@ -57,35 +144,36 @@ create or replace package body basic_io_b is
 		h.line('r.server_addr : ' || r.server_addr);
 		h.line('r.server_port : ' || r.server_port);
 	
-		h.line;
+		x.t('<hr/>');
 		h.line('## original http request headers exclude cookies');
 		h.line;
 		n := ra.params.first;
 		loop
 			exit when n is null;
-			if n like 'h$%' and substrb(n, -1) != 's' then
+			if n like 'h$%' and n not like 'h$$%' then
 				v := ra.params(n) (1);
 				h.line(sn || n || ' : ' || v);
 			end if;
 			n := ra.params.next(n);
 		end loop;
 	
-		h.line;
+		x.t('<hr/>');
 		h.line('## all http request headers parsed to array');
 		h.line;
 		n := ra.params.first;
 		loop
 			exit when n is null;
-			if n like 'h$%' and substrb(n, -1) = 's' then
+			if substrb(n, 1, 3) = 'h$$' then
 				tmp.stv := ra.params(n);
 				h.line(sn || n || ' : [' || t.join(tmp.stv, ', ') || ']');
 			end if;
 			n := ra.params.next(n);
 		end loop;
 	
-		h.line;
+		x.t('<hr/>');
 		h.line('## This is all http request cookies');
 		h.line;
+		x.a('<a>', 'link to page who set/view cookies', './cookie_h.form_view');
 		n := ra.params.first;
 		loop
 			exit when n is null;
@@ -96,6 +184,7 @@ create or replace package body basic_io_b is
 			n := ra.params.next(n);
 		end loop;
 	
+		x.t('<hr/>');
 		h.line;
 		h.line('## request parameter that may be got from the following ways');
 		h.line('1. query string');
@@ -105,20 +194,21 @@ create or replace package body basic_io_b is
 		n := ra.params.first;
 		loop
 			exit when n is null;
-			if lengthb(n) < 2 or substrb(n, 2, 1) != '$' then
+			if lengthb(n) < 2 or (substrb(n, 2, 1) != '$' and substrb(n, 1, 1) != '[') then
 				va := ra.params(n);
 				h.line(sn || n || ' : ' || t.join(va, ', '));
 				for i in 1 .. va.count loop
-					h.line(sn || '  ' || i || '.' || r.unescape(va(i)));
+					h.line(sn || '  ' || i || '. ' || r.unescape(va(i)));
 				end loop;
 			end if;
 			n := ra.params.next(n);
 		end loop;
 	
-		h.line;
+		x.t('<hr/>');
 		h.line('## all request name-value pairs');
 		h.line;
-		n := ra.params.first;
+		n     := ra.params.first;
+		tmp.s := name_pattern(n);
 		loop
 			exit when n is null;
 			va := ra.params(n);
@@ -128,6 +218,10 @@ create or replace package body basic_io_b is
 				h.line(sn || n || ' : [' || t.join(va, ', ') || ']');
 			end if;
 			n := ra.params.next(n);
+			if name_pattern(n) != tmp.s then
+				h.line;
+				tmp.s := name_pattern(n);
+			end if;
 		end loop;
 	
 		h.line('</pre>');
@@ -168,6 +262,7 @@ create or replace package body basic_io_b is
 	end;
 
 	procedure parameters is
+		v pls_integer := r.getn('step_no', 1);
 	begin
 		pc.h;
 		src_b.link_proc;
@@ -178,8 +273,9 @@ create or replace package body basic_io_b is
 		x.p('  <option>', 'post');
 		x.c(' </select>');
 		x.p(' <script>', 'document.f.mtd.onchange=function(){document.f.method = this.value;};');
-		x.s(' <input type=text,name=p1,value=1>');
-		x.s(' <input type=text,name=p1,value=2>');
+		x.v(' <input type=hidden>', v);
+		x.s(' <input type=text,name=p:1,value=1>', st(v));
+		x.s(' <input type=text,name=p:1,value=2>', st(v));
 		x.s(' <input type=submit>');
 		x.c('</form>');
 		x.t('<br/>');
