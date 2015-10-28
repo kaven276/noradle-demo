@@ -34,8 +34,8 @@ var dbPool = noradle.DBDriver.connect((process.argv[2] || '1522').split(':'), {
 });
 
 app.use(noradle.handlerHTTP(dbPool, {
-  url_pattern : '/x$app/x$prog',
   x$dbu : 'demo',
+  url_pattern : '/i$app/x$prog',
   x$prog : 'index_b.frame',
   u$location : '/demo/',
   l$ : y$static,
