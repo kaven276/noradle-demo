@@ -37,6 +37,9 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'refresh to other', 'http_b.refresh?to=index_b.page'));
 		x.p('<dd>', x.a('<a>', 'content_md5', 'http_b.content_md5'));
 	
+		x.p('<dt>', 'cookie');
+		x.p('<dd>', x.a('<a>', 'set/view cookie', 'cookie_h.form_view'));
+	
 		x.p('<dt>', 'data service');
 		x.p('<dd>', x.a('<a>', 'example', 'db_src_b.basic?inspect&markdown'));
 		x.p('<dd>', x.a('<a>', 'example(jade)', 'db_src_b.basic?template=test.jade'));

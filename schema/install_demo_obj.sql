@@ -94,6 +94,12 @@ prompt =======================
 prompt
 @@http_b.spc
 @@http_b.bdy
+prompt
+prompt Creating package COOKIE_H
+prompt =======================
+prompt
+@@cookie_h.spc
+@@cookie_h.bdy
 
 prompt
 prompt Creating package ERROR_B
