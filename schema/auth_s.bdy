@@ -3,6 +3,7 @@ create or replace package body auth_s is
 	procedure login_simple(p_name varchar2) is
 	begin
 		r.setc('s$username', p_name);
+		r.setc('s$uid', p_name);
 	end;
 
 	procedure login_complex(p_name varchar2) is
@@ -15,6 +16,8 @@ create or replace package body auth_s is
 		r.setn('s$maxlive', r.getn('maxlive'));
 		r.setc('s$attr1', r.getc('attr1'));
 		r.setc('s$attr2', r.getc('attr2'));
+		r.setc('s$gid', r.getc('company'));
+		r.setc('s$uid', p_name);
 	end;
 
 	function user_name return varchar2 is
