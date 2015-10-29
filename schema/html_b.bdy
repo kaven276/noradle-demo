@@ -131,14 +131,14 @@ create or replace package body html_b is
 		pc.h;
 		x.p('<p>', 'This is the first generated page.');
 	
-		h.print_init(true); -- this line will reset page output
+		b.print_init(true); -- this line will reset page output
 		pc.h;
 		src_b.link_proc;
 		x.p('<p>', 'This is the second generated page that replace the first generated page.');
 	end;
 
 	procedure component is
-		v_dhc boolean := h.written = 0;
+		v_dhc boolean := b.written = 0;
 	begin
 		if v_dhc then
 			pc.h;

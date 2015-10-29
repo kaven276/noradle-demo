@@ -15,11 +15,11 @@ create or replace package body post_b is
 	procedure echo_body is
 	begin
 		if r.is_lack('clob') then
-			h.download(rb.blob_entity);
+			b.download(rb.blob_entity);
 		else
 			k_debug.trace(st('echo body for clob'));
 			r.body2clob;
-			h.download(rb.clob_entity);
+			b.download(rb.clob_entity);
 		end if;
 	end;
 
