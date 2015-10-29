@@ -7,6 +7,8 @@ create or replace package pg_test_b is
 	procedure multi;
 
 	procedure form;
+	
+	procedure reorder;
 
 end pg_test_b;
 /
