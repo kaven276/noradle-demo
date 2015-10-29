@@ -319,7 +319,7 @@ create or replace package body msg_b is
 		h.header('Content-Type', 'text/items');
 		h.header('Msg-Type', 'type3');
 		for i in (select * from user_t where rownum <= 3) loop
-			h.line(i.name);
+			b.line(i.name);
 		end loop;
 		mp.send_msg;
 		x.p('<p>', 'printed after message sent.');
@@ -332,7 +332,7 @@ create or replace package body msg_b is
 		mp.set_callback_pipename;
 		h.header('Content-Type', 'text/items');
 		h.header('Msg-Type', 'type4');
-		h.line('Tianjin');
+		b.line('Tianjin');
 		mp.send_msg;
 	
 		if not mp.pipe2param then

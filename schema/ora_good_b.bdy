@@ -6,11 +6,11 @@ create or replace package body ora_good_b is
 		x.o('<html>');
 		x.o('<head>');
 		x.o(' <style>');
-		h.line('dt{margin:0.5em;}');
-		h.line('dt:before{content:"[ "}');
-		h.line('dt:after{content:" ]"}');
-		h.line('dd{line-height:1.5em;}');
-		h.line('h3,h4{text-align:center;}');
+		b.line('dt{margin:0.5em;}');
+		b.line('dt:before{content:"[ "}');
+		b.line('dt:after{content:" ]"}');
+		b.line('dd{line-height:1.5em;}');
+		b.line('h3,h4{text-align:center;}');
 		x.c(' </style>');
 		x.c('</head>');
 		x.o('<body>');

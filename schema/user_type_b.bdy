@@ -8,7 +8,7 @@ create or replace package body user_type_b is
 		else
 			v := tool('.');
 		end if;
-		h.write(v.wrap('hello world'));
+		b.write(v.wrap('hello world'));
 	end;
 
 end user_type_b;

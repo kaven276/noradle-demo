@@ -3,13 +3,13 @@ create or replace package body xml_page_b is
 	-- private
 	procedure show_begin is
 	begin
-		h.line('<textarea cols="100" rows="20" style="#overflow:visible;">');
+		b.line('<textarea cols="100" rows="20" style="#overflow:visible;">');
 	end;
 
 	-- private
 	procedure show_end is
 	begin
-		h.line('</textarea>');
+		b.line('</textarea>');
 	end;
 
 	procedure xmlgen_str is
@@ -25,7 +25,7 @@ create or replace package body xml_page_b is
 		dbms_xmlgen.setrowtag(v, 'tr');
 	
 		show_begin;
-		h.write(dbms_xmlgen.getxmltype(v).getclobval());
+		b.write(dbms_xmlgen.getxmltype(v).getclobval());
 		show_end;
 	end;
 
@@ -44,7 +44,7 @@ create or replace package body xml_page_b is
 		dbms_xmlgen.setrowtag(v, 'user');
 	
 		show_begin;
-		h.write(dbms_xmlgen.getxmltype(v).getclobval());
+		b.write(dbms_xmlgen.getxmltype(v).getclobval());
 		show_end;
 		close c;
 	end;
@@ -66,7 +66,7 @@ create or replace package body xml_page_b is
 		dbms_xmlgen.setrowtag(v, 'package');
 		-- dbms_xmlgen.setmaxrows(v, 1);
 		show_begin;
-		h.write(dbms_xmlgen.getxmltype(v).getclobval());
+		b.write(dbms_xmlgen.getxmltype(v).getclobval());
 		show_end;
 		close c;
 	end;
@@ -93,7 +93,7 @@ create or replace package body xml_page_b is
 			into v_table
 			from user_t t
 		 order by t.ctime asc;
-		h.write(v_table.getclobval);
+		b.write(v_table.getclobval);
 	end;
 
 	procedure xml_users_css is
@@ -108,7 +108,7 @@ create or replace package body xml_page_b is
 		dbms_xmlgen.setrowsettag(v, 'users');
 		dbms_xmlgen.setrowtag(v, 'user');
 		x.t('<?xml-stylesheet type="text/css" href=":1" media="screen"?>', st(l('@b/users_ol.css')));
-		h.write(dbms_xmlgen.getxmltype(v).getclobval);
+		b.write(dbms_xmlgen.getxmltype(v).getclobval);
 		close c;
 	end;
 
@@ -124,9 +124,9 @@ create or replace package body xml_page_b is
 		v := dbms_xmlgen.newcontext(c);
 		dbms_xmlgen.setrowsettag(v, 'users');
 		dbms_xmlgen.setrowtag(v, 'user');
-		h.line('<?xml version="1.0" encoding="UTF-8"?>');
+		b.line('<?xml version="1.0" encoding="UTF-8"?>');
 		x.t('<?xml-stylesheet type="text/xsl" href=":1" media="screen"?>', st(l('@b/users.xsl')));
-		h.write(dbms_xmlgen.getxmltype(v).getclobval());
+		b.write(dbms_xmlgen.getxmltype(v).getclobval());
 		close c;
 	end;
 
@@ -160,7 +160,7 @@ create or replace package body xml_page_b is
 	
 		h.header_close;
 		v_xhtml := v_xml.transform(v_xsl);
-		h.write(v_xhtml.getclobval());
+		b.write(v_xhtml.getclobval());
 	end;
 
 end xml_page_b;

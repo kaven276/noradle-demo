@@ -92,7 +92,7 @@ xhr.send("<p>abedefg</p>\n\
 		x.p('<p>', 'length(rb.clob_entity): ' || dbms_lob.getlength(rb.clob_entity));
 		x.t('<hr/>');
 		x.p('<h3>', 'ajax request request entity content');
-		h.write(rb.clob_entity);
+		b.write(rb.clob_entity);
 	end;
 
 end post_file_b;

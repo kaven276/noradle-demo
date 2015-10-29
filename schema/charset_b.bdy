@@ -25,39 +25,39 @@ create or replace package body charset_b is
 		x.p('<h3>', 'basic output API for nvarchar2');
 		x.o('<div>');
 	
-		h.write('h.write : ');
-		h.write(ncstr);
-		h.line('<br/>');
+		b.write('b.write : ');
+		b.write(ncstr);
+		b.line('<br/>');
 	
-		h.write('h.writeln : ');
-		h.writeln(ncstr);
-		h.line('<br/>');
+		b.write('b.writeln : ');
+		b.writeln(ncstr);
+		b.line('<br/>');
 	
-		h.write('h.string : ');
-		h.string(ncstr);
-		h.line('<br/>');
+		b.write('b.string : ');
+		b.string(ncstr);
+		b.line('<br/>');
 	
-		h.write('h.line : ');
-		h.line(ncstr);
-		h.line('<br/>');
+		b.write('b.line : ');
+		b.line(ncstr);
+		b.line('<br/>');
 	
-		h.write('x.t : ');
+		b.write('x.t : ');
 		x.t(ncstr);
-		h.line('<br/>');
+		b.line('<br/>');
 	
 		x.c('</div>');
 	
 		x.p('<h3>', 'other tag API using nvarchar2');
 		x.o('<div>');
-		h.write('x.p : ');
+		b.write('x.p : ');
 		x.p('<p>', ncstr);
 		x.c('</div>');
 	
 		x.p('<h3>', 'function tag API using nvarchar2');
 		x.o('<div>');
-		h.write('x.p using function API: ');
+		b.write('x.p using function API: ');
 		x.p('<p>', x.p('<span>', ncstr));
-		h.write('x.a using function API: ');
+		b.write('x.a using function API: ');
 		x.p('<p>', x.a('<a>', ncstr, n'form?a=' || ncstr));
 		x.c('</div>');
 	
@@ -117,8 +117,8 @@ create or replace package body charset_b is
 			for j in 1 .. 20 loop
 				x.p('<p>', v_liyong);
 			end loop;
-			h.line('<br/>');
-			-- h.flush;
+			b.line('<br/>');
+			-- b.flush;
 			if false and mod(i, 100) = 0 then
 				dbms_lock.sleep(1);
 			end if;

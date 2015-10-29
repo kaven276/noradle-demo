@@ -4,13 +4,13 @@ create or replace package body src_b is
 		n varchar2(30) := upper(r.getc('p'));
 	begin
 		h.content_type('text/plain');
-		h.set_line_break('');
+		b.set_line_break('');
 		for i in (select a.text
 								from user_source a
 							 where a.name = n
 								 and a.type = 'PACKAGE BODY'
 							 order by a.line) loop
-			h.line(replace(i.text, chr(9), '  '));
+			b.line(replace(i.text, chr(9), '  '));
 		end loop;
 	end;
 
@@ -25,7 +25,7 @@ create or replace package body src_b is
 		-- v_proc := chr(9) || 'procedure ' || v_prog(2) || ' is' || chr(10);
 		v_proc := chr(9) || 'procedure ' || v_prog(2) || '%' || chr(10);
 		h.content_type('text/plain');
-		h.set_line_break('');
+		b.set_line_break('');
 		for i in (select a.text
 								from user_source a
 							 where a.name = v_pack
@@ -37,7 +37,7 @@ create or replace package body src_b is
 				end if;
 			end if;
 			if v_sts then
-				h.line(substrb(replace(i.text, chr(9), '  '), 3));
+				b.line(substrb(replace(i.text, chr(9), '  '), 3));
 				if i.text = chr(9) || 'end;' || chr(10) then
 					exit;
 				end if;
@@ -47,13 +47,13 @@ create or replace package body src_b is
 
 	procedure link_pack(pack varchar2 := null) is
 	begin
-		h.line(t.ps('<a href="src_b.pack?p=:1" target=":1">view pl/sql source pack ":1" in new window</a></br>',
+		b.line(t.ps('<a href="src_b.pack?p=:1" target=":1">view pl/sql source pack ":1" in new window</a></br>',
 								st(nvl(pack, r.pack))));
 	end;
 
 	procedure link_proc(proc varchar2 := null) is
 	begin
-		h.line(t.ps('<a href="src_b.proc?p=:1" target=":1">view pl/sql source proc ":1" in new window</a><br/><br/>',
+		b.line(t.ps('<a href="src_b.proc?p=:1" target=":1">view pl/sql source proc ":1" in new window</a><br/><br/>',
 								st(nvl(proc, r.prog))));
 	end;
 
@@ -90,22 +90,22 @@ create or replace package body src_b is
 		end if;
 	
 		r.setc('p', r.getc('x$prog'));
-		h.line('```plsql');
+		b.line('```plsql');
 		src_b.proc;
-		h.line('```');
+		b.line('```');
 	
-		h.set_line_break(chr(10));
-		h.line;
-		h.line;
-		h.line('produce');
-		h.line;
-		h.line('```' || v_type);
+		b.set_line_break(chr(10));
+		b.line;
+		b.line;
+		b.line('produce');
+		b.line;
+		b.line('```' || v_type);
 	end;
 
 	procedure footer is
 	begin
 		if not r.is_lack('inspect') then
-			h.line('```');
+			b.line('```');
 			h.content_type('text/plain');
 		end if;
 	end;

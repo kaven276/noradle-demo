@@ -45,9 +45,9 @@ create or replace package body json_b is
 		end loop;
     -- l := json_dyn.executeList('select * from team_t a');
 		p.script_open;
-		h.line('var teams =');
-		h.line(l.to_char);
-		h.line(';
+		b.line('var teams =');
+		b.line(l.to_char);
+		b.line(';
 		for(i=0;i<teams.length;i++) document.body.insertAdjacentHTML("beforeEnd","<p>"+teams[i].tname+"</p>");
 		');
 		p.script_close;

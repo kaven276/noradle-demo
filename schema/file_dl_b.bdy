@@ -13,10 +13,10 @@ create or replace package body file_dl_b is
 
 	procedure text is
 	begin
-		h.set_line_break(chr(13) || chr(10));
+		b.set_line_break(chr(13) || chr(10));
 		h.content_disposition_attachment('test.txt');
-		h.line('some text');
-		h.line('some other text');
+		b.line('some text');
+		b.line('some other text');
 	end;
 
 	procedure excel is

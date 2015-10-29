@@ -7,7 +7,7 @@ create or replace package body k_filter is
 		r.setc('l$jquery', l('^bower_lib/jquery/dist/jquery.min.js'));
 		r.setc('l$myself', l('^'));
 	
-		-- h.set_line_break(null);
+		-- b.set_line_break(null);
 		pv.id  := 'liyong';
 		pv.now := sysdate;
 	

@@ -29,7 +29,7 @@ create or replace package body css_prof_b is
 		x.p('  <script>', 'var t_head = Number(new Date());');
 		x.o('  <style>');
 		x.t('   label{display:block;}#topmost{display::1;}', st(t.tf(p_paint, 'block', 'none')));
-		h.flush;
+		b.flush;
 		for i in 1 .. p_rule_cnt loop
 			x.t(p_rule_pat, st(i));
 		end loop;
@@ -56,7 +56,7 @@ create or replace package body css_prof_b is
 		end loop;
 		for i in 1 .. v_loop_cnt loop
 			if mod(i, 100) = 0 then
-				h.flush;
+				b.flush;
 			end if;
 			for j in 1 .. p_nest_cnt loop
 				x.o('<p>');

@@ -1,4 +1,4 @@
-create or replace package body db_src_b is
+﻿create or replace package body db_src_b is
 
 	procedure basic is
 		cur sys_refcursor;
@@ -11,11 +11,11 @@ create or replace package body db_src_b is
 		--h.etag_md5_on;
 		if r.is_lack('inspect') then
 			rs.use_remarks;
-			h.line('# a stardard psp.web result sets example page');
-			h.line('# It can be used in browser or NodeJS');
-			h.line('# You can use some standard parser or write your own ' ||
+			b.line('# a stardard psp.web result sets example page');
+			b.line('# It can be used in browser or NodeJS');
+			b.line('# You can use some standard parser or write your own ' ||
 						 'parsers to convert the raw resultsets to javascript data object');
-			h.line('# see PL/SQL source at ' || r.dir_full || '/src_b.proc/' || r.prog);
+			b.line('# see PL/SQL source at ' || r.dir_full || '/src_b.proc/' || r.prog);
 		end if;
 	
 		open cur for
@@ -138,9 +138,9 @@ create or replace package body db_src_b is
 	begin
 		h.content_type('text/plain');
 		src_b.header;
-		h.line('set mime other than default "text/html",');
-		h.line('rs.print will not set mime to "text/resultsets",');
-		h.line('and not cause conversion to JSON format.');
+		b.line('set mime other than default "text/html",');
+		b.line('rs.print will not set mime to "text/resultsets",');
+		b.line('and not cause conversion to JSON format.');
 		open cur for
 			select a.object_name, a.object_type from user_objects a where rownum <= 3;
 		rs.print(cur);

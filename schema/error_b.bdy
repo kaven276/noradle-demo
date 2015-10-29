@@ -19,7 +19,7 @@ create or replace package body error_b is
 	begin
 		h.sts_501_not_implemented;
 		src_b.link_proc;
-		h.line('<br/>This page is under development, please wait for it''s release.');
+		b.line('<br/>This page is under development, please wait for it''s release.');
 	end;
 
 	procedure check_right is

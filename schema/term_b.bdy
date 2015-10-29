@@ -23,8 +23,8 @@ create or replace package body term_b is
 		x.a('<a>', 'refresh', '@b.setting_form');
 		if rcpv.term_row.bgcolor is not null then
 			x.o('<style>');
-			h.line('body{background-color:' || rcpv.term_row.bgcolor || '}');
-			h.line('body{color:' || rcpv.term_row.fgcolor || '}');
+			b.line('body{background-color:' || rcpv.term_row.bgcolor || '}');
+			b.line('body{color:' || rcpv.term_row.fgcolor || '}');
 			x.c('</style>');
 		end if;
 		x.p('<p>', 'The pattern in package RC will use result cache function to get versioned rowtype data,');
