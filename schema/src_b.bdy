@@ -59,12 +59,8 @@ create or replace package body src_b is
 
 	procedure header is
 		v_pos  pls_integer;
-		v_type varchar2(100) := h.header('Content-Type');
+		v_type varchar2(100) := h.mime_type;
 	begin
-		v_pos := instrb(v_type, ';');
-		if v_pos > 1 then
-			v_type := substrb(v_type, 1, v_pos - 1);
-		end if;
 		v_pos  := instrb(v_type, '/');
 		v_type := substrb(v_type, v_pos + 1);
 		if r.pack = 'db_src_b' then
