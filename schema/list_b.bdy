@@ -4,6 +4,7 @@ create or replace package body list_b is
 	begin
 		x.o('<html>');
 		x.o('<head>');
+		src_b.header;
 		sty.embed('<style>');
 		x.c('</head>');
 		x.o('<body>');
@@ -34,6 +35,7 @@ create or replace package body list_b is
 	begin
 		x.o('<html>');
 		x.o('<head>');
+		src_b.header;
 		sty.embed('<style>');
 		x.c('</head>');
 		x.o('<body>');
@@ -64,6 +66,7 @@ create or replace package body list_b is
 	begin
 		x.o('<html>');
 		x.o('<head>');
+		src_b.header;
 		sty.embed('<style>');
 		x.c('</head>');
 		x.o('<body>');
