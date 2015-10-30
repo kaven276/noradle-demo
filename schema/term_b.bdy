@@ -31,7 +31,7 @@ create or replace package body term_b is
 		x.p('<p>', ' and set them in package variable and avoid requent reads on table.');
 		x.p('<p>',
 				'This method will run well on both oracle 11.1 and 11.2, through they do differently for result cache dependency');
-		x.o('<form name=f,action=term_b.setting_save,method=post>');
+		x.f('<form name=f,method=post>', '@b.setting_save');
 		t.split(tmp.stv, 'red,blue,green,silver,gray', ',');
 		x.p('<label>', 'background-color');
 		x.o('<select name=bgcolor>');

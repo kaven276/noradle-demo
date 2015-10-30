@@ -88,7 +88,7 @@ create or replace package body charset_b is
 		x.c('</div>');
 	
 		-- basic_io_b.req_info
-		x.o('<form name=f,action=charset_b.form,method=post>'); -- accept-charset="gbk"
+		x.f('<form name=f,method=post>', '@b.form'); -- accept-charset="gbk"
 		x.v(' <input type=text,name=url>', 'http://www.google.com?q=HELLO');
 		x.v(' <input type=ch,name=url>', v_ch);
 		x.v(' <input type=text,name=en>', 'english');
@@ -109,7 +109,7 @@ create or replace package body charset_b is
 		pc.h;
 		x.p('<p>', v_liyong);
 		x.a('<a>', v_liyong, '@b.test?name=' || v_liyong);
-		x.o('<form action=:1,method=get>', st(l('@b.test')));
+		x.f('<form method=get>', '@b.test');
 		x.v(' <input type=submit,name=name>', v_liyong);
 		x.c('</form>');
 		return;

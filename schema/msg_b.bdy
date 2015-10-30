@@ -62,7 +62,7 @@ create or replace package body msg_b is
 	procedure say_something is
 	begin
 		x.t('<doctype HTML>');
-		x.o('<form action=msg_c.say_something>');
+		x.f('<form>', '@c.say_something');
 		x.s(' <input type=text,name=message>');
 		x.s(' <input type=submit>');
 		x.c('</form>');

@@ -8,7 +8,7 @@ create or replace package body cookie_h is
 			h.set_cookie(r.getc('name'), r.getc('value'));
 			r.setc('c$' || r.getc('name'), r.getc('value'));
 		end if;
-		x.o('<form action=./cookie_h.form_view>');
+		x.f('<form>', r.prog);
 		x.s(' <input type=text,name=name>');
 		x.s(' <input type=text,name=value>');
 		x.s(' <input type=submit>');

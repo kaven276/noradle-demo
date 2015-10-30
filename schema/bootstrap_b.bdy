@@ -40,7 +40,7 @@ create or replace package body bootstrap_b is
 		navs('packages');
 	
 		-- form
-		x.o('<form.form-inline role=form,method=get,action=:1>', st(r.prog));
+		x.f('<form.form-inline role=form,method=get>', r.prog);
 		x.o(' <div.form-group>');
 		x.p('  <lable>', 'object name');
 		x.s('  <input.form-control type=text,name=oname,placeholder=%>');

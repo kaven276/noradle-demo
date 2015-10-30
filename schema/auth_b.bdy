@@ -51,7 +51,7 @@ create or replace package body auth_b is
 		end if;
 	
 		x.p('<p>', 'Please fill your name and password to log in.');
-		x.o('<form action=auth_b.login,method=post>');
+		x.f('<form method=post>', '@b.login');
 	
 		x.p(' <label>', 'campany:');
 		x.s(' <input type=text,name=company>');

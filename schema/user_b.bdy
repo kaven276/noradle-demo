@@ -21,8 +21,8 @@ create or replace package body user_b is
 		x.c('</table>');
 		x.t('<br/>');
 	
-		x.o('<form name=f,action=user_c.register,method=post>');
-		-- x.o('<form name=f,action=basic_io_b.req_info,method=post>');
+		x.f('<form name=f,method=post>', '@c.register');
+		-- x.f('<form name=f,method=post>', './basic_io_b.req_info');
 	
 		x.p(' <label>', 'username: ');
 		x.s(' <input type=text,name=name>');

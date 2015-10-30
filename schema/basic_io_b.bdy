@@ -267,7 +267,7 @@ create or replace package body basic_io_b is
 		pc.h;
 		src_b.link_proc;
 		x.t('<br/>');
-		x.o('<form name=f,method=get,action=:1>', st(l('@b.req_info?qstr1=A&qstr1=B&p1=0')));
+		x.f('<form name=f,method=get>', '@b.req_info?qstr1=A&qstr1=B&p1=0');
 		x.o(' <select name=mtd>');
 		x.p('  <option>', 'get');
 		x.p('  <option>', 'post');
@@ -289,7 +289,7 @@ create or replace package body basic_io_b is
 		pc.h;
 		src_b.link_proc;
 		x.t('<br/>');
-		x.o('<form name=f,method=get,action=:1>', st(l('@b.req_info')));
+		x.f('<form name=f,method=get>', '@b.req_info');
 		x.o(' <select name=mtd>');
 		x.p('  <option>', 'get');
 		x.p('  <option>', 'post');
