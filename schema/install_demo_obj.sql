@@ -33,13 +33,6 @@ whenever sqlerror exit
 @@pc.bdy
 
 prompt
-prompt Creating package DEFAULT_B
-prompt ==========================
-prompt
-@@default_b.spc
-@@default_b.bdy
-
-prompt
 prompt Creating package SRC_B
 prompt ======================
 prompt
