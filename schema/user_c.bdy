@@ -18,7 +18,7 @@ create or replace package body user_c is
 		case r.getc('fb')
 			when 'N' then
 				return;
-				h.gol('@b.register');
+				h.go('@b.register');
 			when 'Y' then
 				pc.h;
 				src_b.link_proc;

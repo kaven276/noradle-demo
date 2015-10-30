@@ -91,7 +91,7 @@ create or replace package body test_b is
 	begin
 		case r.method
 			when 'POST' then
-				h.go('test_b.d');
+				h.go('@b.d');
 				-- h.feedback;
 				return;
 			
@@ -126,7 +126,7 @@ create or replace package body test_b is
 				b.line(r.cookie('ck4'));
 			when 'GET' then
 				h.status_line(303);
-				h.location('test_b.entry');
+				h.location('@b.entry');
 				h.header_close;
 			else
 				h.status_line(200);

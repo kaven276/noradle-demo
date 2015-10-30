@@ -3,7 +3,7 @@ create or replace package body default_b is
 	procedure d is
 	begin
 		if r.is_lack('location') then
-			h.redirect('index_b.frame');
+			h.redirect('./index_b.frame');
 		else
 			h.redirect(r.getc('location'));
 		end if;

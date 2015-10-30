@@ -121,7 +121,7 @@ create or replace package body auth_b is
 	procedure logout is
 	begin
 		auth_s.logout;
-		h.gol('@b.cookie_gac');
+		h.go('@b.cookie_gac');
 	end;
 
 	procedure check_maxidle is

@@ -62,7 +62,7 @@ create or replace package body term_b is
 		commit;
 		select ora_rowscn into rcpv.term_ver from term_t a where a.msid = v.msid;
 		r.setc('s$term_ver', rcpv.term_ver);
-		h.gol('@b.setting_form');
+		h.go('@b.setting_form');
 	end;
 
 end term_b;

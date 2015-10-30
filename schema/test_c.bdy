@@ -18,7 +18,7 @@ create or replace package body test_c is
 	procedure do_201 is
 	begin
 		h.status_line(201);
-		h.location('test_b.d');
+		h.location('@b.d');
 		h.header_close;
 	end;
 
@@ -62,14 +62,14 @@ create or replace package body test_c is
 	procedure do_303 is
 	begin
 		h.status_line(303);
-		h.location('test_b.d');
+		h.location('@b.d');
 		h.header_close;
 	end;
 
 	procedure do_303_retry_alfter is
 	begin
 		h.status_line(303);
-		h.location('test_b.d');
+		h.location('@b.d');
 		--h.retry_after(10);
 		h.retry_after(sysdate + 10 / 24 / 60 / 60);
 		h.header_close;
