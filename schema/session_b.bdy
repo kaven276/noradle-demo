@@ -1,7 +1,7 @@
 create or replace package body session_b is
 
 	procedure login_form is
-		s_user varchar2(30) := r.getc('s$user', '');
+		s_user varchar2(30) := r.getc('s$user');
 		v_sid  varchar2(100);
 	begin
 		-- create session store with right sid in node
@@ -17,8 +17,9 @@ create or replace package body session_b is
 			r.setc('s$BSID', v_sid);
 		end if;
 		x.t('<!doctype HTML>');
+		src_b.header;
 		x.p('<p>', 'logged user is ' || s_user);
-		x.o('<form action=:1,method=post>', st(l('@b.login_check')));
+		x.f('<form method=post>', '@b.login_check');
 		x.v(' <input type=text,name=user>', s_user);
 		x.s(' <input type=submit>');
 		x.c('</form>');
