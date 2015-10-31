@@ -27,6 +27,7 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'output', 'basic_io_b.output'));
 		x.p('<dd>', x.a('<a>', 'parameters', 'basic_io_b.parameters'));
 		x.p('<dd>', x.a('<a>', 'keep_urlencoded', 'basic_io_b.keep_urlencoded'));
+		x.p('<dd>', x.a('<a>', 'steps', 'basic_io_b.steps'));
 	
 		x.p('<dt>', 'http_b');
 		x.p('<dd>', x.a('<a>', 'gzip', 'http_b.gzip'));

@@ -303,6 +303,42 @@ create or replace package body basic_io_b is
 		x.c('</form>');
 	end;
 
+	procedure steps is
+		no pls_integer := r.getn('step_no', 0) + 1;
+		n  varchar2(100);
+		v  varchar2(999);
+		va st;
+		sn varchar2(3) := '';
+	begin
+		src_b.header;
+		x.p('<h3>', 'already filled items');
+		n := ra.params.first;
+		loop
+			exit when n is null;
+			if substrb(n, 2, 1) = '$' then
+				null;
+			else
+				x.p('<p>', n || ' : ' || r.dump(n, true));
+			end if;
+			n := ra.params.next(n);
+		end loop;
+		x.t('<hr/>');
+		if r.is_lack('commit') then
+			-- delete from params, so not keep step_no to next step
+			r.del('step_no');
+			x.f('<form method=post>', r.prog);
+			x.v(' <input readonly type=text,name=_saves>', r.vqstr);
+			x.t(' <br/>');
+			x.v(' <input readonly type=text,name=step_no>', no);
+			x.s(' <input type=text,name=p:1,value=1>', st(no));
+			x.s(' <input type=submit,value=next>');
+			x.s(' <input type=submit,name=commit,value=commit>');
+			x.c('</form>');
+		else
+			x.p('<h3>', 'all steps complete, commit all collected infomation ok!');
+		end if;
+	end;
+
 	procedure any_size is
 		v_size  number(8) := r.getn('size', 0);
 		v_chunk varchar2(1024) := rpad('H', 1024, '.');

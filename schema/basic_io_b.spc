@@ -8,6 +8,8 @@ create or replace package basic_io_b is
 
 	procedure keep_urlencoded;
 
+	procedure steps;
+
 	procedure any_size;
 
 end basic_io_b;
