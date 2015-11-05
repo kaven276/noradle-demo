@@ -149,5 +149,66 @@ create or replace package body easy_url_b is
 		x.p('<p>', x.a('<a>', 'link to servlet(to self)', '@b.use_base_url_for_static'));
 	end;
 
+	procedure param_use_stv is
+	begin
+		src_b.header;
+		x.p('<p>', 'current url is :' || r.url);
+		x.p('<p>', 'note: one line for param values, one line for url param filling, one line use url');
+		tmp.stv := st('v1', 'v2', 'v3');
+		tmp.url := t.ps('@b.param_use_stv?p1=:1&p2=:2&p3=:3');
+		x.p('<p>', x.a('<a>', 'link params filled with tmp.stv', tmp.url));
+	end;
+
+	procedure param_interpolate is
+	begin
+		src_b.header;
+		x.p('<p>', 'current url is :' || r.url);
+		x.p('<p>', 'note: url tailed with "@" will trigger interpolation');
+		x.p('<p>', x.a('<a>', 'link to url interpolated with NV env(as req)', '@b.param_interpolate?{p1}&{p2}@'));
+		r.del('p1');
+		r.del('p2');
+		x.p('<p>', x.a('<a>', 'link to url interpolated with NV env(not exists)', '@b.param_interpolate?{p1}&{p2}@'));
+		r.setc('p1', 'v1');
+		r.setc('p2', 'v2');
+		x.p('<p>', x.a('<a>', 'link to url interpolated with NV env(exists)', '@b.param_interpolate?{p1}&{p2}@'));
+	end;
+
+	procedure param_use_vqstr is
+	begin
+		src_b.header;
+		r.setc('p3', 'v3');
+		x.p('<p>', 'current url is :' || r.url);
+		x.p('<p>', q'|note: your can append r.vqstr value to a url prefix|');
+		x.p('<p>', 'r.vqstr: ' || r.vqstr);
+		x.p('<p>', q'!r.vqstr('p1,p3'): !' || r.vqstr('p1,p3'));
+		x.p('<p>', x.a('<a>', 'link to me with 5 params', r.prog || '?p1=v1&p2=v2'));
+	end;
+
+	procedure param_tail is
+	begin
+		src_b.header;
+		x.p('<p>', 'current url is :' || r.url);
+		x.p('<p>', 'note: url suffixed with "?" or "&" denote uncomplete url that will be appended with r.getc(l$?)');
+		x.p('<p>', x.a('<a>', 'link to url lack of tail (as req)', '@b.param_tail?'));
+		r.del('l$?');
+		x.p('<p>', x.a('<a>', 'link to url lack of tail (no tail)', '@b.param_tail?'));
+		r.setc('l$?', 'flag=Y');
+		x.p('<p>', x.a('<a>', 'link to url lack of tail (has tail)', '@b.param_tail?'));
+	end;
+
+	procedure param_interpolate_tail is
+	begin
+		src_b.header;
+		x.p('<p>', 'current url is :' || r.url);
+		x.p('<p>', 'note: interpolation and tail completion can co-exist, suffix like "?@" or "&@"');
+		x.p('<p>', x.a('<a>', 'link to url interpolated with NV env(as req)', '@b.param_interpolate_tail?{p1}&@'));
+		r.del('p1');
+		r.del('l$?');
+		x.p('<p>', x.a('<a>', 'link to url interpolated with NV env(not exists)', '@b.param_interpolate_tail?{p1}&@'));
+		r.setc('p1', 'v1');
+		r.setc('l$?', 'flag=Y');
+		x.p('<p>', x.a('<a>', 'link to url interpolated with NV env(exists)', '@b.param_interpolate_tail?{p1}&@'));
+	end;
+
 end easy_url_b;
 /

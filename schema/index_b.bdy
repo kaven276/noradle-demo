@@ -107,6 +107,11 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'use_base_url_for_static', 'easy_url_b.use_base_url_for_static'));
 		x.p('<dd>', x.a('<a>', 'all patterns', 'easy_url_b.d'));
 		x.p('<dd>', x.a('<a>', 'links in standalone procedure', './url_test1_b'));
+		x.p('<dd>', x.a('<a>', 'param use t.ps and tmp.stv', 'easy_url_b.param_use_stv'));
+		x.p('<dd>', x.a('<a>', 'param interpolate', 'easy_url_b.param_interpolate'));
+		x.p('<dd>', x.a('<a>', 'param use vqstr', 'easy_url_b.param_use_vqstr'));
+		x.p('<dd>', x.a('<a>', 'param tail', 'easy_url_b.param_tail'));
+		x.p('<dd>', x.a('<a>', 'param interpolate&tail', 'easy_url_b.param_interpolate_tail'));
 	
 		x.p('<dt>', 'css in HTML API(embeded or linked)');
 		x.p('<dd>', x.a('<a>', 'basic', 'style_b.d'));

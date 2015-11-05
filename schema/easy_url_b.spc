@@ -21,8 +21,18 @@ create or replace package easy_url_b is
 	procedure link_other_parallel_app_static;
 
 	procedure link_configured_url;
-  
-  procedure use_base_url_for_static;
+
+	procedure use_base_url_for_static;
+
+	procedure param_use_stv;
+
+	procedure param_interpolate;
+
+	procedure param_use_vqstr;
+
+	procedure param_tail;
+
+	procedure param_interpolate_tail;
 
 end easy_url_b;
 /
