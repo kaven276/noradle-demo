@@ -112,6 +112,7 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'param use vqstr', 'easy_url_b.param_use_vqstr'));
 		x.p('<dd>', x.a('<a>', 'param tail', 'easy_url_b.param_tail'));
 		x.p('<dd>', x.a('<a>', 'param interpolate&tail', 'easy_url_b.param_interpolate_tail'));
+		x.p('<dd>', x.a('<a>', 'url relay', 'easy_url_b.url_relay'));
 	
 		x.p('<dt>', 'css in HTML API(embeded or linked)');
 		x.p('<dd>', x.a('<a>', 'basic', 'style_b.d'));

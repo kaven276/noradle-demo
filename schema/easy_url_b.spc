@@ -34,5 +34,9 @@ create or replace package easy_url_b is
 
 	procedure param_interpolate_tail;
 
+	procedure url_relay;
+
+	procedure url_relay_receiver;
+
 end easy_url_b;
 /

@@ -210,5 +210,40 @@ create or replace package body easy_url_b is
 		x.p('<p>', x.a('<a>', 'link to url interpolated with NV env(exists)', '@b.param_interpolate_tail?{p1}&@'));
 	end;
 
+	procedure url_relay is
+	begin
+		src_b.header;
+		x.p('<p>', 'current url is :' || r.url);
+		x.p('<p>', 'note: relay a url to a series of servlet, and redirect back to it finally');
+		r.setc('backurl1', utl_url.escape(r.url, true, 'utf-8'));
+		r.setc('backurl2', utl_encode.text_encode(r.url, null, utl_encode.base64));
+		x.p('<p>', 'url-escaped url is :' || r.getc('backurl1'));
+		x.p('<p>', 'base64-encoded url is :' || r.getc('backurl2'));
+		r.setc('l$?', r.vqstr('backurl1,backurl2'));
+		x.p('<p>', x.a('<a>', 'link to hand url off', '@b.url_relay_receiver?'));
+		x.f('<form method=post>', '@b.url_relay_receiver');
+		x.p(' <label>', '(origin url)');
+		x.v(' <input readonly type=text,name=backurl1,size=80>', r.url);
+		x.t(' <br/>');
+		x.p(' <label>', '(based64 encoded)');
+		x.v(' <input readonly type=text,name=backurl2,size=80>', r.getc('backurl2'));
+		x.t(' <br/>');
+		x.s(' <input type=submit>');
+		x.c('</form>');
+	end;
+
+	procedure url_relay_receiver is
+	begin
+		src_b.header;
+		x.p('<p>', 'current url is :' || r.url);
+		x.p('<p>', 'note: got a relayed a url, restore its value');
+		x.p('<p>', 'back url (url-escaped) is(r.get) :' || r.get('backurl1'));
+		x.p('<p>', 'back url (url-escaped) is(r.getc) :' || r.getc('backurl1'));
+		x.p('<p>', 'back url (based64-encoded) is(r.get) :' || r.get('backurl2'));
+		x.p('<p>', 'back url (based64-decoded) is(decode) :' || utl_encode.text_decode(r.get('backurl2'), null, 1));
+		x.p('<p>', x.a('<a>', 'click to backurl (url-unescaped)', utl_url.unescape(r.getc('backurl1'))));
+		x.p('<p>', x.a('<a>', 'click to backurl (based64-decoded)', utl_encode.text_decode(r.getc('backurl2'), null, 1)));
+	end;
+
 end easy_url_b;
 /
