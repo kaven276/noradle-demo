@@ -21,13 +21,17 @@ create or replace package body local_css_b is
 			x.p('<p.c2>', name);
 		end;
 	begin
-		src_b.header;
-	
+	  x.o('<body>');
 		if r.getb('reorder') then
 			x.o('<script#buffer type=text>');
 		end if;
 	
+		src_b.header;
+	
 		x.p('<p>', 'note: css rule set just before usage of them, print only once, no repeat');
+		x.p('<p>', x.a('<a>', 'link to plain version', r.prog));
+		x.p('<p>', x.a('<a>', 'link to reorder source version', r.prog || '?reorder=y'));
+	
 		x.p('<h3>', 'include component1 with each package names');
 		for i in (select a.object_name
 								from user_objects a
@@ -45,15 +49,23 @@ create or replace package body local_css_b is
 	
 		if r.getb('reorder') then
 			x.c('</script>');
-			x.p('<script>',
+			x.p('<script#reorder>',
 					'(function(){
-		var text = document.getElementById("buffer").innerText
+		var domBuffer = document.getElementById("buffer")
+		 , domReorder = document.getElementById("reorder")
+		 , text = domBuffer.innerText
 		 , re = /<style>[^<>]*<\/style>\n?/gm
 		 , body = text.replace(re,"")
 		 , style = text.match(re).join("\n").replace(/(<style>|<\/style>)/g,"")
 		 ;
 		document.head.insertAdjacentHTML("beforeEnd","<style>" + style + "</style>");
-		document.body.insertAdjacentHTML("beforeEnd",body);
+		if(false){
+	    document.body.removeChild(domBuffer);
+		  document.body.removeChild(domReorder);
+		  document.body.insertAdjacentHTML("beforeEnd",body);
+		} else {
+		  document.body.innerHTML = body;
+		}		
 		})();');
 		end if;
 	
