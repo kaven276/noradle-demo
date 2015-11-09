@@ -59,8 +59,6 @@ create or replace package body index_b is
 	
 		x.p('<dt>', 'html_b');
 		x.p('<dd>', x.a('<a>', 'd', 'html_b.d'));
-		x.p('<dd>', x.a('<a>', 'component_css?link=Y', 'html_b.component_css?link=Y'));
-		x.p('<dd>', x.a('<a>', 'component_css?link=N', 'html_b.component_css?link=N'));
 		x.p('<dd>', x.a('<a>', 'regen_page', 'html_b.regen_page'));
 		x.p('<dd>', x.a('<a>', 'component', 'html_b.component'));
 		x.p('<dd>', x.a('<a>', 'complex', 'html_b.complex'));
@@ -123,6 +121,8 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'url relay', 'easy_url_b.url_relay'));
 	
 		x.p('<dt>', 'css related');
+		x.p('<dd>', x.a('<a>', 'component_css?link=Y', 'html_b.component_css?link=Y'));
+		x.p('<dd>', x.a('<a>', 'component_css?link=N', 'html_b.component_css?link=N'));
 		x.p('<dd>', x.a('<a>', 'css in HTML API(embeded or linked)', 'style_b.d'));
 		x.p('<dd>', x.a('<a>', 'include component with local none-repeated css rule', 'local_css_b.d'));
 	
