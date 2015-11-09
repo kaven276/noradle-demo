@@ -2,9 +2,11 @@ create or replace package body k_filter is
 
 	procedure before is
 	begin
-	
-		-- url [jquery] is alwarys available
-		r.setc('l$jquery', l('^bower_lib/jquery/dist/jquery.min.js'));
+		r.setc('l$bowerlib', 'http://static.noradle.com/bowerlib');
+		--r.setc('l$bowerlib', l('^bower_lib'));
+		r.setc('l$jquery.js', l('[bowerlib]/jquery/dist/jquery.min.js'));
+		r.setc('l$bootstrap.js', l('[bowerlib]/bootstrap/dist/js/bootstrap.min.js'));
+		r.setc('l$bootstrap.css', l('[bowerlib]/bootstrap/dist/css/bootstrap.min.css'));
 		r.setc('l$myself', l('^'));
 	
 		-- b.set_line_break(null);
