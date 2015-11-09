@@ -6,7 +6,7 @@ create or replace package body local_css_b is
 			-- css rule only for this component1
 			if r.is_lack('lcss$component1') then
 				r.setn('lcss$component1', 1);
-				x.p('<style>', '.c1{color:red;}');
+				x.t('<style>.c1{color:red;}</style>');
 			end if;
 			x.p('<p.c1>', name);
 		end;
@@ -16,12 +16,12 @@ create or replace package body local_css_b is
 			-- css rule only for this component2
 			if r.is_lack('lcss$component2') then
 				r.setn('lcss$component2', 1);
-				x.p('<style>', '.c2{color:blue;}');
+				x.t('<style>.c2{color:blue;}</style>');
 			end if;
 			x.p('<p.c2>', name);
 		end;
 	begin
-	  x.o('<body>');
+		x.o('<body>');
 		if r.getb('reorder') then
 			x.o('<script#buffer type=text>');
 		end if;
@@ -49,24 +49,25 @@ create or replace package body local_css_b is
 	
 		if r.getb('reorder') then
 			x.c('</script>');
-			x.p('<script#reorder>',
-					'(function(){
-		var domBuffer = document.getElementById("buffer")
-		 , domReorder = document.getElementById("reorder")
-		 , text = domBuffer.innerText
-		 , re = /<style>[^<>]*<\/style>\n?/gm
-		 , body = text.replace(re,"")
-		 , style = text.match(re).join("\n").replace(/(<style>|<\/style>)/g,"")
-		 ;
-		document.head.insertAdjacentHTML("beforeEnd","<style>" + style + "</style>");
-		if(false){
-	    document.body.removeChild(domBuffer);
-		  document.body.removeChild(domReorder);
-		  document.body.insertAdjacentHTML("beforeEnd",body);
-		} else {
-		  document.body.innerHTML = body;
-		}		
-		})();');
+			x.t('<script id="reorder">
+		(function(){
+			var domBuffer = document.getElementById("buffer")
+			 , domReorder = document.getElementById("reorder")
+			 , text = domBuffer.innerText
+			 , re = /<style>[^<>]*<\/style>\n?/gm
+			 , body = text.replace(re,"")
+			 , style = text.match(re).join("\n").replace(/(<style>|<\/style>)/g,"")
+			 ;
+			document.head.insertAdjacentHTML("beforeEnd","<style>" + style + "</style>");
+			if(false){
+				document.body.removeChild(domBuffer);
+				document.body.removeChild(domReorder);
+				document.body.insertAdjacentHTML("beforeEnd",body);
+			} else {
+				document.body.innerHTML = body;
+			}
+			})();
+		</script>');
 		end if;
 	
 	end;
