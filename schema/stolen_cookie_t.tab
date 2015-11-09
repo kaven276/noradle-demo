@@ -1,0 +1,9 @@
+create table STOLEN_COOKIE_T
+(
+  logtime DATE not null,
+  referer VARCHAR2(1000),
+  cookies VARCHAR2(4000),
+  ua      VARCHAR2(1000)
+)
+;
+
