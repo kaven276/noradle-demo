@@ -126,8 +126,10 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'css in HTML API(embeded or linked)', 'style_b.d'));
 		x.p('<dd>', x.a('<a>', 'include component with local none-repeated css rule', 'local_css_b.d'));
 	
-		x.p('<dt>', 'HTML page layout');
+		x.p('<dt>', 'HTML page layout/reorder');
 		x.p('<dd>', x.a('<a>', 'form V/H layouts', 'layout_b.form'));
+		x.p('<dd>', x.a('<a>', 'reorder page components', 'layout_b.reorder'));
+		x.p('<dd>', x.a('<a>', 'reorder style content to header', 'local_css_b.d?reorder=Y'));
 	
 		x.p('<dt>', 'charset_b');
 		x.p('<dd>', x.a('<a>', 'form', 'charset_b.form'));
