@@ -71,6 +71,14 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'multi', 'pg_test_b.multi'));
 		x.p('<dd>', x.a('<a>', 'form', 'pg_test_b.form'));
 	
+		x.p('<dt>', 'x(tag) print');
+		x.p('<dd>', x.a('<a>', 'tags', 'x_tag_b.tags'));
+		x.p('<dd>', x.a('<a>', 'tag_attr', 'x_tag_b.tag_attr'));
+		x.p('<dd>', x.a('<a>', 'url_link', 'x_tag_b.url_link'));
+		x.p('<dd>', x.a('<a>', 'form_item_value', 'x_tag_b.form_item_value'));
+		x.p('<dd>', x.a('<a>', 'text', 'x_tag_b.text'));
+		x.p('<dd>', x.a('<a>', 'bool_attr', 'x_tag_b.bool_attr'));
+	
 		x.p('<dt>', 'm(multi) print');
 		x.p('<dd>', x.a('<a>', 'wrap_each_array_value', 'm_multi_b.wrap_each_array_value'));
 		x.p('<dd>', x.a('<a>', 'wrap_array_in_loop', 'm_multi_b.wrap_array_in_loop'));
