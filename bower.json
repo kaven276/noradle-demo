@@ -1,0 +1,27 @@
+{
+  "name": "noradle-demo",
+  "version": "0.11.2",
+  "authors": [
+    "Li Yong <kaven276@vip.sina.com>"
+  ],
+  "description": "demo for noradle platform",
+  "keywords": [
+    "noradle",
+    "demo",
+    "plsql",
+    "psp"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/bower_lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4"
+  }
+}
