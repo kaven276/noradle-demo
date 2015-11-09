@@ -63,12 +63,6 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'component', 'html_b.component'));
 		x.p('<dd>', x.a('<a>', 'complex', 'html_b.complex'));
 	
-		x.p('<dt>', 'concise HTML API');
-		x.p('<dd>', x.a('<a>', 'use tag', 'pg_test_b.use_tag'));
-		x.p('<dd>', x.a('<a>', 'odd_even_switch', 'pg_test_b.odd_even_switch'));
-		x.p('<dd>', x.a('<a>', 'multi', 'pg_test_b.multi'));
-		x.p('<dd>', x.a('<a>', 'form', 'pg_test_b.form'));
-	
 		x.p('<dt>', 'x(tag) print');
 		x.p('<dd>', x.a('<a>', 'tags', 'x_tag_b.tags'));
 		x.p('<dd>', x.a('<a>', 'tag_attr', 'x_tag_b.tag_attr'));
