@@ -50,5 +50,33 @@ create or replace package body layout_b is
 		x.c('</form>');
 	end;
 
+	procedure reorder is
+	begin
+		x.o('<html>');
+		x.o('<head>');
+		x.o('<script#header type=text>');
+		x.p(' <p>', 'header');
+		x.c('</script>');
+		x.o('<script#footer type=text>');
+		x.p(' <p>', 'footer');
+		x.c('</script>');
+		x.c('</head>');
+		x.o('<body>');
+		src_b.header;
+		x.p('<div#c1>', '');
+		x.t('<hr/>');
+		x.p('<p>', 'main content here');
+		x.p('<p>', 'component html content printed in head as script(type=text)');
+		x.p('<p>', 'use js to fill the component content into anchar tags');
+		x.p('<p>', 'reorder parts of page in client is easy');
+		x.p('<p>', 'so noradle does''t support reorder at server side');
+		x.t('<hr/>');
+		x.p('<div#c2>', '');
+		x.c('</body>');
+		x.p('<script>', 'document.getElementById("c1").innerHTML =document.getElementById("header").innerHTML;');
+		x.p('<script>', 'document.getElementById("c2").innerHTML =document.getElementById("footer").innerHTML;');
+		x.c('</html>');
+	end;
+
 end layout_b;
 /
