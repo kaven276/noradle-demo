@@ -1,6 +1,6 @@
 create or replace package html_b is
 
-	procedure d;
+	procedure bind_data;
 
 	procedure component_css;
 

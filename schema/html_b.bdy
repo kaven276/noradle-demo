@@ -1,59 +1,18 @@
 create or replace package body html_b is
 
-	procedure d is
+	procedure bind_data is
 		cursor c_packages is
-			select * from user_objects a where a.object_type = 'PACKAGE' order by a.object_name asc;
+			select *
+				from user_objects a
+			 where a.object_type = 'PACKAGE'
+				 and rownum <= 5
+			 order by a.object_name asc;
 	begin
-		h.status_line;
-		h.content_type(charset => 'utf-8');
-		-- h.transfer_encoding_chunked;
-		-- h.content_encoding_identity;
-		h.header_close;
-	
-		x.t('<!DOCTYPE html>');
-		x.o('<html>');
-		x.o('<head>');
-		y.embed(r.getc('tag', '<style>'));
-		x.c('</head>');
-		x.o('<body>');
-		src_b.link_proc;
-		x.o('<div#wrapper>');
-		y.lcss_ctx('div#wrapper');
-		y.lcss('{margin:0px;background-color:#EEE;}');
-	
-		x.o('<div#text style=border:1px solid silver;width:80%;padding:8px 20px;>');
-		for i in 1 .. 6 loop
-			x.p('<h' || i || '>', 'header ' || i);
-			x.p('<p>', 'a paragraph');
-		end loop;
-		x.c('</div>');
-	
-		x.o('<ul#ul>');
-		for i in c_packages loop
-			x.p('<li>', i.object_name);
-		end loop;
-		x.c('</ul>');
-	
-		x.o('<ol#ol>');
-		for i in c_packages loop
-			x.p('<li>', i.object_name);
-		end loop;
-		x.c('</ol>');
-	
-		x.o('<dl>');
-		for i in c_packages loop
-			x.p('<dt>', i.object_name);
-			x.p('<dd>', t.d2s(i.created));
-		end loop;
-		x.c('</dl>');
-	
-		x.t('<hr/>');
-	
+		pc.h;
+		src_b.header;
 		x.o('<table rules=all,cellspacing=0,cellpadding=5,style=border:1px solid silver;>');
-		x.p('<caption>', 'table example');
-		x.o(' <thead>');
-		x.p('  <tr>', m.w('<th>@</th>', st('package name', 'created')));
-		x.c(' </thead>');
+		x.p(' <caption>', 'bind sql data to table example');
+		x.p(' <thead>', x.p('<tr>', m.w('<th>@</th>', 'package name,created')));
 		x.o(' <tbody>');
 		for i in c_packages loop
 			x.o('<tr>');
@@ -63,21 +22,6 @@ create or replace package body html_b is
 		end loop;
 		x.c(' </tbody>');
 		x.c('</table>');
-	
-		x.o('<field>');
-		x.p(' <legend>', 'form example');
-		x.o(' <form name=f,action=html_b.action,target=_blank,method=get>');
-		x.p('  <label>', 'your name' || x.s('<input type=text,name=name>'));
-		x.p('  <label>', 'your password' || x.s('<input type=password,name=pass>'));
-		x.s('  <input type=submit>');
-		x.c(' </form>');
-		x.c('</field>');
-	
-		x.c('</div>');
-	
-		for i in 1 .. r.getn('count', 0) loop
-			x.p('<p>', i);
-		end loop;
 	end;
 
 	procedure component_css is

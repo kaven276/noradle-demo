@@ -58,7 +58,7 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'set_mime_no_convert', 'db_src_b.set_mime_no_convert?inspect&markdown'));
 	
 		x.p('<dt>', 'html_b');
-		x.p('<dd>', x.a('<a>', 'd', 'html_b.d'));
+		x.p('<dd>', x.a('<a>', 'bind data in html', 'html_b.bind_data'));
 		x.p('<dd>', x.a('<a>', 'regen_page', 'html_b.regen_page'));
 		x.p('<dd>', x.a('<a>', 'component', 'html_b.component'));
 		x.p('<dd>', x.a('<a>', 'complex', 'html_b.complex'));
