@@ -2,12 +2,14 @@ create or replace package body k_filter is
 
 	procedure before is
 	begin
-		r.setc('l$bowerlib', 'http://static.noradle.com/bowerlib');
-		--r.setc('l$bowerlib', l('^bower_lib'));
-		r.setc('l$jquery.js', l('[bowerlib]/jquery/dist/jquery.min.js'));
-		r.setc('l$bootstrap.js', l('[bowerlib]/bootstrap/dist/js/bootstrap.min.js'));
-		r.setc('l$bootstrap.css', l('[bowerlib]/bootstrap/dist/css/bootstrap.min.css'));
-		r.setc('l$myself', l('^'));
+		r.setc('l$jscdn', 'https://cdnjs.cloudflare.com/ajax/libs/');
+		r.setc('l$jquery.js', l('[jscdn]jquery/3.0.0-alpha1/jquery.min.js'));
+		r.setc('l$bootstrap.js', l('[jscdn]twitter-bootstrap/3.3.5/js/bootstrap.min.js'));
+		r.setc('l$bootstrap.css', l('[jscdn]twitter-bootstrap/3.3.5/css/bootstrap.min.css'));
+		r.setc('l$knockout.js', l('[jscdn]knockout/3.3.0/knockout-min.js'));
+		r.setc('l$angular.js', l('[jscdn]angular.js/1.4.7/angular.min.js'));
+		r.setc('l$angular-animate.js', l('[jscdn]angular.js/1.4.7/angular-animate.min.js'));
+		r.setc('l$angular-resource.js', l('[jscdn]angular.js/1.4.7/angular-resource.min.js'));
 	
 		-- b.set_line_break(null);
 		pv.id  := 'liyong';

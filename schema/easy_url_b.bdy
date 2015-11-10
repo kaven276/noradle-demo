@@ -3,6 +3,7 @@ create or replace package body easy_url_b is
 	procedure d is
 	begin
 		src_b.header;
+		r.setc('l$myself', l('^'));
 		x.l('<link>', '*.css');
 		x.j('<script>', '*.js');
 		x.j('<script>', '^packs/url_test1_b/proc.js');
