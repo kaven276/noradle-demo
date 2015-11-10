@@ -11,7 +11,7 @@ create or replace package body http_b is
 				h.content_encoding_auto;
 		end case;
 	
-		src_b.link_proc;
+		src_b.header;
 		b.line('This page gzip setting is ' || r.getc('use', 'auto') || '<br/>');
 		b.line('This page print ' || r.getc('count', 100) || ' numbers <br/>');
 		b.line('<br/>');
@@ -44,7 +44,7 @@ create or replace package body http_b is
 	
 		b.line('<link href="http_b.content_css" type="text/css" rel="stylesheet"/>');
 		b.line('<script src="http_b.content_js"></script>');
-		src_b.link_proc;
+		src_b.header;
 		b.line('This page transfer-encoding setting is ' || r.getc('use', 'on') || '<br/>');
 		b.line('This page print ' || r.getc('count', 100) || ' numbers <br/>');
 		b.line('<br/>');
@@ -83,7 +83,7 @@ create or replace package body http_b is
 		h.content_encoding_identity;
 		h.header_close;
 	
-		src_b.link_proc;
+		src_b.header;
 		b.line('<h3>This a long-running page that use chunked transfer and flush by section to response early</h3>');
 		b.line('<div id="cnt"></div>');
 		b.line('<script>var cnt=document.getElementById("cnt");</script>');
@@ -92,10 +92,12 @@ create or replace package body http_b is
 			b.line('LiNE, NO.' || i);
 			b.line('<script>cnt.innerText=' || i || ';</script>');
 			-- b.line(rpad(i, 300, i));
-			b.flush;
-			-- you may not force flush when h.auto_chunk_max_idle is set.
-			-- but you can close auto flush by call h.auto_chunk_max_idle(null);
-			dbms_lock.sleep(1);
+			if r.is_lack('inspect') then
+				b.flush;
+				-- you may not force flush when h.auto_chunk_max_idle is set.
+				-- but you can close auto flush by call h.auto_chunk_max_idle(null);
+				dbms_lock.sleep(1);
+			end if;
 		end loop;
 		b.line('</pre>');
 		b.line('<p>Over, Full page is generated completely</p>');
@@ -122,7 +124,7 @@ create or replace package body http_b is
 		b.line('<body>');
 	
 		if r.getc('mime', 'text/html') = 'text/html' then
-			src_b.link_proc;
+			src_b.header;
 			b.line('<br/>');
 		
 			mime_link('text/html');
@@ -171,8 +173,10 @@ create or replace package body http_b is
 
 	procedure refresh is
 	begin
-		h.refresh(r.getn('interval', 3, '9'), r.getc('to', ''));
-		src_b.link_proc;
+		if r.is_lack('inspect') then
+			h.refresh(r.getn('interval', 3, '9'), r.getc('to', ''));
+		end if;
+		src_b.header;
 		b.line('<pre>');
 		b.line(t.dt2s(sysdate));
 		b.line('refresh to ' || r.getc('to', 'self') || ' every ' || r.getn('interval', 3) || 's');
@@ -182,14 +186,14 @@ create or replace package body http_b is
 	procedure content_md5 is
 	begin
 		h.content_md5_on;
-		if false then
+		if r.getb('nozip', true) then
 			-- md5 is computed in Oracle
 			h.content_encoding_identity;
 		else
 			-- md5 is computed in NodeJS;
 			null;
 		end if;
-		src_b.link_proc;
+		src_b.header;
 		x.p('<p>', 'Use http content-md5 header to ensure response body integrity.');
 		x.p('<p>', 'Call h.conent_md5_on to automatically compute md5 of response body and set content-md5 header.');
 		x.p('<p>', 'Content MD5 for the same page is diffrent for diffrent Content-Encoding');

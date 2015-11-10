@@ -6,6 +6,9 @@ create or replace package body pc is
 		title  varchar2 := null
 	) is
 	begin
+		if r.not_lack('inspect') then
+			return;
+		end if;
 		x.t('<!DOCTYPE html>');
 		x.o('<html>');
 		if target is not null or title is not null then

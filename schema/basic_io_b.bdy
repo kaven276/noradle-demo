@@ -20,7 +20,7 @@ create or replace package body basic_io_b is
 		sn varchar2(3) := '';
 	begin
 		b.set_line_break(chr(10));
-		src_b.link_proc;
+		src_b.header;
 		x.p('<style>', 'hr{margin:2em 0 1em;}');
 		b.line('<pre>');
 	
@@ -230,7 +230,7 @@ create or replace package body basic_io_b is
 	procedure output is
 	begin
 		b.set_line_break(chr(10));
-		src_b.link_proc;
+		src_b.header;
 		b.line('<pre>');
 	
 		b.line('Basic output include the following APIs');
@@ -265,7 +265,7 @@ create or replace package body basic_io_b is
 		v pls_integer := r.getn('step_no', 1);
 	begin
 		pc.h;
-		src_b.link_proc;
+		src_b.header;
 		x.t('<br/>');
 		x.f('<form name=f,method=get>', '@b.req_info?qstr1=A&qstr1=B&p1=0');
 		x.o(' <select name=mtd>');
@@ -287,7 +287,7 @@ create or replace package body basic_io_b is
 	procedure keep_urlencoded is
 	begin
 		pc.h;
-		src_b.link_proc;
+		src_b.header;
 		x.t('<br/>');
 		x.f('<form name=f,method=get>', '@b.req_info');
 		x.o(' <select name=mtd>');
@@ -345,6 +345,7 @@ create or replace package body basic_io_b is
 	begin
 		k_debug.set_run_comment('size:' || v_size);
 		h.content_encoding_identity;
+		src_b.header;
 		for i in 1 .. v_size loop
 			b.write(v_chunk);
 		end loop;

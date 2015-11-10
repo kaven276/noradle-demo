@@ -16,6 +16,7 @@ create or replace package body list_b is
 								from user_objects a
 							 where a.object_name not like 'BIN$%'
 								 and a.object_type not like '%PARTITION'
+								 and rownum <= 3
 							 order by a.object_type, a.object_name) loop
 			x.p('<tr>', m.w('<td>', st(i.object_name, i.object_type), '</td>'));
 		end loop;
@@ -33,6 +34,7 @@ create or replace package body list_b is
 				from user_objects a
 			 where a.object_name not like 'BIN$%'
 				 and a.object_type not like '%PARTITION'
+				 and rownum <= 3
 			 order by a.object_type, a.object_name;
 		tb.cfg_init('table');
 		tb.cfg_add('oname', 'obj_name', 'left', '360px');
@@ -54,7 +56,10 @@ create or replace package body list_b is
 		src_b.header;
 		x.p('<h2>', 'use table list(tl) and tb.cfg_content(sys_refcursor)');
 		open c for
-			select a.object_name, a.procedure_name, a.object_id from user_procedures a order by a.object_type, a.object_name;
+			select a.object_name, a.procedure_name, a.object_id
+				from user_procedures a
+			 where rownum <= 3
+			 order by a.object_type, a.object_name;
 		tb.cfg_init('table');
 		tb.cfg_add('pack', 'package', null, '30ex');
 		tb.cfg_add('proc', 'procedure');

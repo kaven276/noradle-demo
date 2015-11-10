@@ -80,7 +80,7 @@ create or replace package body src_b is
 			return;
 		end if;
 		h.content_type('text/plain');
-		if not r.is_lack('markdown') then
+		if r.not_lack('markdown') then
 			h.header('_convert', 'marked');
 			x.o('<head>');
 			--x.l('<link>', 'http://highlightjs.org/static/styles.css');
