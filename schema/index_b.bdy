@@ -22,14 +22,19 @@ create or replace package body index_b is
 		x.p('<dt>', 'ora_good_b');
 		x.p('<dd>', x.a('<a>', 'introduce', 'ora_good_b.entry'));
 	
-		x.p('<dt>', 'basic_io_b');
+		x.p('<dt>', 'basic input output');
 		x.p('<dd>', x.a('<a>', 'req_info', 'basic_io_b.req_info'));
 		x.p('<dd>', x.a('<a>', 'output', 'basic_io_b.output'));
 		x.p('<dd>', x.a('<a>', 'parameters', 'basic_io_b.parameters'));
 		x.p('<dd>', x.a('<a>', 'keep_urlencoded', 'basic_io_b.keep_urlencoded'));
 		x.p('<dd>', x.a('<a>', 'steps', 'basic_io_b.steps'));
 	
-		x.p('<dt>', 'http_b');
+		x.p('<dt>', 'post/upload file');
+		x.p('<dd>', x.a('<a>', 'upload_form', 'post_file_b.upload_form'));
+		x.p('<dd>', x.a('<a>', 'ajax_post', 'post_file_b.ajax_post'));
+		x.p('<dd>', x.a('<a>', 'media capture', 'media_b.file_image'));
+	
+		x.p('<dt>', 'http response control headers');
 		x.p('<dd>', x.a('<a>', 'gzip', 'http_b.gzip'));
 		x.p('<dd>', x.a('<a>', 'chunked_transfer', 'http_b.chunked_transfer'));
 		x.p('<dd>', x.a('<a>', 'long_job', 'http_b.long_job'));
@@ -38,10 +43,16 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'refresh to other', 'http_b.refresh?to=index_b.page'));
 		x.p('<dd>', x.a('<a>', 'content_md5', 'http_b.content_md5'));
 	
-		x.p('<dt>', 'cookie');
+		x.p('<dt>', 'mimic file download');
+		x.p('<dd>', x.a('<a>', 'd', 'file_dl_b.d'));
+		x.p('<dd>', x.a('<a>', 'text', 'file_dl_b.text'));
+		x.p('<dd>', x.a('<a>', 'excel', 'file_dl_b.excel'));
+		x.p('<dd>', x.a('<a>', 'word', 'file_dl_b.excel'));
+	
+		x.p('<dt>', 'about cookie');
 		x.p('<dd>', x.a('<a>', 'set/view cookie', 'cookie_h.form_view'));
 	
-		x.p('<dt>', 'data service');
+		x.p('<dt>', 'rs(resultset) data service');
 		x.p('<dd>', x.a('<a>', 'example', 'db_src_b.basic?inspect&markdown'));
 		x.p('<dd>', x.a('<a>', 'example(jade)', 'db_src_b.basic?template=test.jade'));
 		x.p('<dd>', x.a('<a>', 'example(mustache)', 'db_src_b.basic?template=test.mst'));
@@ -57,7 +68,7 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'direct_json', 'db_src_b.direct_json?inspect&markdown'));
 		x.p('<dd>', x.a('<a>', 'set_mime_no_convert', 'db_src_b.set_mime_no_convert?inspect&markdown'));
 	
-		x.p('<dt>', 'html_b');
+		x.p('<dt>', 'html output');
 		x.p('<dd>', x.a('<a>', 'bind data in html', 'html_b.bind_data'));
 		x.p('<dd>', x.a('<a>', 'regen_page', 'html_b.regen_page'));
 		x.p('<dd>', x.a('<a>', 'component', 'html_b.component'));
@@ -81,19 +92,19 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'nv_form_radios', 'm_multi_b.nv_form_radios'));
 		x.p('<dd>', x.a('<a>', 'nv_form_checkboxes', 'm_multi_b.nv_form_checkboxes'));
 	
-		x.p('<dt>', 'ul/li tree printing');
+		x.p('<dt>', 'tr(tree) printing');
 		x.p('<dd>', x.a('<a>', 'parse_render_in_loop', 'tree_b.parse_render_in_loop'));
 		x.p('<dd>', x.a('<a>', 'parse_open_render_cur_close', 'tree_b.parse_open_render_cur_close'));
 		x.p('<dd>', x.a('<a>', 'parse_render_cur_united', 'tree_b.parse_render_cur_united'));
 		x.p('<dd>', x.a('<a>', 'hier_node_level_in_loop', 'tree_b.hier_node_level_in_loop'));
 		x.p('<dd>', x.a('<a>', 'hier_node_all_types', 'tree_b.hier_node_all_types'));
 	
-		x.p('<dt>', 'table list formating/printing');
+		x.p('<dt>', 'tb(table) formating/printing');
 		x.p('<dd>', x.a('<a>', 'for loop print', 'list_b.user_objects'));
 		x.p('<dd>', x.a('<a>', 'multi.c print', 'list_b.user_objects_cur'));
 		x.p('<dd>', x.a('<a>', 'sys_refcursor print', 'list_b.user_procedures'));
 	
-		x.p('<dt>', 'link to url');
+		x.p('<dt>', 'l(link) to url');
 		x.p('<dd>', x.a('<a>', 'link_transparent', 'easy_url_b.link_transparent'));
 		x.p('<dd>', x.a('<a>', 'link_equal_to', 'easy_url_b.link_equal_to'));
 		x.p('<dd>', x.a('<a>', 'link_proc_in_same_pack', 'easy_url_b.link_proc_in_same_pack'));
@@ -128,20 +139,9 @@ create or replace package body index_b is
 		x.p('<dt>', 'charset_b');
 		x.p('<dd>', x.a('<a>', 'form', 'charset_b.form'));
 	
-		x.p('<dt>', 'negotiation_b');
+		x.p('<dt>', 'content negotiation');
 		x.p('<dd>', x.a('<a>', 'lang_versions', 'negotiation_b.languages_by_browser'));
 		x.p('<dd>', x.a('<a>', 'accepts_best_match', 'negotiation_b.accepts_best_match'));
-	
-		x.p('<dt>', 'file_dl_b');
-		x.p('<dd>', x.a('<a>', 'd', 'file_dl_b.d'));
-		x.p('<dd>', x.a('<a>', 'text', 'file_dl_b.text'));
-		x.p('<dd>', x.a('<a>', 'excel', 'file_dl_b.excel'));
-		x.p('<dd>', x.a('<a>', 'word', 'file_dl_b.excel'));
-	
-		x.p('<dt>', 'post_file_b');
-		x.p('<dd>', x.a('<a>', 'upload_form', 'post_file_b.upload_form'));
-		x.p('<dd>', x.a('<a>', 'ajax_post', 'post_file_b.ajax_post'));
-		x.p('<dd>', x.a('<a>', 'media capture', 'media_b.file_image'));
 	
 		x.p('<dt>', 'user_b(show processing)');
 		x.p('<dd>', x.a('<a>', 'register', 'user_b.register'));
