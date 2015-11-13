@@ -8,6 +8,7 @@ grant execute on SYS.DBMS_HPROF to &demodbu;
 
 -- Grant/Revoke role privileges 
 grant resource to &demodbu;
+grant create view to &demodbu;
 
 -- Grant/Revoke system privileges 
 grant create session to &demodbu;
