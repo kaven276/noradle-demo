@@ -135,6 +135,7 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'form V/H layouts', 'layout_b.form'));
 		x.p('<dd>', x.a('<a>', 'reorder page components', 'layout_b.reorder'));
 		x.p('<dd>', x.a('<a>', 'reorder style content to header', 'local_css_b.d?reorder=Y'));
+		x.p('<dd>', x.a('<a>', 'use layout template', 'layout_b.use_layout'));
 	
 		x.p('<dt>', 'charset_b');
 		x.p('<dd>', x.a('<a>', 'form', 'charset_b.form'));

@@ -78,5 +78,37 @@ create or replace package body layout_b is
 		x.c('</html>');
 	end;
 
+	procedure use_layout is
+		procedure layout_template(name varchar2 := null) is
+		begin
+			case r.return_before_set_this(name)
+				when '^' then
+					x.o('<html>');
+					x.o(' <head>');
+					x.p('  <title>', 'layout demo');
+					x.c(' </head>');
+					x.o(' <body>');
+					src_b.header;
+					x.o('  <header>');
+				when trim('{{header}}') then
+					x.c('  </header>');
+					x.t('  <hr/>');
+					x.o('  <article>');
+				when trim('{{content}}') then
+					x.c('  </article>');
+					x.t('  <hr/>');
+					x.p('  <footer>', 'layout template footer');
+					x.c(' </body>');
+					x.c('</html>');
+			end case;
+		end;
+	begin
+		layout_template('{{header}}');
+		x.p('<h1>', 'my own header');
+		layout_template('{{content}}');
+		x.p('<p>', 'my own content');
+		layout_template;
+	end;
+
 end layout_b;
 /
