@@ -137,6 +137,13 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'reorder style content to header', 'local_css_b.d?reorder=Y'));
 		x.p('<dd>', x.a('<a>', 'use layout template', 'layout_b.use_layout'));
 	
+		x.p('<dt>', 'reports');
+		x.p('<dd>', x.a('<a>', 'emp_managers(hierachical)', 'aggregation_b.emp_managers'));
+		x.p('<dd>', x.a('<a>', 'emp_salaries(simple rollup)', 'aggregation_b.emp_salaries'));
+		x.p('<dd>', x.a('<a>', 'emp_groups_list(complex rollup)', 'aggregation_b.emp_groups_list'));
+		x.p('<dd>', x.a('<a>', 'job_dept_sals(cube)', 'aggregation_b.job_dept_sals'));
+		x.p('<dd>', x.a('<a>', 'dept_job_sals(cube)', 'aggregation_b.dept_job_sals'));
+	
 		x.p('<dt>', 'charset_b');
 		x.p('<dd>', x.a('<a>', 'form', 'charset_b.form'));
 	
