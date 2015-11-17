@@ -306,9 +306,6 @@ create or replace package body basic_io_b is
 	procedure steps is
 		no pls_integer := r.getn('step_no', 0) + 1;
 		n  varchar2(100);
-		v  varchar2(999);
-		va st;
-		sn varchar2(3) := '';
 	begin
 		src_b.header;
 		x.p('<h3>', 'already filled items');
@@ -349,6 +346,23 @@ create or replace package body basic_io_b is
 		for i in 1 .. v_size loop
 			b.write(v_chunk);
 		end loop;
+	end;
+
+	procedure appended is
+		v_pattern varchar2(100) := upper(r.getc('name')) || '%';
+	begin
+		src_b.header;
+		b.line('<h1>object list prefixed with param "name"="'||v_pattern ||'"</h1>');
+		b.save_pointer;
+		for i in (select *
+								from user_objects a
+							 where a.object_name like v_pattern
+								 and rownum <= 3) loop
+			b.line('<p>' || i.object_name || ' - ' || i.object_type || '</p>');
+		end loop;
+		if b.not_appended then
+			b.line('<h4>no objects found by ' || v_pattern || '</h4>');
+		end if;
 	end;
 
 end basic_io_b;

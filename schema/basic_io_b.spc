@@ -12,5 +12,7 @@ create or replace package basic_io_b is
 
 	procedure any_size;
 
+	procedure appended;
+
 end basic_io_b;
 /
