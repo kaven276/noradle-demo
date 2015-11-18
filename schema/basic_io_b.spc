@@ -1,5 +1,7 @@
 create or replace package basic_io_b is
 
+	procedure req_params;
+
 	procedure req_info;
 
 	procedure output;

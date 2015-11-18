@@ -13,6 +13,26 @@ create or replace package body basic_io_b is
 		end if;
 	end;
 
+	procedure req_params is
+		n  varchar2(100);
+		v  varchar2(999);
+		va st;
+		sn varchar2(3) := '';
+	begin
+		n := ra.params.first;
+		loop
+			exit when n is null;
+			if lengthb(n) < 2 or (substrb(n, 2, 1) != '$' and substrb(n, 1, 1) != '[') then
+				va := ra.params(n);
+				b.line(sn || n || ' : [' || t.join(va, ', ') || ']');
+				for i in 1 .. va.count loop
+					b.line(sn || '  ' || i || '. ' || r.unescape(va(i)));
+				end loop;
+			end if;
+			n := ra.params.next(n);
+		end loop;
+	end;
+
 	procedure req_info is
 		n  varchar2(100);
 		v  varchar2(999);
@@ -24,6 +44,14 @@ create or replace package body basic_io_b is
 		x.p('<style>', 'hr{margin:2em 0 1em;}');
 		b.line('<pre>');
 	
+		b.line('## request parameter that may be got from the following ways');
+		b.line('1. query string');
+		b.line('2. post with application/x-www-form-urlencoded');
+		b.line('3. post with multipart/form-data');
+		b.line;
+		req_params;
+	
+		x.t('<hr/>');
 		b.line('## basic request info derived from http request line and http header host');
 		b.line('');
 		b.line('r.method : ' || r.method);
@@ -180,26 +208,6 @@ create or replace package body basic_io_b is
 			if n like 'c$%' then
 				v := ra.params(n) (1);
 				b.line(sn || n || ' : ' || v);
-			end if;
-			n := ra.params.next(n);
-		end loop;
-	
-		x.t('<hr/>');
-		b.line;
-		b.line('## request parameter that may be got from the following ways');
-		b.line('1. query string');
-		b.line('2. post with application/x-www-form-urlencoded');
-		b.line('3. post with multipart/form-data');
-		b.line;
-		n := ra.params.first;
-		loop
-			exit when n is null;
-			if lengthb(n) < 2 or (substrb(n, 2, 1) != '$' and substrb(n, 1, 1) != '[') then
-				va := ra.params(n);
-				b.line(sn || n || ' : ' || t.join(va, ', '));
-				for i in 1 .. va.count loop
-					b.line(sn || '  ' || i || '. ' || r.unescape(va(i)));
-				end loop;
 			end if;
 			n := ra.params.next(n);
 		end loop;

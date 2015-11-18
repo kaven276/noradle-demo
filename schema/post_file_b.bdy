@@ -77,7 +77,7 @@ xhr.send("<p>abedefg</p>\n\
 			alert("got req_info echo");
 			$("#content").html(data);
 		}
-		$.post("basic_io_b.req_info",{name:"noradle",author:"kaven276"},cb,"text");
+		$.post("basic_io_b.req_params",{name:"noradle",author:"kaven276"},cb,"text");
 		</script>');
 		x.p('<pre#content>', '');
 	end;
