@@ -34,6 +34,7 @@ create or replace package body index_b is
 		x.p('<dt>', 'post/upload file');
 		x.p('<dd>', x.a('<a>', 'upload_form', 'post_file_b.upload_form'));
 		x.p('<dd>', x.a('<a>', 'ajax_post', 'post_file_b.ajax_post'));
+		x.p('<dd>', x.a('<a>', 'post json', 'post_file_b.ajax_post_json'));
 		x.p('<dd>', x.a('<a>', 'media capture', 'media_b.file_image'));
 	
 		x.p('<dt>', 'http response control headers');

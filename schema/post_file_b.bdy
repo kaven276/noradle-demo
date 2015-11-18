@@ -68,6 +68,20 @@ xhr.send("<p>abedefg</p>\n\
 		x.p('<div#content>', '');
 	end;
 
+	procedure ajax_post_json is
+	begin
+		src_b.header;
+		x.j('<script>', '[jquery.js]');
+		x.t('<script>
+		function cb(data){
+			alert("got req_info echo");
+			$("#content").html(data);
+		}
+		$.post("basic_io_b.req_info",{name:"noradle",author:"kaven276"},cb,"text");
+		</script>');
+		x.p('<pre#content>', '');
+	end;
+
 	procedure echo_http_body is
 		v_line  varchar2(200);
 		v_nline nvarchar2(200);
