@@ -49,6 +49,10 @@ create or replace package body basic_io_b is
 		b.line('2. post with application/x-www-form-urlencoded');
 		b.line('3. post with multipart/form-data');
 		b.line;
+		x.a('<a>', 'get/post form demo', '@b.parameters');
+		x.a('<a>', 'post json demo', './post_file_b.ajax_post_json');
+		x.a('<a>', 'form multipart/form-data demo', './post_file_b.upload_form');
+		b.line;
 		req_params;
 	
 		x.t('<hr/>');
