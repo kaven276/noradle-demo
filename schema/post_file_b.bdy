@@ -48,9 +48,7 @@ create or replace package body post_file_b is
 
 	procedure ajax_post is
 	begin
-		pc.h;
-		src_b.link_proc;
-		src_b.link_pack;
+		src_b.header;
 		x.p('<script>',
 				'
 var xhr = new XMLHttpRequest();
@@ -77,7 +75,7 @@ xhr.send("<p>abedefg</p>\n\
 			alert("got req_info echo");
 			$("#content").html(data);
 		}
-		$.post("basic_io_b.req_params",{name:"noradle",author:"kaven276"},cb,"text");
+		$.post("basic_io_b.req_info?topic=param",{name:"noradle",author:"kaven276"},cb,"text");
 		</script>');
 		x.p('<pre#content>', '');
 	end;

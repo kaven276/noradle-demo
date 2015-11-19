@@ -13,228 +13,247 @@ create or replace package body basic_io_b is
 		end if;
 	end;
 
-	procedure req_params is
-		n  varchar2(100);
-		v  varchar2(999);
-		va st;
-		sn varchar2(3) := '';
-	begin
-		n := ra.params.first;
-		loop
-			exit when n is null;
-			if lengthb(n) < 2 or (substrb(n, 2, 1) != '$' and substrb(n, 1, 1) != '[') then
-				va := ra.params(n);
-				b.line(sn || n || ' : [' || t.join(va, ', ') || ']');
-				for i in 1 .. va.count loop
-					b.line(sn || '  ' || i || '. ' || r.unescape(va(i)));
-				end loop;
-			end if;
-			n := ra.params.next(n);
-		end loop;
-	end;
-
 	procedure req_info is
-		n  varchar2(100);
-		v  varchar2(999);
-		va st;
-		sn varchar2(3) := '';
+		n     varchar2(100);
+		v     varchar2(999);
+		va    st;
+		sn    varchar2(3) := '';
+		topic varchar2(30) := r.getc('topic', '%');
 	begin
 		b.set_line_break(chr(10));
 		src_b.header;
 		x.p('<style>', 'hr{margin:2em 0 1em;}');
 		b.line('<pre>');
 	
-		b.line('## request parameter that may be got from the following ways');
-		b.line('1. query string');
-		b.line('2. post with application/x-www-form-urlencoded');
-		b.line('3. post with multipart/form-data');
-		b.line;
-		x.a('<a>', 'get/post form demo', '@b.parameters');
-		x.a('<a>', 'post json demo', './post_file_b.ajax_post_json');
-		x.a('<a>', 'form multipart/form-data demo', './post_file_b.upload_form');
-		b.line;
-		req_params;
+		if 'param' like topic then
+			b.line('## request parameter that may be got from the following ways');
+			b.line('1. query string');
+			b.line('2. post with application/x-www-form-urlencoded');
+			b.line('3. post with multipart/form-data');
+			b.line;
+			x.a('<a>', 'get/post form demo', '@b.parameters');
+			x.a('<a>', 'post json demo', './post_file_b.ajax_post_json');
+			x.a('<a>', 'form multipart/form-data demo', './post_file_b.upload_form');
+			b.line;
+			n := ra.params.first;
+			loop
+				exit when n is null;
+				if lengthb(n) < 2 or (substrb(n, 2, 1) != '$' and substrb(n, 1, 1) != '[') then
+					va := ra.params(n);
+					b.line(sn || n || ' : [' || t.join(va, ', ') || ']');
+					for i in 1 .. va.count loop
+						b.line(sn || '  ' || i || '. ' || r.unescape(va(i)));
+					end loop;
+				end if;
+				n := ra.params.next(n);
+			end loop;
+		end if;
 	
-		x.t('<hr/>');
-		b.line('## basic request info derived from http request line and http header host');
-		b.line('');
-		b.line('r.method : ' || r.method);
-		b.line('r.url : ' || r.url);
-		b.line('');
-		b.line('r.url_full : ' || r.url_full);
-		b.line('r.dir_full : ' || r.dir_full);
-		b.line('');
-		b.line('r.site : ' || r.site);
-		b.line(' r.protocol(false) : ' || r.protocol(false));
-		b.line(' r.protocol(true) : ' || r.protocol(true));
-		b.line(' r.host : ' || r.host);
-		b.line('  r.hostname : ' || r.hostname);
-		b.line('   r.sdns : ' || r.sdns);
-		b.line('   r.pdns : ' || r.pdns);
-		b.line('  r.port : ' || r.port);
-		b.line('');
-		b.line('r.path : ' || r.path);
-		b.line(' r.pathname : ' || r.pathname);
-		b.line('  r.dir : ' || r.dir);
-		b.line('  r.prog : ' || r.prog);
-		b.line('   r.pack : ' || r.pack);
-		b.line('   r.proc : ' || r.proc);
-		b.line('   r.type : ' || r.type);
-		b.line('   r.is_readonly : ' || t.tf(r.is_readonly, 'true', 'false'));
-		b.line(' r.subpath : ' || r.subpath);
-		b.line(' r.search : ' || r.search);
-		b.line(' r.qstr : ' || r.qstr);
+		if 'url' like topic then
+			x.t('<hr/>');
+			b.line('## basic request info derived from http request line and http header host');
+			b.line('');
+			b.line('r.method : ' || r.method);
+			b.line('r.url : ' || r.url);
+			b.line('');
+			b.line('r.url_full : ' || r.url_full);
+			b.line('r.dir_full : ' || r.dir_full);
+			b.line('');
+			b.line('r.site : ' || r.site);
+			b.line(' r.protocol(false) : ' || r.protocol(false));
+			b.line(' r.protocol(true) : ' || r.protocol(true));
+			b.line(' r.host : ' || r.host);
+			b.line('  r.hostname : ' || r.hostname);
+			b.line('   r.sdns : ' || r.sdns);
+			b.line('   r.pdns : ' || r.pdns);
+			b.line('  r.port : ' || r.port);
+			b.line('');
+			b.line('r.path : ' || r.path);
+			b.line(' r.pathname : ' || r.pathname);
+			b.line('  r.dir : ' || r.dir);
+			b.line('  r.prog : ' || r.prog);
+			b.line('   r.pack : ' || r.pack);
+			b.line('   r.proc : ' || r.proc);
+			b.line('   r.type : ' || r.type);
+			b.line('   r.is_readonly : ' || t.tf(r.is_readonly, 'true', 'false'));
+			b.line(' r.subpath : ' || r.subpath);
+			b.line(' r.search : ' || r.search);
+			b.line(' r.qstr : ' || r.qstr);
+		end if;
 	
-		x.t('<hr/>');
-		b.line('## core excution NV');
-		b.line;
-		b.line('x$dbu|r.dbu : ' || r.dbu);
-		b.line('x$prog|r.prog : ' || r.prog);
-		b.line('x$before : ' || r.getc('x$before'));
-		b.line('x$after : ' || r.getc('x$after'));
+		if 'exec' like topic then
+			x.t('<hr/>');
+			b.line('## core excution NV');
+			b.line;
+			b.line('x$dbu|r.dbu : ' || r.dbu);
+			b.line('x$prog|r.prog : ' || r.prog);
+			b.line('x$before : ' || r.getc('x$before'));
+			b.line('x$after : ' || r.getc('x$after'));
+		end if;
 	
-		x.t('<hr/>');
-		b.line('## session related info');
-		b.line;
-		x.a('<a>', 'link to protected page who require logged-in session', './auth_b.protected_page');
-		b.line('r.bsid : ' || r.bsid);
-		b.line('r.msid : ' || r.msid);
-		b.line('r.gid : ' || r.gid);
-		b.line('r.uid : ' || r.uid);
-		b.line('s$ : ' || r.getc('s$'));
-		b.line('r.idle : ' || r.idle);
-		b.line('r.lat : ' || r.lat);
-		n := ra.params.first;
-		loop
-			exit when n is null;
-			if substrb(n, 1, 3) like 's$_' then
-				tmp.stv := ra.params(n);
-				b.line(sn || n || ' : [' || t.join(tmp.stv, ', ') || ']');
-			end if;
-			n := ra.params.next(n);
-		end loop;
+		if 'session' like topic then
+			x.t('<hr/>');
+			b.line('## session related info');
+			b.line;
+			x.a('<a>', 'link to protected page who require logged-in session', './auth_b.protected_page');
+			b.line('r.bsid : ' || r.bsid);
+			b.line('r.msid : ' || r.msid);
+			b.line('r.gid : ' || r.gid);
+			b.line('r.uid : ' || r.uid);
+			b.line('s$ : ' || r.getc('s$'));
+			b.line('r.idle : ' || r.idle);
+			b.line('r.lat : ' || r.lat);
+			n := ra.params.first;
+			loop
+				exit when n is null;
+				if substrb(n, 1, 3) like 's$_' then
+					tmp.stv := ra.params(n);
+					b.line(sn || n || ' : [' || t.join(tmp.stv, ', ') || ']');
+				end if;
+				n := ra.params.next(n);
+			end loop;
+		end if;
 	
-		x.t('<hr/>');
-		b.line('## file/link related info');
-		b.line;
-		b.line('r.file : if static url mapped to lob stored in oracle database other than external filesystem file' ||
-					 r.file);
-		n := ra.params.first;
-		loop
-			exit when n is null;
-			if n like 'l$%' then
-				b.line(sn || n || ' : ' || r.getc(n));
-			end if;
-			n := ra.params.next(n);
-		end loop;
+		if 'link' like topic then
+			x.t('<hr/>');
+			b.line('## file/link related info');
+			b.line;
+			b.line('r.file : if static url mapped to lob stored in oracle database other than external filesystem file' ||
+						 r.file);
+			n := ra.params.first;
+			loop
+				exit when n is null;
+				if n like 'l$%' then
+					b.line(sn || n || ' : ' || r.getc(n));
+				end if;
+				n := ra.params.next(n);
+			end loop;
+		end if;
 	
-		/*
-    b.line;
-    b.line('## charset related');
-    b.line('r.req_charset_db : ' || t.tf(r.req_charset_db));
-    b.line('r.req_charset_ndb : ' || t.tf(r.req_charset_ndb));
-    b.line('r.req_charset_utf8 : ' || t.tf(r.req_charset_utf8));
-    */
+		if 'charset' like topic then
+			x.t('<hr/>');
+			b.line('## charset info');
+			b.line;
+			b.line('## charset related');
+			b.line('h.charset : ' || h.charset);
+			--b.line('r.req_charset_db : ' || t.tf(r.req_charset_db));
+			--b.line('r.req_charset_ndb : ' || t.tf(r.req_charset_ndb));
+			--b.line('r.req_charset_utf8 : ' || t.tf(r.req_charset_utf8));
+		end if;
 	
-		x.t('<hr/>');
-		b.line('## infrastucture info');
-		b.line;
-		b.line('r.database_role : ' || r.database_role);
-		b.line('r.db_unique_name : ' || r.db_unique_name);
-		b.line('r.instance : ' || r.instance);
-		b.line('r.cfg : ' || r.cfg);
-		b.line('r.slot : ' || r.slot);
-		b.line('r.cid|b$cid : ' || r.cid);
-		b.line('r.cslot|b$cslot : ' || r.cslot);
+		if 'infra' like topic then
+			x.t('<hr/>');
+			b.line('## infrastucture info');
+			b.line;
+			b.line('r.database_role : ' || r.database_role);
+			b.line('r.db_unique_name : ' || r.db_unique_name);
+			b.line('r.instance : ' || r.instance);
+			b.line('r.cfg : ' || r.cfg);
+			b.line('r.slot : ' || r.slot);
+			b.line('r.cid|b$cid : ' || r.cid);
+			b.line('r.cslot|b$cslot : ' || r.cslot);
+		end if;
 	
-		h.header('etag', '"BASIC_IO_B.V1"');
-		h.last_modified((sysdate));
-		x.t('<hr/>');
-		b.line('## basic request info derived from http header');
-		b.line;
-		x.a('<a>', 'link to page who require http basic authorization', './auth_b.basic');
-		b.line(q'|r.header('authorization') : |' || r.header('authorization'));
-		b.line(q'|r.getc('h$authorization') : |' || r.getc('h$authorization'));
-		b.line('r.user : ' || r.user);
-		b.line('r.pass : ' || r.pass);
-		b.line('r.ua : ' || r.ua);
-		b.line('r.referer : ' || r.referer);
-		b.line('r.referer2 : ' || r.referer2);
-		b.line('r.is_xhr : ' || t.tf(r.is_xhr, 'true', 'false'));
-		b.line('r.is_readonly : ' || t.tf(r.is_readonly, 'true', 'false'));
-		b.line('r.etag : ' || r.etag);
-		b.line('r.lmt : ' || r.lmt);
+		if 'header2' like topic then
+			h.header('etag', '"BASIC_IO_B.V1"');
+			h.last_modified((sysdate));
+			x.t('<hr/>');
+			b.line('## basic request info derived from http header');
+			b.line;
+			x.a('<a>', 'link to page who require http basic authorization', './auth_b.basic');
+			b.line(q'|r.header('authorization') : |' || r.header('authorization'));
+			b.line(q'|r.getc('h$authorization') : |' || r.getc('h$authorization'));
+			b.line('r.user : ' || r.user);
+			b.line('r.pass : ' || r.pass);
+			b.line('r.ua : ' || r.ua);
+			b.line('r.referer : ' || r.referer);
+			b.line('r.referer2 : ' || r.referer2);
+			b.line('r.is_xhr : ' || t.tf(r.is_xhr, 'true', 'false'));
+			b.line('r.is_readonly : ' || t.tf(r.is_readonly, 'true', 'false'));
+			b.line('r.etag : ' || r.etag);
+			b.line('r.lmt : ' || r.lmt);
+		end if;
 	
-		x.t('<hr/>');
-		b.line('## client/server address from TCP socket or x-forwarded-* headers');
-		b.line;
-		b.line('r.client_addr(false) : ' || r.client_addr(false));
-		b.line('r.client_port(false) : ' || r.client_port(false));
-		b.line('r.client_addr(true) : ' || r.client_addr(true));
-		b.line('r.client_port(true) : ' || r.client_port(true));
-		b.line('r.server_family : ' || r.server_family);
-		b.line('r.server_addr : ' || r.server_addr);
-		b.line('r.server_port : ' || r.server_port);
+		if 'addr' like topic then
+			x.t('<hr/>');
+			b.line('## client/server address from TCP socket or x-forwarded-* headers');
+			b.line;
+			b.line('r.client_addr(false) : ' || r.client_addr(false));
+			b.line('r.client_port(false) : ' || r.client_port(false));
+			b.line('r.client_addr(true) : ' || r.client_addr(true));
+			b.line('r.client_port(true) : ' || r.client_port(true));
+			b.line('r.server_family : ' || r.server_family);
+			b.line('r.server_addr : ' || r.server_addr);
+			b.line('r.server_port : ' || r.server_port);
+		end if;
 	
-		x.t('<hr/>');
-		b.line('## original http request headers exclude cookies');
-		b.line;
-		n := ra.params.first;
-		loop
-			exit when n is null;
-			if n like 'h$%' and n not like 'h$$%' then
-				v := ra.params(n) (1);
-				b.line(sn || n || ' : ' || v);
-			end if;
-			n := ra.params.next(n);
-		end loop;
+		if 'header' like topic then
+			x.t('<hr/>');
+			b.line('## original http request headers exclude cookies');
+			b.line;
+			n := ra.params.first;
+			loop
+				exit when n is null;
+				if n like 'h$%' and n not like 'h$$%' then
+					v := ra.params(n) (1);
+					b.line(sn || n || ' : ' || v);
+				end if;
+				n := ra.params.next(n);
+			end loop;
+		end if;
 	
-		x.t('<hr/>');
-		b.line('## all http request headers parsed to array');
-		b.line;
-		n := ra.params.first;
-		loop
-			exit when n is null;
-			if substrb(n, 1, 3) = 'h$$' then
-				tmp.stv := ra.params(n);
-				b.line(sn || n || ' : [' || t.join(tmp.stv, ', ') || ']');
-			end if;
-			n := ra.params.next(n);
-		end loop;
+		if 'accept' like topic then
+			x.t('<hr/>');
+			b.line('## all http request headers parsed to array');
+			b.line;
+			n := ra.params.first;
+			loop
+				exit when n is null;
+				if substrb(n, 1, 3) = 'h$$' then
+					tmp.stv := ra.params(n);
+					b.line(sn || n || ' : [' || t.join(tmp.stv, ', ') || ']');
+				end if;
+				n := ra.params.next(n);
+			end loop;
+		end if;
 	
-		x.t('<hr/>');
-		b.line('## This is all http request cookies');
-		b.line;
-		x.a('<a>', 'link to page who set/view cookies', './cookie_h.form_view');
-		n := ra.params.first;
-		loop
-			exit when n is null;
-			if n like 'c$%' then
-				v := ra.params(n) (1);
-				b.line(sn || n || ' : ' || v);
-			end if;
-			n := ra.params.next(n);
-		end loop;
+		if 'cookie' like topic then
+			x.t('<hr/>');
+			b.line('## This is all http request cookies');
+			b.line;
+			x.a('<a>', 'link to page who set/view cookies', './cookie_h.form_view');
+			n := ra.params.first;
+			loop
+				exit when n is null;
+				if n like 'c$%' then
+					v := ra.params(n) (1);
+					b.line(sn || n || ' : ' || v);
+				end if;
+				n := ra.params.next(n);
+			end loop;
+		end if;
 	
-		x.t('<hr/>');
-		b.line('## all request name-value pairs');
-		b.line;
-		n     := ra.params.first;
-		tmp.s := name_pattern(n);
-		loop
-			exit when n is null;
-			va := ra.params(n);
-			if va.count = 1 then
-				b.line(sn || n || ' : ' || va(1));
-			else
-				b.line(sn || n || ' : [' || t.join(va, ', ') || ']');
-			end if;
-			n := ra.params.next(n);
-			if name_pattern(n) != tmp.s then
-				b.line;
-				tmp.s := name_pattern(n);
-			end if;
-		end loop;
+		if 'all' like topic then
+			x.t('<hr/>');
+			b.line('## all request name-value pairs');
+			b.line;
+			n     := ra.params.first;
+			tmp.s := name_pattern(n);
+			loop
+				exit when n is null;
+				va := ra.params(n);
+				if va.count = 1 then
+					b.line(sn || n || ' : ' || va(1));
+				else
+					b.line(sn || n || ' : [' || t.join(va, ', ') || ']');
+				end if;
+				n := ra.params.next(n);
+				if name_pattern(n) != tmp.s then
+					b.line;
+					tmp.s := name_pattern(n);
+				end if;
+			end loop;
+		end if;
 	
 		b.line('</pre>');
 	end;
@@ -274,20 +293,18 @@ create or replace package body basic_io_b is
 	end;
 
 	procedure parameters is
-		v pls_integer := r.getn('step_no', 1);
 	begin
-		pc.h;
 		src_b.header;
 		x.t('<br/>');
-		x.f('<form name=f,method=get>', '@b.req_info?qstr1=A&qstr1=B&p1=0');
+		x.f('<form name=f,method=get>', '@b.req_info?topic=param&p1=1&p2=2');
 		x.o(' <select name=mtd>');
 		x.p('  <option>', 'get');
 		x.p('  <option>', 'post');
 		x.c(' </select>');
 		x.p(' <script>', 'document.f.mtd.onchange=function(){document.f.method = this.value;};');
-		x.v(' <input type=hidden>', v);
-		x.s(' <input type=text,name=p:1,value=1>', st(v));
-		x.s(' <input type=text,name=p:1,value=2>', st(v));
+		x.v(' <input type=hidden,name=topic>', 'param');
+		x.s(' <input type=text,name=p1,value=1>');
+		x.s(' <input type=text,name=p1,value=2>');
 		x.s(' <input type=submit>');
 		x.c('</form>');
 		x.t('<br/>');
@@ -364,7 +381,7 @@ create or replace package body basic_io_b is
 		v_pattern varchar2(100) := upper(r.getc('name')) || '%';
 	begin
 		src_b.header;
-		b.line('<h1>object list prefixed with param "name"="'||v_pattern ||'"</h1>');
+		b.line('<h1>object list prefixed with param "name"="' || v_pattern || '"</h1>');
 		b.save_pointer;
 		for i in (select *
 								from user_objects a
