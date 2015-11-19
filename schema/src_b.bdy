@@ -1,5 +1,6 @@
 create or replace package body src_b is
 
+	-- print package source
 	procedure pack is
 		n varchar2(30) := upper(r.getc('p'));
 	begin
@@ -14,6 +15,7 @@ create or replace package body src_b is
 		end loop;
 	end;
 
+	-- print package.procedure source
 	procedure proc is
 		v_prog st;
 		v_pack varchar2(30);
@@ -45,18 +47,45 @@ create or replace package body src_b is
 		end loop;
 	end;
 
+	-- print links to all sub procedures
+	procedure proc_list is
+		v_pack varchar2(30) := r.getc('pack', r.pack);
+	begin
+		x.t('<!DOCTYPE html>');
+		x.o('<html>');
+		x.o('<head>');
+		x.l(' <link>', '[bootstrap.css]');
+		x.c('</head>');
+		x.o('<body>');
+		x.o('<div.container-fluid>');
+		x.o('<div.panel.panel-default>');
+		x.p(' <div.panel-heading>', v_pack);
+		--x.p(' <div.panel-body>', 'all sub procedure list');
+		x.o(' <ul.list-group>');
+		for i in (select *
+								from user_procedures a
+							 where a.object_name like upper(v_pack)
+								 and a.procedure_name is not null
+							 order by a.subprogram_id asc) loop
+			x.p('<li.list-group-item>', x.a('<a>', i.procedure_name, lower(v_pack || '.' || i.procedure_name)));
+		end loop;
+	end;
+
+	-- print link to package source
 	procedure link_pack(pack varchar2 := null) is
 	begin
 		b.line(t.ps('<a href="src_b.pack?p=:1" target=":1">view pl/sql source pack ":1" in new window</a></br>',
 								st(nvl(pack, r.pack))));
 	end;
 
+	-- print link to package.procedure source
 	procedure link_proc(proc varchar2 := null) is
 	begin
 		b.line(t.ps('<a href="src_b.proc?p=:1" target=":1">view pl/sql source proc ":1" in new window</a><br/><br/>',
 								st(nvl(proc, r.prog))));
 	end;
 
+	-- give link to show source or show source in markdown(plain or converted)
 	procedure header is
 		v_pos  pls_integer;
 		v_type varchar2(100) := h.mime_type;
