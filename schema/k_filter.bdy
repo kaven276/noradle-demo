@@ -2,6 +2,7 @@ create or replace package body k_filter is
 
 	procedure before is
 	begin
+		r.setc('l$upload', '/upload/');
 		r.setc('l$jscdn', 'https://cdnjs.cloudflare.com/ajax/libs/');
 		r.setc('l$jquery.js', l('[jscdn]jquery/3.0.0-alpha1/jquery.min.js'));
 		r.setc('l$bootstrap.js', l('[jscdn]twitter-bootstrap/3.3.5/js/bootstrap.min.js'));

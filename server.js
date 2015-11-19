@@ -54,6 +54,11 @@ app.use(y$static, express.static(__dirname + '/static', {
   redirect : false
 }));
 
+app.use('/upload', express.static(__dirname + '/upload', {
+  maxAge : 24 * 60 * 60,
+  redirect : false
+}));
+
 //app.use(y$static, require('harp').mount(__dirname + '/static'));
 
 app.get('/favicon.ico', function(req, res){

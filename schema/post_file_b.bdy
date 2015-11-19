@@ -14,7 +14,8 @@ create or replace package body post_file_b is
 			r.gets('file', tmp.stv);
 			tmp.cnt := r.cnt('file');
 			for i in 1 .. tmp.cnt loop
-				x.p('<p>', 'file[' || i || ']: ' || tmp.stv(i) || ', size ' || r.getc('file.size', 0, i));
+				tmp.s := x.a('<a>', tmp.stv(i), '[upload]' || tmp.stv(i));
+				x.p('<p>', 'file[' || i || ']: ' || tmp.s || ', size ' || r.getc('file.size', 0, i));
 			end loop;
 		exception
 			when others then
