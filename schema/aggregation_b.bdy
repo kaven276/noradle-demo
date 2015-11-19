@@ -29,7 +29,6 @@ create or replace package body aggregation_b is
 	begin
 		--p.h('u:hierachical.css,u:pw/pw.js,u:pw/treeble.js,u:.js');
 		common_preface;
-		x.o('<div.container>');
 		x.o('<table#report.table.table-bordered.table-hover rules=all>');
 		x.p(' <caption.center>', 'staff hierachy with level');
 		tmp.s := 'name,staff_num,grade,manager,leaf,path';
@@ -58,7 +57,6 @@ create or replace package body aggregation_b is
 	procedure emp_salaries is
 	begin
 		common_preface;
-		x.o('<div.container>');
 		x.o('<table#report.table.table-bordered.table-hover rules=all>');
 		x.p(' <caption.center>', 'group by with one-level rollup example');
 		tmp.s := 'dept,emp,name,salary';
@@ -160,7 +158,6 @@ create or replace package body aggregation_b is
 		v_dept_names idx;
 	begin
 		common_preface;
-		x.o('<div.container>');
 		x.o('<table#report.table.table-bordered.table-hover rules=all>');
 		x.p(' <caption.indent>', 'cross table for h:job,v:dept, group by cube demo');
 		x.o(' <thead.border.darkbg>');
@@ -220,7 +217,6 @@ create or replace package body aggregation_b is
 		v_job_names idx;
 	begin
 		common_preface;
-		x.o('<div.container>');
 		x.o('<table#report.table.table-bordered.table-hover rules=all>');
 		x.p(' <caption.indent>', 'cross table for h:dept,v:job, group by cube demo');
 		x.o(' <thead.border.darkbg>');
