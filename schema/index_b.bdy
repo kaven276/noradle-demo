@@ -147,6 +147,10 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'job_dept_sals(cube)', 'aggregation_b.job_dept_sals'));
 		x.p('<dd>', x.a('<a>', 'dept_job_sals(cube)', 'aggregation_b.dept_job_sals'));
 	
+		x.p('<dt>', 'charts');
+		x.p('<dd>', x.a('<a>', 'salary min/max by job_id', 'chart_b.salary_min_max_by_job_id'));
+		x.p('<dd>', x.a('<a>', 'salary share by job_id', 'chart_b.salary_share_by_job_id'));
+
 		x.p('<dt>', 'charset_b');
 		x.p('<dd>', x.a('<a>', 'form', 'charset_b.form'));
 	
