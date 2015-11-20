@@ -55,10 +55,11 @@ create or replace package body src_b is
 		x.o('<html>');
 		x.o('<head>');
 		x.l(' <link>', '[bootstrap.css]');
+		x.l(' <link>', '[animate.css]');
 		x.c('</head>');
 		x.o('<body>');
 		x.o('<div.container-fluid>');
-		x.o('<div.panel.panel-default>');
+		x.o('<div.panel.panel-default.animated.bounceInDown>');
 		x.p(' <div.panel-heading>', v_pack);
 		--x.p(' <div.panel-body>', 'all sub procedure list');
 		x.o(' <ul.list-group>');

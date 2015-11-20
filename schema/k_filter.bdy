@@ -12,6 +12,8 @@ create or replace package body k_filter is
 		r.setc('l$angular-animate.js', l('[jscdn]angular.js/1.4.7/angular-animate.min.js'));
 		r.setc('l$angular-resource.js', l('[jscdn]angular.js/1.4.7/angular-resource.min.js'));
 	
+		r.setc('l$bcdn', '//cdn.bootcss.com/');
+		r.setc('l$animate.css', l('[bcdn]animate.css/3.4.0/animate.min.css'));
 		-- b.set_line_break(null);
 		pv.id  := 'liyong';
 		pv.now := sysdate;

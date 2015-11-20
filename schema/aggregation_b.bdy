@@ -16,8 +16,9 @@ create or replace package body aggregation_b is
 	begin
 		src_b.header;
 		x.l('<link>', '[bootstrap.css]');
+		x.l(' <link>', '[animate.css]');
 		common_css;
-		x.o('<div.container>');
+		x.o('<div.container.animated.zoomInDown>');
 	end;
 
 	function badge(cnt pls_integer) return varchar2 is
