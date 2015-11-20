@@ -159,6 +159,7 @@ create or replace package body index_b is
 		x.p('<dt>', 'tables/grid/edit');
 		x.p('<dd>', x.a('<a>', 'x-editable', 'tables_h.xeditable'));
 		x.p('<dd>', x.a('<a>', 'handsontable', 'tables_h.handsontable'));
+		x.p('<dd>', x.a('<a>', 'datatables', 'tables_h.datatables'));
 
 		x.p('<dt>', 'charset_b');
 		x.p('<dd>', x.a('<a>', 'form', 'charset_b.form'));
