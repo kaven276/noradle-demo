@@ -156,6 +156,10 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'bootstrap_material_design', 'icon_b.bootstrap_material_design'));
 		x.p('<dd>', x.a('<a>', 'ionicons', 'icon_b.ionicons'));
 
+		x.p('<dt>', 'tables/grid/edit');
+		x.p('<dd>', x.a('<a>', 'x-editable', 'tables_h.xeditable'));
+		x.p('<dd>', x.a('<a>', 'handsontable', 'tables_h.handsontable'));
+
 		x.p('<dt>', 'charset_b');
 		x.p('<dd>', x.a('<a>', 'form', 'charset_b.form'));
 	
