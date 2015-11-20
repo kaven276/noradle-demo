@@ -92,7 +92,8 @@ create or replace package body tables_h is
 		x.p('<h3.page-header>', x.a('<a target=_blank>', 'datatables', 'http://datatables.net/'));
 		x.o('<div.container-fluid>');
 
-		x.o('<table.table.table-bordered>');
+		x.o('<table.table.table-bordered style=table-layout:fixed>');
+		x.p('<colgroup>', m.w('<col width="@0">', '20,15,20,10'));
 		x.p('<thead>', x.p('<tr>', m.w('<td>@</td>', 'name,email,phone,salary')));
 		x.o('<tbody>');
 		for i in (select a.*, rowid rid from employees a) loop
