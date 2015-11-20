@@ -151,6 +151,11 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'salary min/max by job_id', 'chart_b.salary_min_max_by_job_id'));
 		x.p('<dd>', x.a('<a>', 'salary share by job_id', 'chart_b.salary_share_by_job_id'));
 
+		x.p('<dt>', 'icons');
+		x.p('<dd>', x.a('<a>', 'material design icons', 'icon_b.material_design_icons'));
+		x.p('<dd>', x.a('<a>', 'bootstrap_material_design', 'icon_b.bootstrap_material_design'));
+		x.p('<dd>', x.a('<a>', 'ionicons', 'icon_b.ionicons'));
+
 		x.p('<dt>', 'charset_b');
 		x.p('<dd>', x.a('<a>', 'form', 'charset_b.form'));
 	
