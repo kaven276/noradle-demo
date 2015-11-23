@@ -224,13 +224,6 @@ prompt
 ---------  print/output/response API demos ------------
 
 prompt
-prompt Creating package PG_TEST_B
-prompt ==========================
-prompt
-@@pg_test_b.spc
-@@pg_test_b.bdy
-
-prompt
 prompt Creating package DB_SRC_B
 prompt =========================
 prompt
@@ -242,12 +235,6 @@ prompt Creating procedure URL_TEST1_B
 prompt ==============================
 prompt
 @@url_test1_b.prc
-
-prompt
-prompt Creating procedure URL_TEST2_B
-prompt ==============================
-prompt
-@@url_test2_b.prc
 
 prompt
 prompt Creating package EASY_URL_B
