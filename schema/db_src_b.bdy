@@ -1,4 +1,4 @@
-﻿create or replace package body db_src_b is
+create or replace package body db_src_b is
 
 	procedure basic is
 		cur sys_refcursor;
