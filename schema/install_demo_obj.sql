@@ -27,6 +27,12 @@ prompt Creating table EMP_T
 prompt ==========================
 prompt
 @@emp_t.tab
+prompt
+prompt Creating table STOLEN_COOKIE_T
+prompt ==============================
+prompt
+@@stolen_cookie_t.tab
+@@../demo_data/human_resources/my_main.sql
 whenever sqlerror exit
 
 @@pc.spc
@@ -251,6 +257,27 @@ prompt
 @@style_b.bdy
 
 prompt
+prompt Creating package LOCAL_CSS_B
+prompt ==========================
+prompt
+@@local_css_b.spc
+@@local_css_b.bdy
+
+prompt
+prompt Creating package X_TAG_B
+prompt ==========================
+prompt
+@@list_b.spc
+@@list_b.bdy
+
+prompt
+prompt Creating package M_MULTI_B
+prompt ==========================
+prompt
+@@m_multi_b.spc
+@@m_multi_b.bdy
+
+prompt
 prompt Creating package LIST_B
 prompt ==========================
 prompt
@@ -280,6 +307,19 @@ prompt
 @@jqm_b.spc
 @@jqm_b.bdy
 
+prompt high-level demos
+@@aggregation_b.spc
+@@aggregation_b.bdy
+@@analytic_b.spc
+@@analytic_b.bdy
+@@tables_h.spc
+@@tables_h.bdy
+@@icon_b.spc
+@@icon_b.bdy
+@@chart_b.spc
+@@chart_b.bdy
+@@d3_chart_b.spc
+@@d3_chart_b.bdy
 
 prompt
 prompt Creating package XML_PAGE_B
