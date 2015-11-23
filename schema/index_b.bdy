@@ -17,6 +17,7 @@ create or replace package body index_b is
 	procedure dir is
 	begin
 		pc.h(target => 'page');
+		x.t('<style>html{background:url(:1)}</style>', st(l('^img/subtle_freckles.png')));
 		x.o('<dl>');
 	
 		x.p('<dt>', 'ora_good_b');
