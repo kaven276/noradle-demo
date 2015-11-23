@@ -4,7 +4,7 @@ create or replace package body icon_b is
 	begin
 		src_b.header;
 		x.l('<link>', '[bcdn]material-design-icons/2.0.0/iconfont/style.min.css');
-		x.p('<span.material-icons>', 'flower');
+		x.p('<span.material-icons>', 'face');
 	end;
 
 	procedure bootstrap_material_design is
