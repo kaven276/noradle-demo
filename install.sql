@@ -23,6 +23,10 @@ alter session set current_schema = &demodbu;
 @@grant2demo.sql
 
 prompt begin to install Noradle demo schema objects
+whenever sqlerror continue
+@@demo_data/human_resources/my_main.sql
+whenever sqlerror exit
+
 @@schema/install_demo_obj.sql
 exec DBMS_UTILITY.COMPILE_SCHEMA(upper('&demodbu'),false);
 
