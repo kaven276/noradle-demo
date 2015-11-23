@@ -1,3 +1,10 @@
 .idea/
 node_modules/
 static/bower_lib/
+static/csstest/
+static/jsprint/
+upload/
+*expr*
+*test*
+*.del
+Thumbs.db
