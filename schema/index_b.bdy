@@ -29,8 +29,7 @@ create or replace package body index_b is
 		x.p('<dd>', x.a('<a>', 'parameters', 'basic_io_b.parameters'));
 		x.p('<dd>', x.a('<a>', 'keep_urlencoded', 'basic_io_b.keep_urlencoded'));
 		x.p('<dd>', x.a('<a>', 'steps', 'basic_io_b.steps'));
-		x.p('<dd>', x.a('<a>', 'list data', 'basic_io_b.appended'));
-		x.p('<dd>', x.a('<a>', 'show no data', 'basic_io_b.appended?name=*'));
+		x.p('<dd>', x.a('<a>', 'if appended', 'basic_io_b.appended'));
 	
 		x.p('<dt>', 'post/upload file');
 		x.p('<dd>', x.a('<a>', 'upload_form', 'post_file_b.upload_form'));

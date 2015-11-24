@@ -379,19 +379,23 @@ create or replace package body basic_io_b is
 	end;
 
 	procedure appended is
-		v_pattern varchar2(100) := upper(r.getc('name')) || '%';
+		v_prefix varchar2(100) := upper(r.getc('prefix'));
 	begin
 		src_b.header;
-		b.line('<h1>object list prefixed with param "name"="' || v_pattern || '"</h1>');
+		b.line('<h1>object list prefixed with "' || v_prefix || '"</h1>');
+		x.f('<form method=post>', r.prog);
+		x.v(' <input type=text,name=prefix>', v_prefix);
+		x.s(' <input type=submit>');
+		x.c('</form>');
 		b.save_pointer;
 		for i in (select *
 								from user_objects a
-							 where a.object_name like v_pattern
+							 where a.object_name like v_prefix || '%'
 								 and rownum <= 3) loop
 			b.line('<p>' || i.object_name || ' - ' || i.object_type || '</p>');
 		end loop;
 		if b.not_appended then
-			b.line('<h4>no objects found by ' || v_pattern || '</h4>');
+			b.line('<h4>no objects whose name is prefixed by ' || v_prefix || '</h4>');
 		end if;
 	end;
 
