@@ -1,13 +1,67 @@
 create or replace package body tree_b is
 
+	procedure tree_css is
+	begin
+		x.l('<link>', '[bootstrap.css]');
+		b.l('<style>
+		.root {
+		  font-size :36px;
+		}
+		.branch {
+			margin-left : 0.22em;
+			border-left: 1px solid silver;
+			padding-left : 0.82em;
+		}
+		.root > li,
+		.branch > li {
+			list-style: none;
+		}
+		.node {
+		  line-height: 1.7;
+		}
+		.node > .handle {
+			font-size: 0.5em;
+			color: black;
+		}
+		.node > .icon {
+			font-size: 0.8em;
+			margin-left: 0.5em;
+			margin-right: 0.5em;
+		}
+		.node > a,
+		.node > b {
+			padding: 3px 10px 3px;
+			border: 1px solid silver;
+			border-radius: 6px;
+		}
+		.node > a:hover {
+		  text-decoration: none;
+			background-color: silver;
+		}
+		</style>');
+	end;
+
 	procedure parse_render_in_loop is
 		cur sys_refcursor;
 	begin
 		src_b.header;
+		tree_css;
 		x.p('<h2>', 'use tree.p, tree.o, tree,r, tree.c to print tree');
 	
-		x.o('<ul>');
-		tr.p(' <li class="xing-@"><a href="see?pid=@">@</a>|<ul>|</ul>|</li>', tmp.stv);
+		x.o('<ul.root>');
+		b.begin_template;
+		x.o('<li.xing-@>');
+		x.o(' <span.node>');
+		x.p('  <i.handle.glyphicon.glyphicon-plus>');
+		x.p('  <i.icon.glyphicon.glyphicon-user>');
+		x.a('  <a>', '@', 'see?pid=@ ');
+		x.c(' </span>');
+		x.t('|');
+		x.p(' <ul.branch>', '|');
+		x.t('|');
+		x.c('</li>');
+		b.end_template(tmp.s);
+		tr.p(tmp.s, tmp.stv);
 		tr.o(true);
 		for a in (select level, substr(a.name, 1, 1), a.pid, a.name
 								from emp_t a
@@ -23,14 +77,27 @@ create or replace package body tree_b is
 		cur sys_refcursor;
 	begin
 		src_b.header;
+		tree_css;
 		x.p('<h2>', 'use tree.rc(sys_refcursor) to print tree');
 		open cur for
 			select level, substr(a.name, 1, 1), a.pid, a.name
 				from emp_t a
 			 start with a.name = 'Li Xinyan'
 			connect by a.ppid = prior a.pid;
-		x.o('<ul>');
-		tr.p('<li class="xing-@"><a href="see?pid=@">@</a>|<ul>|</ul>|</li>', tmp.stv);
+		x.o('<ul.root>');
+		b.begin_template;
+		x.o('<li.xing-@>');
+		x.o(' <span.node>');
+		x.p('  <i.handle.glyphicon.glyphicon-plus>');
+		x.p('  <i.icon.glyphicon.glyphicon-user>');
+		x.a('  <a>', '@', 'see?pid=@ ');
+		x.c(' </span>');
+		x.t('|');
+		x.p(' <ul.branch>', '|');
+		x.t('|');
+		x.c('</li>');
+		b.end_template(tmp.s);
+		tr.p(tmp.s, tmp.stv);
 		tr.o(true);
 		tr.rc(tmp.stv, cur);
 		tr.c(tmp.stv);
@@ -41,14 +108,27 @@ create or replace package body tree_b is
 		cur sys_refcursor;
 	begin
 		src_b.header;
+		tree_css;
 		x.p('<h2>', 'use tree.prc(sys_refcursor) to print tree in one step');
 		open cur for
 			select level, substr(a.name, 1, 1), a.name
 				from emp_t a
 			 start with a.name = 'Li Xinyan'
 			connect by a.ppid = prior a.pid;
-		x.o('<ul>');
-		tr.prc('<li class="xing-@"><b>@</b>|<ul>|</ul>|</li>', cur, pretty => true);
+		x.o('<ul.root>');
+		b.begin_template;
+		x.o('<li.xing-@>');
+		x.o(' <span.node>');
+		x.p('  <i.handle.glyphicon.glyphicon-plus>');
+		x.p('  <i.icon.glyphicon.glyphicon-user>');
+		x.p('  <b>', '@');
+		x.c(' </span>');
+		x.t('|');
+		x.p(' <ul.branch>', '|');
+		x.t('|');
+		x.c(' </li>');
+		b.end_template(tmp.s);
+		tr.prc(tmp.s, cur, pretty => true);
 		x.c('</ul>');
 	end;
 
@@ -56,9 +136,22 @@ create or replace package body tree_b is
 		cur sys_refcursor;
 	begin
 		src_b.header;
+		tree_css;
 		x.p('<h2>', 'use tree.p, tree.o, tree,r, tree.n(by level), tree.c to print tree');
-		x.o('<ul>');
-		tr.p('<li class="xing-@"><a href="see?pid=@">@</a>|<ul>|</ul>|</li>', tmp.stv);
+		x.o('<ul.root>');
+		b.begin_template;
+		x.o('<li.xing-@>');
+		x.o(' <span.node>');
+		x.p('  <i.handle.glyphicon.glyphicon-plus>');
+		x.p('  <i.icon.glyphicon.glyphicon-user>');
+		x.a('  <a>', '@', 'see?pid=@ ');
+		x.c(' </span>');
+		x.t('|');
+		x.p(' <ul.branch>', '|');
+		x.t('|');
+		x.c('</li>');
+		b.end_template(tmp.s);
+		tr.p(tmp.s, tmp.stv);
 		tr.o(true);
 		for a in (select level, substr(a.name, 1, 1), a.pid, a.name
 								from emp_t a
