@@ -13,6 +13,10 @@ cd "project root"
 
 sqlplus "/ as sysdba" @install.sql
 
+or
+
+sqlplus "/ as sysdba" @http://static.noradle.com/repo/noradle-demo/install.sql
+
 In oracle database, configure server_control_t, and run noradle dispatcher to listen for client connection.
 
 `npm start [dispatcher_addr:=1522] [http_listen_addr:=8888]` to start the demo.
