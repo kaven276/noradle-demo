@@ -324,6 +324,7 @@ create or replace package body basic_io_b is
 		x.p('  <option>', 'post');
 		x.c(' </select>');
 		x.p(' <script>', 'document.f.mtd.onchange=function(){document.f.method = this.value;};');
+		x.s(' <input type=hidden,name=topic,value=param>');
 		x.v(' <input type=text,name=_qstr1>', nvl(r.qstr, 'a=1&b=2'));
 		x.v(' <input type=text,name=_qstr2>', nvl(r.qstr, 'a=3&b=4'));
 		x.s(' <input type=text,name=p1,value=1>');
