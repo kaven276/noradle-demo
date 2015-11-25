@@ -178,6 +178,9 @@ create or replace package body basic_io_b is
 			x.t('<hr/>');
 			b.line('## client/server address from TCP socket or x-forwarded-* headers');
 			b.line;
+			b.line('r.protocol(false) : ' || r.protocol(false));
+			b.line('r.protocol(true) : ' || r.protocol(true));
+			b.line('r.host : ' || r.host);
 			b.line('r.client_addr(false) : ' || r.client_addr(false));
 			b.line('r.client_port(false) : ' || r.client_port(false));
 			b.line('r.client_addr(true) : ' || r.client_addr(true));
@@ -185,6 +188,15 @@ create or replace package body basic_io_b is
 			b.line('r.server_family : ' || r.server_family);
 			b.line('r.server_addr : ' || r.server_addr);
 			b.line('r.server_port : ' || r.server_port);
+			n := ra.params.first;
+			loop
+				exit when n is null;
+				if n like 'h$$x-forwarded%' then
+					tmp.stv := ra.params(n);
+					b.line(sn || n || ' : [' || t.join(tmp.stv, ', ') || ']');
+				end if;
+				n := ra.params.next(n);
+			end loop;
 		end if;
 	
 		if 'header' like topic then
@@ -209,7 +221,7 @@ create or replace package body basic_io_b is
 			n := ra.params.first;
 			loop
 				exit when n is null;
-				if substrb(n, 1, 3) = 'h$$' then
+				if n like 'h$$accept%' then
 					tmp.stv := ra.params(n);
 					b.line(sn || n || ' : [' || t.join(tmp.stv, ', ') || ']');
 				end if;
