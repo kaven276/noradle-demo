@@ -56,6 +56,7 @@ create or replace package body src_b is
 		x.o('<head>');
 		x.l(' <link>', '[bootstrap.css]');
 		x.l(' <link>', '[animate.css]');
+		x.p(' <style>', 'body{padding-top:1em;}');
 		x.c('</head>');
 		x.o('<body>');
 		x.o('<div.container-fluid>');
