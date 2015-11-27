@@ -1,0 +1,42 @@
+.root {
+  font-size: 14px;
+}
+.branch {
+  margin-left: 0.45em;
+  border-left: 1px solid silver;
+  padding-left: 0.82em;
+}
+.node {
+  line-height: 2;
+  white-space: nowrap;
+}
+.node > .handle {
+  font-size: 0.5em;
+  color: black;
+  margin-right: 0.5em;
+}
+.node > .text,
+.node > a,
+.node > b {
+  padding: 3px 10px 3px;
+  border: 1px solid silver;
+  border-radius: 6px;
+}
+.node > a.text:hover,
+.node > a:hover,
+.node > b:hover {
+  text-decoration: none;
+  background-color: silver;
+}
+.handle.glyphicon:before {
+  color: silver;
+}
+.handle.glyphicon.glyphicon-unchecked:before {
+  color: #eee;
+}
+.node.selected > .icon {
+  color: orange;
+}
+.node.selected > .text {
+  background-color: orange;
+}
