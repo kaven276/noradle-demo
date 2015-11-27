@@ -38,6 +38,6 @@
     "connect": "2.8.4"
   },
   "globalDependencies": {
-    "noradle": ">=0.12.0"
+    "noradle": ">=0.12.2"
   }
 }
