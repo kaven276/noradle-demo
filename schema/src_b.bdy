@@ -7,7 +7,7 @@ create or replace package body src_b is
 		h.content_type('text/plain');
 		h.header('_convert', 'marked');
 		x.o('<head>');
-		x.l('<link>', '[bcdn]highlight.js/8.9.1/styles/railscasts.min.css');
+		x.l('<link>', '[highlight.css]');
 		x.c('</head>');
 		x.p('<h3>', 'PL/SQL UNIT: ' || n);
 		x.p('<h4>', x.a('<a>', 'show subprocedures', './src_b.proc_list?pack=' || n));
@@ -37,7 +37,7 @@ create or replace package body src_b is
 		h.content_type('text/plain');
 		h.header('_convert', 'marked');
 		x.o('<head>');
-		x.l('<link>', '[bcdn]highlight.js/8.9.1/styles/railscasts.min.css');
+		x.l('<link>', '[highlight.css]');
 		x.c('</head>');
 		x.p('<p>', x.a('<a>', 'execute', r.prog));
 		b.line('```plsql');
@@ -129,8 +129,7 @@ create or replace package body src_b is
 		if r.not_lack('markdown') then
 			h.header('_convert', 'marked');
 			x.o('<head>');
-			--x.l('<link>', 'http://highlightjs.org/static/styles.css');
-			x.l('<link>', 'http://highlightjs.org/static/styles/railscasts.css');
+			x.l('<link>', '[highlight.css]');
 			x.c('</head>');
 			x.p('<p>', x.a('<a>', 'execute', r.prog));
 		end if;

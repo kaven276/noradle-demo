@@ -17,8 +17,8 @@ create or replace package body tables_h is
 		x.l('<link>', '[bootstrap.css]');
 		x.j('<script>', '[jquery.js]');
 		x.j('<script>', '[bootstrap.js]');
-		x.l('<link>', '[bcdn]x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css');
-		x.j('<script>', '[bcdn]x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js');
+		x.l('<link>', '[bootstrap-editable.css]');
+		x.j('<script>', '[bootstrap-editable.js]');
 		x.p('<script>', x.r('$.fn.editable.defaults.mode = "@";', r.getc('mode', 'inline')));
 		x.p('<style>', '.name{width:10em;}.pass{width:10em;}table{table-layout:fixed}td{padding:3px;}');
 		x.o('<div.container-fluid>');
@@ -59,8 +59,8 @@ create or replace package body tables_h is
 		end if;
 		src_b.header;
 		x.j('<script>', '[jquery.js]');
-		x.l('<link>', '[bcdn]jquery-handsontable/0.10.2/jquery.handsontable.full.min.css');
-		x.j('<script>', '[bcdn]jquery-handsontable/0.10.2/jquery.handsontable.full.min.js');
+		x.l('<link>', '[jquery.handsontable.full.css]');
+		x.j('<script>', '[jquery.handsontable.full.js]');
 		x.p('<h3.page-header>', x.a('<a target=_blank>', 'handsontable', 'http://handsontable.com/'));
 		x.p('<div#example>', '');
 		x.t('<script>
@@ -86,12 +86,12 @@ create or replace package body tables_h is
 		src_b.header;
 		x.l('<link>', '[bootstrap.css]');
 		x.j('<script>', '[jquery.js]');
-		x.l('<link>', '[bcdn]datatables/1.10.10/css/dataTables.bootstrap.min.css');
-		x.j('<script>', '[bcdn]datatables/1.10.10/js/jquery.dataTables.min.js');
-		x.j('<script>', '[bcdn]datatables/1.10.10/js/dataTables.bootstrap.min.js');
+		x.l('<link>', '[dataTables.bootstrap.css]');
+		x.j('<script>', '[jquery.dataTables.js]');
+		x.j('<script>', '[dataTables.bootstrap.js]');
 		x.p('<h3.page-header>', x.a('<a target=_blank>', 'datatables', 'http://datatables.net/'));
 		x.o('<div.container-fluid>');
-
+	
 		x.o('<table.table.table-bordered style=table-layout:fixed>');
 		x.p('<colgroup>', m.w('<col width="@0">', '20,15,20,10'));
 		x.p('<thead>', x.p('<tr>', m.w('<td>@</td>', 'name,email,phone,salary')));
@@ -106,7 +106,7 @@ create or replace package body tables_h is
 		end loop;
 		x.c('</tbody>');
 		x.c('</table>');
-
+	
 		x.t('<script>
 		$(document).ready(function(){
 			$("table").DataTable();
