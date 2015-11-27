@@ -1,6 +1,13 @@
 create or replace package body list_b is
 
 	procedure user_objects is
+		cursor c is
+			select *
+				from user_objects a
+			 where a.object_name not like 'BIN$%'
+				 and a.object_type not like '%PARTITION'
+				 and rownum <= 3
+			 order by a.object_type, a.object_name;
 	begin
 		x.p('<style>', 'table{border:1px solid;}th,td{padding:8px;}');
 		src_b.header;
@@ -12,12 +19,7 @@ create or replace package body list_b is
 		x.p(' <caption>', 'table list format API example');
 		tb.cfg_cols_thead;
 		x.o(' <tbody>');
-		for i in (select *
-								from user_objects a
-							 where a.object_name not like 'BIN$%'
-								 and a.object_type not like '%PARTITION'
-								 and rownum <= 3
-							 order by a.object_type, a.object_name) loop
+		for i in c loop
 			x.p('<tr>', m.w('<td>', st(i.object_name, i.object_type), '</td>'));
 		end loop;
 		x.c(' </tbody>');

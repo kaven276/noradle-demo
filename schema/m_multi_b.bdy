@@ -19,16 +19,18 @@ create or replace package body m_multi_b is
 
 	procedure wrap_array_in_loop is
 		v_total pls_integer := 0;
+		cursor c is
+			select a.object_name pack, count(a.procedure_name) pcnt
+				from user_procedures a
+			 where a.object_type = 'PACKAGE'
+				 and a.procedure_name is not null
+			 group by a.object_name;
 	begin
 		src_b.header;
 		x.o('<table rules=all,cellspacing=8>');
 		x.p(' <thead>', x.p('<tr>', m.w('<th>@</th>', 'package,number of procedures')));
 		x.o(' <tbody>');
-		for i in (select a.object_name pack, count(a.procedure_name) pcnt
-								from user_procedures a
-							 where a.object_type = 'PACKAGE'
-								 and a.procedure_name is not null
-							 group by a.object_name) loop
+		for i in c loop
 			x.p('<tr>', m.w('<td>', st(i.pack, i.pcnt), '</td>'));
 			v_total := v_total + i.pcnt;
 		end loop;
@@ -38,12 +40,14 @@ create or replace package body m_multi_b is
 	end;
 
 	procedure parse_render_st is
+		cursor c is
+			select rownum rid, a.object_name, a.object_type from user_objects a where rownum < = 3;
 	begin
 		src_b.header;
 		x.o('<table rules=all,cellspacing=8>');
 		x.p(' <caption>', 'm.parse once, m.render repeatly, high proformance');
 		m.p(' <tr><th>@</th><td>@</td><td>@</td></tr>', tmp.stv);
-		for i in (select rownum rid, a.object_name, a.object_type from user_objects a where rownum < = 3) loop
+		for i in c loop
 			m.r(tmp.stv, st(to_char(i.rid, '09'), i.object_type, i.object_name));
 		end loop;
 		x.c('</table>');
@@ -51,6 +55,8 @@ create or replace package body m_multi_b is
 
 	procedure parse_render_st_boolean is
 		svs varchar2(4000) := r.getc('sv', 'AUTH_B,BASIC_IO_B');
+		cursor c is
+			select a.object_id, a.object_name from user_objects a where rownum < 10;
 	begin
 		src_b.header;
 		x.p('<h1>', 'checkboxes / procedure edition');
@@ -58,7 +64,7 @@ create or replace package body m_multi_b is
 		x.p(' <legend>', 'checkbox groups');
 		x.o(' <div>');
 		m.p(' <label><input @ type="checkbox" name="single" value="@"/>@</label><br/>', tmp.stv);
-		for i in (select a.object_id, a.object_name from user_objects a where rownum < 10) loop
+		for i in c loop
 			m.r(tmp.stv, st(t.tf(t.inlist(svs, i.object_name), 'checked'), i.object_id, i.object_name));
 		end loop;
 		x.c(' </div>');

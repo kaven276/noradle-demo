@@ -114,7 +114,16 @@ create or replace package body tree_b is
 	end;
 
 	procedure parse_render_in_loop is
-		cur sys_refcursor;
+		cursor c is
+			select e.*,
+						 level as lvl,
+						 connect_by_isleaf as is_leaf,
+						 sys_connect_by_path(last_name, '/') as path,
+						 connect_by_root last_name as manager
+				from employees e
+			 start with e.manager_id = (select a.employee_id from employees a where a.manager_id is null)
+			connect by prior e.employee_id = e.manager_id
+			 order siblings by e.last_name asc;
 	begin
 		src_b.header;
 		tree_css2;
@@ -134,15 +143,7 @@ create or replace package body tree_b is
 		b.end_template(tmp.s);
 		tr.p(tmp.s, tmp.stv);
 		tr.o(true);
-		for i in (select e.*,
-										 level as lvl,
-										 connect_by_isleaf as is_leaf,
-										 sys_connect_by_path(last_name, '/') as path,
-										 connect_by_root last_name as manager
-								from employees e
-							 start with e.manager_id = (select a.employee_id from employees a where a.manager_id is null)
-							connect by prior e.employee_id = e.manager_id
-							 order siblings by e.last_name asc) loop
+		for i in c loop
 			tr.r(i.lvl, tmp.stv, st(i.phone_number, i.first_name, i.last_name));
 		end loop;
 		tr.c;
