@@ -5,6 +5,13 @@ create or replace package body src_b is
 		n varchar2(30) := upper(r.getc('p'));
 	begin
 		h.content_type('text/plain');
+		h.header('_convert', 'marked');
+		x.o('<head>');
+		x.l('<link>', '[bcdn]highlight.js/8.9.1/styles/railscasts.min.css');
+		x.c('</head>');
+		x.p('<h3>', 'PL/SQL UNIT: ' || n);
+		x.p('<h4>', x.a('<a>', 'show subprocedures', './src_b.proc_list?pack=' || n));
+		b.line('```plsql');
 		b.set_line_break('');
 		for i in (select a.text
 								from user_source a
@@ -13,6 +20,7 @@ create or replace package body src_b is
 							 order by a.line) loop
 			b.line(replace(i.text, chr(9), '  '));
 		end loop;
+		b.line('```');
 	end;
 
 	-- print package.procedure source
@@ -27,6 +35,12 @@ create or replace package body src_b is
 		-- v_proc := chr(9) || 'procedure ' || v_prog(2) || ' is' || chr(10);
 		v_proc := chr(9) || 'procedure ' || v_prog(2) || '%' || chr(10);
 		h.content_type('text/plain');
+		h.header('_convert', 'marked');
+		x.o('<head>');
+		x.l('<link>', '[bcdn]highlight.js/8.9.1/styles/railscasts.min.css');
+		x.c('</head>');
+		x.p('<p>', x.a('<a>', 'execute', r.prog));
+		b.line('```plsql');
 		b.set_line_break('');
 		for i in (select a.text
 								from user_source a
@@ -45,6 +59,7 @@ create or replace package body src_b is
 				end if;
 			end if;
 		end loop;
+		b.line('```');
 	end;
 
 	-- print links to all sub procedures
