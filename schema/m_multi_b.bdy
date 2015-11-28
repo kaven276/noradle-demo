@@ -63,7 +63,13 @@ create or replace package body m_multi_b is
 		x.o('<fieldset>');
 		x.p(' <legend>', 'checkbox groups');
 		x.o(' <div>');
-		m.p(' <label><input @ type="checkbox" name="single" value="@"/>@</label><br/>', tmp.stv);
+		b.begin_template;
+		x.o(' <label>');
+		x.s('  <input @ type=checkbox,name=single,value=@>');
+		x.t('  @');
+		x.c(' </label>');
+		x.t(' <br/>');
+		m.p(tmp.stv);
 		for i in c loop
 			m.r(tmp.stv, st(t.tf(t.inlist(svs, i.object_name), 'checked'), i.object_id, i.object_name));
 		end loop;
@@ -79,7 +85,12 @@ create or replace package body m_multi_b is
 			select a.object_name, a.object_type from user_objects a where rownum <= 3;
 		x.p('<p>', 'sys_refcursor to simple fill ul list');
 		x.o('<ul>');
-		m.prc('<li><b>@</b><small> - (@)</small></li>', cur);
+		b.begin_template;
+		x.o(' <li>');
+		x.p('  <b>', '@');
+		x.p('  <small>', ' - (@)');
+		x.c(' </li>');
+		m.prc(cur);
 		x.c('</ul>');
 	end;
 
