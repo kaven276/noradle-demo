@@ -3,27 +3,27 @@ create or replace package body purecss_b is
 	procedure d is
 		procedure tables is
 		begin
-			j.t('<table.pure-table.pure-table-horizontal>');
-			j.t('<thead>');
-			j.t(' <tr>');
-			j.t('  <th>', 'country_id');
-			j.t('  <th>', 'country_name');
-			j.t(' </tr>');
-			j.t('</thead>');
-			j.t('<tbody>');
+			o.t('<table.pure-table.pure-table-horizontal>');
+			o.t('<thead>');
+			o.t(' <tr>');
+			o.t('  <th>', 'country_id');
+			o.t('  <th>', 'country_name');
+			o.t(' </tr>');
+			o.t('</thead>');
+			o.t('<tbody>');
 			for i in (select * from countries a) loop
-				j.t('<tr>');
-				j.t(' <td>', i.country_id);
-				j.t(' <td>', i.country_name);
-				j.t('</tr>');
+				o.t('<tr>');
+				o.t(' <td>', i.country_id);
+				o.t(' <td>', i.country_name);
+				o.t('</tr>');
 			end loop;
-			j.t('</tbody>');
-			j.t('</table>');
+			o.t('</tbody>');
+			o.t('</table>');
 		end;
 	begin
 		src_b.header;
-		j.u('<link rel=stylesheet/>', '[pure.css]');
-		j.t('<h2>', j.u('<a target=_blank>', 'http://purecss.io/', 'purecss official site'));
+		o.u('<link rel=stylesheet/>', '[pure.css]');
+		o.t('<h2>', o.u('<a target=_blank>', 'http://purecss.io/', 'purecss official site'));
 		tables;
 	end;
 

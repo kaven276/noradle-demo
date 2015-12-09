@@ -3,16 +3,16 @@ create or replace package body index_b is
 	procedure frame is
 	begin
 		b.l('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">');
-		j.t('<html>');
-		j.t('<head>');
-		j.t(' <title>', 'PSP.WEB test/demo suite');
-		j.t('</head>');
-		j.t('<frameset cols=280,* frameborder=yes>');
-		j.p(1, 'border-right:1px solid gray;overflow-y:scroll;');
-		j.u(' <frame name=dir scrolling=true style=?>', '@b.dir');
-		j.u(' <frame name=page>', '@b.page');
-		j.t('</frameset>');
-		j.t('</html>');
+		o.t('<html>');
+		o.t('<head>');
+		o.t(' <title>', 'PSP.WEB test/demo suite');
+		o.t('</head>');
+		o.t('<frameset cols=280,* frameborder=yes>');
+		o.p(1, 'border-right:1px solid gray;overflow-y:scroll;');
+		o.u(' <frame name=dir scrolling=true style=?>', '@b.dir');
+		o.u(' <frame name=page>', '@b.page');
+		o.t('</frameset>');
+		o.t('</html>');
 	end;
 
 	procedure dir is

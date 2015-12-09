@@ -4,12 +4,12 @@ create or replace package body chart_b is
 		v_chart_type varchar2(30) := r.getc('chart_type', default_type);
 	begin
 		src_b.header;
-		j.u('<link rel=stylesheet/>', '[animate.css]');
-		j.u('<script>', '[chart.js]', '');
-		j.u('<script>', '[zepto.js]', '');
-		j.u('<script>', '[underscore.js]', '');
-		j.t('<canvas#cc width=600 height=400>', '');
-		j.t('<script>',
+		o.u('<link rel=stylesheet/>', '[animate.css]');
+		o.u('<script>', '[chart.js]', '');
+		o.u('<script>', '[zepto.js]', '');
+		o.u('<script>', '[underscore.js]', '');
+		o.t('<canvas#cc width=600 height=400>', '');
+		o.t('<script>',
 				t.ps('
 		var ctx = document.getElementById("cc").getContext("2d")
 		 , demoChart = new Chart(ctx)
@@ -32,11 +32,11 @@ create or replace package body chart_b is
 		end if;
 	
 		common_preface('Bar');
-		j.t('<div#links>');
-		j.u(' <a>', r.prog || '?chart_type=Line', 'Line');
-		j.u(' <a>', r.prog || '?chart_type=Bar', 'Bar');
-		j.u(' <a>', r.prog || '?chart_type=Radar', 'Rader');
-		j.t('</div>');
+		o.t('<div#links>');
+		o.u(' <a>', r.prog || '?chart_type=Line', 'Line');
+		o.u(' <a>', r.prog || '?chart_type=Bar', 'Bar');
+		o.u(' <a>', r.prog || '?chart_type=Radar', 'Rader');
+		o.t('</div>');
 		b.l('<script>
 		$.getJSON(location.pathname+"?data", function(data){
 			var salaries = data.$DATA.rows;
@@ -74,11 +74,11 @@ create or replace package body chart_b is
 		end if;
 	
 		common_preface('Pie');
-		j.t('<div#links>');
-		j.u(' <a>', r.prog || '?chart_type=Pie', 'Pie');
-		j.u(' <a>', r.prog || '?chart_type=PolarArea', 'PolarArea');
-		j.u(' <a>', r.prog || '?chart_type=Doughnut', 'Doughnut');
-		j.t('</div>');
+		o.t('<div#links>');
+		o.u(' <a>', r.prog || '?chart_type=Pie', 'Pie');
+		o.u(' <a>', r.prog || '?chart_type=PolarArea', 'PolarArea');
+		o.u(' <a>', r.prog || '?chart_type=Doughnut', 'Doughnut');
+		o.t('</div>');
 		b.l('<script>
 		$.getJSON(location.pathname+"?data", function(data){
 			var chartData = data.$DATA.rows.map(function(v,i){

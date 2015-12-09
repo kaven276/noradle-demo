@@ -2,21 +2,21 @@ create or replace package body semantic_ui_b is
 
 	procedure three_buttons is
 	begin
-		j.t('<div#buttons.ui.three.buttons>');
-		j.t(' <button.ui.button.active>', 'One');
-		j.t(' <button.ui.button>', 'Two');
-		j.t(' <button.ui.button>', 'Three');
-		j.t('</div>');
+		o.t('<div#buttons.ui.three.buttons>');
+		o.t(' <button.ui.button.active>', 'One');
+		o.t(' <button.ui.button>', 'Two');
+		o.t(' <button.ui.button>', 'Three');
+		o.t('</div>');
 	end;
 
 	procedure select_dropdown is
 	begin
-		j.t('<select.ui.fluid.dropdown multiple name=countries>');
+		o.t('<select.ui.fluid.dropdown multiple name=countries>');
 		for i in (select * from countries a) loop
-			j.v('<option>', i.country_id, i.country_name);
+			o.v('<option>', i.country_id, i.country_name);
 		end loop;
-		j.t('</select>');
-		j.t('<script>', '$("select.dropdown").dropdown("set selected", ["BR", "AR"]);');
+		o.t('</select>');
+		o.t('<script>', '$("select.dropdown").dropdown("set selected", ["BR", "AR"]);');
 	end;
 
 	procedure animate is
@@ -33,50 +33,50 @@ create or replace package body semantic_ui_b is
 
 	procedure divider is
 	begin
-		j.t('<div.ui.three.column.middle.aligned.very.relaxed.grid>');
-		j.t(' <div.column>', 'bootstrap');
-		j.t(' <div.ui.vertical.divider>', 'OR');
-		j.t(' <div.column>', 'semantic UI');
-		j.t(' <div.ui.vertical.divider>', 'OR');
-		j.t(' <div.column>', 'pure css');
-		j.t('</div>');
+		o.t('<div.ui.three.column.middle.aligned.very.relaxed.grid>');
+		o.t(' <div.column>', 'bootstrap');
+		o.t(' <div.ui.vertical.divider>', 'OR');
+		o.t(' <div.column>', 'semantic UI');
+		o.t(' <div.ui.vertical.divider>', 'OR');
+		o.t(' <div.column>', 'pure css');
+		o.t('</div>');
 	end;
 
 	procedure dropdown_menu is
 	begin
-		j.t('<div#file_menu.ui.dropdown>');
-		j.t(' <div.text>', 'File');
-		j.t(' <i.dropdown.icon>', '');
-		j.t(' <div.menu>');
-		j.t('  <div.item>', 'New');
-		j.t('  <div.item>', j.t('<span.description>', 'ctrl-o') || 'Open...');
-		j.t('  <div.item>', j.t('<span.description>', 'ctrl-s') || 'Save...');
-		j.t('  <div.item>', j.t('<span.description>', 'ctrl-r') || 'Rename...');
-		j.t('  <div.item>', 'Make a copy');
-		j.t('  <div.item>', j.t('<i.folder.icon>', '') || 'Move to folder');
-		j.t('  <div.item>', j.t('<i.trash.icon>', '') || 'Move to trash');
-		j.t('  <div.divider>', '');
-		j.t('  <div.item>');
-		j.t('   <i.dropdown.icon>', '');
+		o.t('<div#file_menu.ui.dropdown>');
+		o.t(' <div.text>', 'File');
+		o.t(' <i.dropdown.icon>', '');
+		o.t(' <div.menu>');
+		o.t('  <div.item>', 'New');
+		o.t('  <div.item>', o.t('<span.description>', 'ctrl-o') || 'Open...');
+		o.t('  <div.item>', o.t('<span.description>', 'ctrl-s') || 'Save...');
+		o.t('  <div.item>', o.t('<span.description>', 'ctrl-r') || 'Rename...');
+		o.t('  <div.item>', 'Make a copy');
+		o.t('  <div.item>', o.t('<i.folder.icon>', '') || 'Move to folder');
+		o.t('  <div.item>', o.t('<i.trash.icon>', '') || 'Move to trash');
+		o.t('  <div.divider>', '');
+		o.t('  <div.item>');
+		o.t('   <i.dropdown.icon>', '');
 		b.l('   publish to web');
-		j.t('   <div.menu>');
-		j.t('    <div.item>', 'Google Docs');
-		j.t('    <div.item>', 'Google Drive');
-		j.t('    <div.item>', 'Dropbox');
-		j.t('   </div>');
-		j.t('  </div>');
-		j.t(' </div>');
-		j.t('</div>');
-		j.t('<script>', '$("#file_menu").dropdown()');
+		o.t('   <div.menu>');
+		o.t('    <div.item>', 'Google Docs');
+		o.t('    <div.item>', 'Google Drive');
+		o.t('    <div.item>', 'Dropbox');
+		o.t('   </div>');
+		o.t('  </div>');
+		o.t(' </div>');
+		o.t('</div>');
+		o.t('<script>', '$("#file_menu").dropdown()');
 	end;
 
 	procedure d is
 	begin
 		src_b.header;
-		j.u('<link rel=stylesheet/>', '[semantic.css]');
-		j.u('<script>', '[jquery.js]', '');
-		j.u('<script>', '[semantic.js]', '');
-		j.t('<h2>', j.u('<a target=_blank>', 'http://semantic-ui.com/', 'semantic-ui official site'));
+		o.u('<link rel=stylesheet/>', '[semantic.css]');
+		o.u('<script>', '[jquery.js]', '');
+		o.u('<script>', '[semantic.js]', '');
+		o.t('<h2>', o.u('<a target=_blank>', 'http://semantic-ui.com/', 'semantic-ui official site'));
 		three_buttons;
 		animate;
 		select_dropdown;

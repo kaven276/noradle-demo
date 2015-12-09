@@ -14,28 +14,28 @@ create or replace package body tables_h is
 			return;
 		end if;
 		src_b.header;
-		j.u('<link rel=stylesheet/>', '[bootstrap.css]');
-		j.u('<script>', '[jquery.js]', '');
-		j.u('<script>', '[bootstrap.js]', '');
-		j.u('<link rel=stylesheet/>', '[bootstrap-editable.css]');
-		j.u('<script>', '[bootstrap-editable.js]', '');
-		j.t('<script>', t.fill('$.fn.editable.defaults.mode = "@";', r.getc('mode', 'inline')));
-		j.t('<style>',
+		o.u('<link rel=stylesheet/>', '[bootstrap.css]');
+		o.u('<script>', '[jquery.js]', '');
+		o.u('<script>', '[bootstrap.js]', '');
+		o.u('<link rel=stylesheet/>', '[bootstrap-editable.css]');
+		o.u('<script>', '[bootstrap-editable.js]', '');
+		o.t('<script>', t.fill('$.fn.editable.defaults.mode = "@";', r.getc('mode', 'inline')));
+		o.t('<style>',
 				'.name{width:10em;}
 				 .pass{width:10em;}
 		     table{table-layout:fixed}
 				 td{padding:3px;}');
-		j.t('<div.container-fluid>');
-		j.t('<h3.page-header>', j.u('<a target=_blank>', 'http://vitalets.github.io/x-editable/', 'x-editable'));
-		j.t('<table.table.table-bordered>');
+		o.t('<div.container-fluid>');
+		o.t('<h3.page-header>', o.u('<a target=_blank>', 'http://vitalets.github.io/x-editable/', 'x-editable'));
+		o.t('<table.table.table-bordered>');
 		for i in (select a.*, rowid rid from user_t a) loop
-			j.p(1, i.rid);
-			j.t('<tr>');
-			j.t(' <td.name -name=name -pk=?>', i.name);
-			j.t(' <td.pass -name=pass -pk=?>', i.pass);
-			j.t('</tr>');
+			o.p(1, i.rid);
+			o.t('<tr>');
+			o.t(' <td.name -name=name -pk=?>', i.name);
+			o.t(' <td.pass -name=pass -pk=?>', i.pass);
+			o.t('</tr>');
 		end loop;
-		j.t('</table>');
+		o.t('</table>');
 	
 		b.l('<script>
 		$(document).ready(function(){
@@ -63,11 +63,11 @@ create or replace package body tables_h is
 			return;
 		end if;
 		src_b.header;
-		j.u('<script>', '[jquery.js]', '');
-		j.u('<link rel=stylesheet/>', '[jquery.handsontable.full.css]');
-		j.u('<script>', '[jquery.handsontable.full.js]', '');
-		j.t('<h3.page-header>', j.u('<a target=_blank>', 'http://handsontable.com/', 'handsontable'));
-		j.t('<div#example>', '');
+		o.u('<script>', '[jquery.js]', '');
+		o.u('<link rel=stylesheet/>', '[jquery.handsontable.full.css]');
+		o.u('<script>', '[jquery.handsontable.full.js]', '');
+		o.t('<h3.page-header>', o.u('<a target=_blank>', 'http://handsontable.com/', 'handsontable'));
+		o.t('<div#example>', '');
 		b.l('<script>
 		$.get(location.href, function(obj){
 			var head = obj.$DATA.attrs.map(function(v){return v.name;});
@@ -89,28 +89,28 @@ create or replace package body tables_h is
 	procedure datatables is
 	begin
 		src_b.header;
-		j.u('<link rel=stylesheet/>', '[bootstrap.css]');
-		j.u('<script>', '[jquery.js]', '');
-		j.u('<link rel=stylesheet/>', '[dataTables.bootstrap.css]');
-		j.u('<script>', '[jquery.dataTables.js]', '');
-		j.u('<script>', '[dataTables.bootstrap.js]', '');
-		j.t('<h3.page-header>', j.u('<a target=_blank>', 'datatables', 'http://datatables.net/'));
-		j.t('<div.container-fluid>');
+		o.u('<link rel=stylesheet/>', '[bootstrap.css]');
+		o.u('<script>', '[jquery.js]', '');
+		o.u('<link rel=stylesheet/>', '[dataTables.bootstrap.css]');
+		o.u('<script>', '[jquery.dataTables.js]', '');
+		o.u('<script>', '[dataTables.bootstrap.js]', '');
+		o.t('<h3.page-header>', o.u('<a target=_blank>', 'datatables', 'http://datatables.net/'));
+		o.t('<div.container-fluid>');
 	
-		j.t('<table.table.table-bordered style=table-layout:fixed>');
-		j.t('<colgroup>', m.w('<col width="@0">', '20,15,20,10'));
-		j.t('<thead>', j.t('<tr>', m.w('<td>@</td>', 'name,email,phone,salary')));
-		j.t('<tbody>');
+		o.t('<table.table.table-bordered style=table-layout:fixed>');
+		o.t('<colgroup>', m.w('<col width="@0">', '20,15,20,10'));
+		o.t('<thead>', o.t('<tr>', m.w('<td>@</td>', 'name,email,phone,salary')));
+		o.t('<tbody>');
 		for i in (select a.*, rowid rid from employees a) loop
-			j.t('<tr>');
-			j.t(' <td>', i.first_name || ' ' || i.last_name);
-			j.t(' <td>', i.email);
-			j.t(' <td>', i.phone_number);
-			j.t(' <td>', i.salary);
-			j.t('</tr>');
+			o.t('<tr>');
+			o.t(' <td>', i.first_name || ' ' || i.last_name);
+			o.t(' <td>', i.email);
+			o.t(' <td>', i.phone_number);
+			o.t(' <td>', i.salary);
+			o.t('</tr>');
 		end loop;
-		j.t('</tbody>');
-		j.t('</table>');
+		o.t('</tbody>');
+		o.t('</table>');
 	
 		b.l('<script>
 		$(document).ready(function(){
