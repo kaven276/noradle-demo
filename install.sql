@@ -14,7 +14,7 @@ prompt Noradle demo's units(tables,plsql,...) in oracle will be installed to the
 prompt You can try the sql scripts below to achieve the preparation required above.
 prompt drop user demo cascade;;
 prompt create user demo identified by demo default tablespace sysaux temporary tablespace temp;;
-prompt alter user psp quota unlimited on sysaux;;
+prompt alter user demo quota unlimited on sysaux;;
 pause if not, create empty DEMO db users beforehand, and then press enter to continue
 accept demodbu char default 'demo' prompt 'Enter the schema/User(must already exist) for noradle demo (demo) : '
 
