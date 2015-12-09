@@ -2,16 +2,16 @@ create or replace package body index_b is
 
 	procedure frame is
 	begin
-		x.t('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">');
-		x.o('<html>');
-		x.o('<head>');
-		x.p(' <title>', 'PSP.WEB test/demo suite');
-		x.c('</head>');
-		x.o('<frameset cols=:1,frameborder=yes>', st('280,*'));
-		x.j(' <frame name=dir,scrolling=true,style=border-right:1px solid gray;overflow-y:scroll;>', '@b.dir');
-		x.j(' <frame name=page>', '@b.page');
-		x.c('</frameset>');
-		x.c('</html>');
+		b.l('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">');
+		j.t('<html>');
+		j.t('<head>');
+		j.t(' <title>', 'PSP.WEB test/demo suite');
+		j.t('</head>');
+		j.t('<frameset cols=280,* frameborder=yes>');
+		j.u(' <frame name=dir scrolling=true style="border-right:1px solid gray;overflow-y:scroll;">', '@b.dir');
+		j.u(' <frame name=page>', '@b.page');
+		j.t('</frameset>');
+		j.t('</html>');
 	end;
 
 	procedure dir is
