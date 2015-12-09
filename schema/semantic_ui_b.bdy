@@ -76,7 +76,7 @@ create or replace package body semantic_ui_b is
 		j.u('<link rel=stylesheet/>', '[semantic.css]');
 		j.u('<script>', '[jquery.js]', '');
 		j.u('<script>', '[semantic.js]', '');
-		j.u('<a target=_blank>', 'http://semantic-ui.com/', 'semantic-ui official site');
+		j.t('<h2>', j.u('<a target=_blank>', 'http://semantic-ui.com/', 'semantic-ui official site'));
 		three_buttons;
 		animate;
 		select_dropdown;
