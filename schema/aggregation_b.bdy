@@ -2,7 +2,7 @@ create or replace package body aggregation_b is
 
 	procedure common_css is
 	begin
-		x.t('<style>
+		b.l('<style>
 		.center {text-align: center;}
 		.border {border: 3px solid gray;}  
 		.darkbg {background-color: silver;}	
@@ -15,15 +15,15 @@ create or replace package body aggregation_b is
 	procedure common_preface is
 	begin
 		src_b.header;
-		x.l('<link>', '[bootstrap.css]');
-		x.l(' <link>', '[animate.css]');
+		j.u('<link rel=stylesheet/>', '[bootstrap.css]');
+		j.u('<link rel=stylesheet/>', '[animate.css]');
 		common_css;
-		x.o('<div.container.animated.zoomInDown>');
+		j.t('<div.container.animated.zoomInDown>');
 	end;
 
 	function badge(cnt pls_integer) return varchar2 is
 	begin
-		return x.r('&nbsp;<span class="badge">@</span>', cnt);
+		return '&nbsp;' || j.t('<span.badge>', cnt);
 	end;
 
 	procedure emp_managers is
@@ -40,20 +40,22 @@ create or replace package body aggregation_b is
 	begin
 		--p.h('u:hierachical.css,u:pw/pw.js,u:pw/treeble.js,u:.js');
 		common_preface;
-		x.o('<table#report.table.table-bordered.table-hover rules=all>');
-		x.p(' <caption.center>', 'staff hierachy with level');
+		j.t('<table#report.table.table-bordered.table-hover rules=all>');
+		j.t(' <caption.center>', 'staff hierachy with level');
 		tmp.s := 'name,staff_num,grade,manager,leaf,path';
-		x.p(' <thead.border.darkbg>', x.p('<tr>', m.w('<th>@</th>', tmp.s)));
-		x.o(' <tbody.border>');
+		j.t(' <thead.border.darkbg>', j.t('<tr>', m.w('<th>@</th>', tmp.s)));
+		j.t(' <tbody.border>');
 		for i in c loop
-			x.o('<tr>');
-			x.p(' <th>', rpad(' ', (i.lvl - 1) * 6 * 4 + 1, '&nbsp;') || i.first_name || ' ' || i.last_name);
-			x.p(' <td>', i.employee_id);
-			x.p(' <td>', i.lvl);
-			x.p(' <td>', x.p('<span.:1>', '', st(t.tf(i.is_leaf != 1, 'flag glyphicon glyphicon-ok'))));
-			x.p(' <td>', x.p('<span.:1>', '', st(t.tf(i.is_leaf = 1, 'flag glyphicon glyphicon-ok'))));
-			x.p(' <td>', i.path);
-			x.c('</tr>');
+			j.p(1, i.is_leaf != 1);
+			j.p(2, i.is_leaf = 1);
+			j.t('<tr>');
+			j.t(' <th>', rpad(' ', (i.lvl - 1) * 6 * 4 + 1, '&nbsp;') || i.first_name || ' ' || i.last_name);
+			j.t(' <td>', i.employee_id);
+			j.t(' <td>', i.lvl);
+			j.t(' <td>', j.t('<span.flag.glyphicon.glyphicon-ok?>', ''));
+			j.t(' <td>', j.t('<span.flag.glyphicon.glyphicon-ok?>2', ''));
+			j.t(' <td>', i.path);
+			j.t('</tr>');
 		end loop;
 	end;
 
@@ -72,28 +74,29 @@ create or replace package body aggregation_b is
 			 order by 2 nulls last, 1 desc, 5 desc;
 	begin
 		common_preface;
-		x.o('<table#report.table.table-bordered.table-hover rules=all>');
-		x.p(' <caption.center>', 'group by with one-level rollup example');
+		j.t('<table#report.table.table-bordered.table-hover rules=all>');
+		j.t(' <caption.center>', 'group by with one-level rollup example');
 		tmp.s := 'dept,emp,name,salary';
-		x.p(' <thead.border.darkbg>', x.p('<tr>', m.w('<th>@</th>', tmp.s)));
-		x.o(' <tbody.border>');
+		j.t(' <thead.border.darkbg>', j.t('<tr>', m.w('<th>@</th>', tmp.s)));
+		j.t(' <tbody.border>');
 		for i in c loop
 			case i.gid
 				when 1 then
-					x.o('<tr>');
-					x.p(' <th rowspan=:1>', i.department_name, st(i.cnt + 1));
+					j.p(1, i.cnt + 1);
+					j.t('<tr>');
+					j.t(' <th rowspan=?>', i.department_name);
 					m.w(' <td>', st(badge(i.cnt), trunc(i.avg) || ' * ' || i.cnt, i.sal), '</td>');
-					x.c('</tr>');
+					j.t('</tr>');
 				when 0 then
-					x.p('<tr>', m.w('<td>', st(i.employee_id, i.fname, i.sal), '</td>'));
+					j.t('<tr>', m.w('<td>', st(i.employee_id, i.fname, i.sal), '</td>'));
 				when 3 then
-					x.c('</tbody>');
-					x.o('<tfoot.border.darkbg>');
-					x.o(' <tr>');
-					x.p('  <th>', 'ALL DEPT');
+					j.t('</tbody>');
+					j.t('<tfoot.border.darkbg>');
+					j.t(' <tr>');
+					j.t('  <th>', 'ALL DEPT');
 					m.w('  <td>', st(badge(i.cnt), trunc(i.avg) || ' * ' || i.cnt, i.sal), '</td>');
-					x.c(' </tr>');
-					x.c('</tfoot>');
+					j.t(' </tr>');
+					j.t('</tfoot>');
 			end case;
 		end loop;
 	end;
@@ -127,32 +130,33 @@ create or replace package body aggregation_b is
 			 order by 1, 2 nulls first, 3 nulls first, 4 nulls first, 5 nulls first, 6;
 	begin
 		common_preface;
-		x.o('<table#report.table.table-bordered.table-hover rules=all>');
-		x.p(' <caption.center>', 'group by with multi-level rollup example');
+		j.t('<table#report.table.table-bordered.table-hover rules=all>');
+		j.t(' <caption.center>', 'group by with multi-level rollup example');
 		tmp.s := 'region,country,city,dept,emp';
-		x.p(' <thead.border.darkbg>', x.p('<tr>', m.w('<th>@</th>', tmp.s)));
-		x.o(' <tbody.border>');
+		j.t(' <thead.border.darkbg>', j.t('<tr>', m.w('<th>@</th>', tmp.s)));
+		j.t(' <tbody.border>');
 		for i in c loop
 			-- when order cann't change
 			if not v_in_tr and i.r = 0 then
-				x.o('<tr>');
+				j.t('<tr>');
 				v_in_tr := true;
 			end if;
+			j.p(1, i.cnt);
 			if i.r = 1 then
 				-- last row
-				x.c('</tbody>');
-				x.p('<tfoot.border.darkbg>', x.p('<tr>', x.p('<th.center colspan=5>', 'total' || badge(i.cnt))));
+				j.t('</tbody>');
+				j.t('<tfoot.border.darkbg>', j.t('<tr>', j.t('<th.center colspan=5>', 'total' || badge(i.cnt))));
 			elsif i.c = 1 then
-				x.p('<th.middle rowspan=:1>', i.region_name || badge(i.cnt), st(i.cnt));
+				j.t('<th.middle rowspan=?>', i.region_name || badge(i.cnt));
 			elsif i.l = 1 then
-				x.p('<th.middle rowspan=:1>', i.country_name || badge(i.cnt), st(i.cnt));
+				j.t('<th.middle rowspan=?>', i.country_name || badge(i.cnt));
 			elsif i.d = 1 then
-				x.p('<th.middle rowspan=:1>', i.city || badge(i.cnt), st(i.cnt));
+				j.t('<th.middle rowspan=?>', i.city || badge(i.cnt));
 			elsif i.e = 1 then
-				x.p('<th.middle rowspan=:1>', i.department_name || badge(i.cnt), st(i.cnt));
+				j.t('<th.middle rowspan=?>', i.department_name || badge(i.cnt));
 			else
-				x.p('<td>', i.fname);
-				x.c('</tr>');
+				j.t('<td>', i.fname);
+				j.t('</tr>');
 				v_in_tr := false;
 			end if;
 		end loop;
@@ -179,44 +183,46 @@ create or replace package body aggregation_b is
 			 order by department_id asc nulls first, job_id asc nulls last;
 	begin
 		common_preface;
-		x.o('<table#report.table.table-bordered.table-hover rules=all>');
-		x.p(' <caption.indent>', 'cross table for h:job,v:dept, group by cube demo');
-		x.o(' <thead.border.darkbg>');
-		x.o('  <tr>');
-		x.p('   <th colspan=3,rowspan=2>', 'departments\jobs');
+		j.t('<table#report.table.table-bordered.table-hover rules=all>');
+		j.t(' <caption.indent>', 'cross table for h:job,v:dept, group by cube demo');
+		j.t(' <thead.border.darkbg>');
+		j.t('  <tr>');
+		j.t('   <th colspan=3,rowspan=2>', 'departments\jobs');
 		for i in (select j.job_id, j.job_title from jobs j order by j.job_id) loop
-			x.p(' <th title=:1>', i.job_id, st(i.job_title));
+			j.p(1, i.job_title);
+			j.t(' <th title=?>', i.job_id);
 		end loop;
 		for i in (select d.* from departments d order by d.department_id asc) loop
 			v_dept_names(i.department_id) := i.department_name;
 		end loop;
-		x.c('  </tr>');
-		x.o('  <tr>');
+		j.t('  </tr>');
+		j.t('  <tr>');
 		for i in c loop
 			if i.department_id = 0 then
-				x.p('<th>', i.sal);
+				j.t('<th>', i.sal);
 			else
 				if v_header then
-					x.c('</tr>');
-					x.c('</thead>');
-					x.o('<tbody.border>');
+					j.t('</tr>');
+					j.t('</thead>');
+					j.t('<tbody.border>');
 				end if;
 				if i.job_id = '0' then
 					if v_header then
 						v_header := false;
 					else
-						x.c('</tr>');
+						j.t('</tr>');
 					end if;
-					x.o('<tr>');
-					x.p(' <th title=:1>', i.department_id, st(v_dept_names(i.department_id)));
-					x.p(' <th>', v_dept_names(i.department_id));
-					x.p(' <th>', i.sal);
+					j.p(1, v_dept_names(i.department_id));
+					j.t('<tr>');
+					j.t(' <th title=?>', i.department_id);
+					j.t(' <th>', v_dept_names(i.department_id));
+					j.t(' <th>', i.sal);
 				else
-					x.p('<td>', i.sal);
+					j.t('<td>', i.sal);
 				end if;
 			end if;
 		end loop;
-		x.c('</tr>');
+		j.t('</tr>');
 	end;
 
 	procedure dept_job_sals is
@@ -240,44 +246,46 @@ create or replace package body aggregation_b is
 			 order by job_id asc nulls last, department_id asc nulls last;
 	begin
 		common_preface;
-		x.o('<table#report.table.table-bordered.table-hover rules=all>');
-		x.p(' <caption.indent>', 'cross table for h:dept,v:job, group by cube demo');
-		x.o(' <thead.border.darkbg>');
-		x.o('  <tr>');
-		x.p('   <th colspan=3,rowspan=2>', 'jobs/departments');
+		j.t('<table#report.table.table-bordered.table-hover rules=all>');
+		j.t(' <caption.indent>', 'cross table for h:dept,v:job, group by cube demo');
+		j.t(' <thead.border.darkbg>');
+		j.t('  <tr>');
+		j.t('   <th colspan=3,rowspan=2>', 'jobs/departments');
 		for i in (select d.* from departments d order by d.department_id asc) loop
-			x.p(' <th title=:1>', i.department_id, st(i.department_name));
+			j.p(1, i.department_name);
+			j.t(' <th title=?>', i.department_id);
 		end loop;
 		for i in (select j.* from jobs j order by j.job_id asc) loop
 			v_job_names(i.job_id) := i.job_title;
 		end loop;
-		x.c('  </tr>');
-		x.o('  <tr>');
+		j.t('  </tr>');
+		j.t('  <tr>');
 		for i in c loop
 			if i.job_id = '0' then
-				x.p('<th>', i.sal);
+				j.t('<th>', i.sal);
 			else
 				if v_header then
-					x.c('</tr>');
-					x.c('</thead>');
-					x.o('<tbody.border>');
+					j.t('</tr>');
+					j.t('</thead>');
+					j.t('<tbody.border>');
 				end if;
 				if i.department_id = 0 then
 					if v_header then
 						v_header := false;
 					else
-						x.c('</tr>');
+						j.t('</tr>');
 					end if;
-					x.o('<tr>');
-					x.p(' <th title=:1>', i.job_id, st(v_job_names(i.job_id)));
-					x.p(' <th>', v_job_names(i.job_id));
-					x.p(' <th>', i.sal);
+					j.p(1, v_job_names(i.job_id));
+					j.t('<tr>');
+					j.t(' <th title=?>', i.job_id);
+					j.t(' <th>', v_job_names(i.job_id));
+					j.t(' <th>', i.sal);
 				else
-					x.p(' <td>', i.sal);
+					j.t(' <td>', i.sal);
 				end if;
 			end if;
 		end loop;
-		x.c('</tr>');
+		j.t('</tr>');
 	end;
 
 end aggregation_b;

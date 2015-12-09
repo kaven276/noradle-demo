@@ -14,25 +14,30 @@ create or replace package body tables_h is
 			return;
 		end if;
 		src_b.header;
-		x.l('<link>', '[bootstrap.css]');
-		x.j('<script>', '[jquery.js]');
-		x.j('<script>', '[bootstrap.js]');
-		x.l('<link>', '[bootstrap-editable.css]');
-		x.j('<script>', '[bootstrap-editable.js]');
-		x.p('<script>', x.r('$.fn.editable.defaults.mode = "@";', r.getc('mode', 'inline')));
-		x.p('<style>', '.name{width:10em;}.pass{width:10em;}table{table-layout:fixed}td{padding:3px;}');
-		x.o('<div.container-fluid>');
-		x.p('<h3.page-header>', x.a('<a target=_blank>', 'x-editable', 'http://vitalets.github.io/x-editable/'));
-		x.o('<table.table.table-bordered>');
+		j.u('<link rel=stylesheet/>', '[bootstrap.css]');
+		j.u('<script>', '[jquery.js]', '');
+		j.u('<script>', '[bootstrap.js]', '');
+		j.u('<link rel=stylesheet/>', '[bootstrap-editable.css]');
+		j.u('<script>', '[bootstrap-editable.js]', '');
+		j.t('<script>', t.fill('$.fn.editable.defaults.mode = "@";', r.getc('mode', 'inline')));
+		j.t('<style>',
+				'.name{width:10em;}
+				 .pass{width:10em;}
+		     table{table-layout:fixed}
+				 td{padding:3px;}');
+		j.t('<div.container-fluid>');
+		j.t('<h3.page-header>', j.u('<a target=_blank>', 'http://vitalets.github.io/x-editable/', 'x-editable'));
+		j.t('<table.table.table-bordered>');
 		for i in (select a.*, rowid rid from user_t a) loop
-			x.o('<tr>');
-			x.p(' <td.name ^name=name,^pk=:1>', i.name, st(i.rid));
-			x.p(' <td.pass ^name=pass,^pk=:1>', i.pass, st(i.rid));
-			x.c('</tr>');
+			j.p(1, i.rid);
+			j.t('<tr>');
+			j.t(' <td.name -name=name -pk=?>', i.name);
+			j.t(' <td.pass -name=pass -pk=?>', i.pass);
+			j.t('</tr>');
 		end loop;
-		x.c('</table>');
+		j.t('</table>');
 	
-		x.t('<script>
+		b.l('<script>
 		$(document).ready(function(){
 			$(".name").editable({
 			  type : "text",
@@ -53,17 +58,17 @@ create or replace package body tables_h is
 	begin
 		if r.is_xhr then
 			open cur for
-				select rowid rid, a.* from user_t a;
+				select rowid rid, a.* from countries a;
 			rs.print(cur);
 			return;
 		end if;
 		src_b.header;
-		x.j('<script>', '[jquery.js]');
-		x.l('<link>', '[jquery.handsontable.full.css]');
-		x.j('<script>', '[jquery.handsontable.full.js]');
-		x.p('<h3.page-header>', x.a('<a target=_blank>', 'handsontable', 'http://handsontable.com/'));
-		x.p('<div#example>', '');
-		x.t('<script>
+		j.u('<script>', '[jquery.js]', '');
+		j.u('<link rel=stylesheet/>', '[jquery.handsontable.full.css]');
+		j.u('<script>', '[jquery.handsontable.full.js]', '');
+		j.t('<h3.page-header>', j.u('<a target=_blank>', 'http://handsontable.com/', 'handsontable'));
+		j.t('<div#example>', '');
+		b.l('<script>
 		$.get(location.href, function(obj){
 			var head = obj.$DATA.attrs.map(function(v){return v.name;});
 			var data = obj.$DATA.rows.map(function(v){
@@ -84,30 +89,30 @@ create or replace package body tables_h is
 	procedure datatables is
 	begin
 		src_b.header;
-		x.l('<link>', '[bootstrap.css]');
-		x.j('<script>', '[jquery.js]');
-		x.l('<link>', '[dataTables.bootstrap.css]');
-		x.j('<script>', '[jquery.dataTables.js]');
-		x.j('<script>', '[dataTables.bootstrap.js]');
-		x.p('<h3.page-header>', x.a('<a target=_blank>', 'datatables', 'http://datatables.net/'));
-		x.o('<div.container-fluid>');
+		j.u('<link rel=stylesheet/>', '[bootstrap.css]');
+		j.u('<script>', '[jquery.js]', '');
+		j.u('<link rel=stylesheet/>', '[dataTables.bootstrap.css]');
+		j.u('<script>', '[jquery.dataTables.js]', '');
+		j.u('<script>', '[dataTables.bootstrap.js]', '');
+		j.t('<h3.page-header>', j.u('<a target=_blank>', 'datatables', 'http://datatables.net/'));
+		j.t('<div.container-fluid>');
 	
-		x.o('<table.table.table-bordered style=table-layout:fixed>');
-		x.p('<colgroup>', m.w('<col width="@0">', '20,15,20,10'));
-		x.p('<thead>', x.p('<tr>', m.w('<td>@</td>', 'name,email,phone,salary')));
-		x.o('<tbody>');
+		j.t('<table.table.table-bordered style=table-layout:fixed>');
+		j.t('<colgroup>', m.w('<col width="@0">', '20,15,20,10'));
+		j.t('<thead>', j.t('<tr>', m.w('<td>@</td>', 'name,email,phone,salary')));
+		j.t('<tbody>');
 		for i in (select a.*, rowid rid from employees a) loop
-			x.o('<tr>');
-			x.p(' <td>', i.first_name || ' ' || i.last_name);
-			x.p(' <td>', i.email);
-			x.p(' <td>', i.phone_number);
-			x.p(' <td>', i.salary);
-			x.c('</tr>');
+			j.t('<tr>');
+			j.t(' <td>', i.first_name || ' ' || i.last_name);
+			j.t(' <td>', i.email);
+			j.t(' <td>', i.phone_number);
+			j.t(' <td>', i.salary);
+			j.t('</tr>');
 		end loop;
-		x.c('</tbody>');
-		x.c('</table>');
+		j.t('</tbody>');
+		j.t('</table>');
 	
-		x.t('<script>
+		b.l('<script>
 		$(document).ready(function(){
 			$("table").DataTable();
 		});

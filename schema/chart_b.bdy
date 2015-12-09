@@ -4,17 +4,18 @@ create or replace package body chart_b is
 		v_chart_type varchar2(30) := r.getc('chart_type', default_type);
 	begin
 		src_b.header;
-		x.l('<link>', '[animate.css]');
-		x.j('<script>', '[chart.js]');
-		x.j('<script>', '[zepto.js]');
-		x.j('<script>', '[underscore.js]');
-		x.p('<canvas#cc width=600,height=400>', '');
-		x.t('<script>
+		j.u('<link rel=stylesheet/>', '[animate.css]');
+		j.u('<script>', '[chart.js]', '');
+		j.u('<script>', '[zepto.js]', '');
+		j.u('<script>', '[underscore.js]', '');
+		j.t('<canvas#cc width=600 height=400>', '');
+		j.t('<script>',
+				t.ps('
 		var ctx = document.getElementById("cc").getContext("2d")
 		 , demoChart = new Chart(ctx)
 		 , chartType=":1"
-		 ;   </script>',
-				st(v_chart_type));
+		 ;',
+						 st(v_chart_type)));
 	end;
 
 	procedure salary_min_max_by_job_id is
@@ -31,12 +32,12 @@ create or replace package body chart_b is
 		end if;
 	
 		common_preface('Bar');
-		x.o('<div#links>');
-		x.a(' <a>', 'Line', r.prog || '?chart_type=Line');
-		x.a(' <a>', 'Bar', r.prog || '?chart_type=Bar');
-		x.a(' <a>', 'Rader', r.prog || '?chart_type=Radar');
-		x.c('</div>');
-		x.t('<script>
+		j.t('<div#links>');
+		j.u(' <a>', r.prog || '?chart_type=Line', 'Line');
+		j.u(' <a>', r.prog || '?chart_type=Bar', 'Bar');
+		j.u(' <a>', r.prog || '?chart_type=Radar', 'Rader');
+		j.t('</div>');
+		b.l('<script>
 		$.getJSON(location.pathname+"?data", function(data){
 			var salaries = data.$DATA.rows;
 			var chartData = {
@@ -73,12 +74,12 @@ create or replace package body chart_b is
 		end if;
 	
 		common_preface('Pie');
-		x.o('<div#links>');
-		x.a(' <a>', 'Pie', r.prog || '?chart_type=Pie');
-		x.a(' <a>', 'PolarArea', r.prog || '?chart_type=PolarArea');
-		x.a(' <a>', 'Doughnut', r.prog || '?chart_type=Doughnut');
-		x.c('</div>');
-		x.t('<script>
+		j.t('<div#links>');
+		j.u(' <a>', r.prog || '?chart_type=Pie', 'Pie');
+		j.u(' <a>', r.prog || '?chart_type=PolarArea', 'PolarArea');
+		j.u(' <a>', r.prog || '?chart_type=Doughnut', 'Doughnut');
+		j.t('</div>');
+		b.l('<script>
 		$.getJSON(location.pathname+"?data", function(data){
 			var chartData = data.$DATA.rows.map(function(v,i){
 			  return {
