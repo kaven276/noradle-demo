@@ -21,6 +21,8 @@
   padding: 3px 10px 3px;
   border: 1px solid silver;
   border-radius: 6px;
+  background-color: #fafafa;
+  font-weight: normal;
 }
 .node > a.text:hover,
 .node > a:hover,
