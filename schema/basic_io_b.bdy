@@ -216,7 +216,17 @@ create or replace package body basic_io_b is
 	
 		if 'accept' like topic then
 			x.t('<hr/>');
-			b.line('## all http request headers parsed to array');
+			b.line('## all http request headers for content negotiation');
+			b.line;
+			n := ra.params.first;
+			loop
+				exit when n is null;
+				if n like 'h$accept%' then
+					tmp.stv := ra.params(n);
+					b.line(sn || n || ' : [' || t.join(tmp.stv, ', ') || ']');
+				end if;
+				n := ra.params.next(n);
+			end loop;
 			b.line;
 			n := ra.params.first;
 			loop
@@ -229,6 +239,21 @@ create or replace package body basic_io_b is
 			end loop;
 		end if;
 	
+		if 'array' like topic then
+			x.t('<hr/>');
+			b.line('## all http request headers parsed to array');
+			b.line;
+			n := ra.params.first;
+			loop
+				exit when n is null;
+				if n like 'h$$%' then
+					tmp.stv := ra.params(n);
+					b.line(sn || n || ' : [' || t.join(tmp.stv, ', ') || ']');
+				end if;
+				n := ra.params.next(n);
+			end loop;
+		end if;
+
 		if 'cookie' like topic then
 			x.t('<hr/>');
 			b.line('## This is all http request cookies');
