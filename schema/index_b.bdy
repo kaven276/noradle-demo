@@ -303,7 +303,7 @@ create or replace package body index_b is
 			x.p('<div.node>', hd1 || x.p('<b>', 'UI lib'));
 			x.o('<div.branch.collapse>');
 			x.p(' <div.node>', hd2 || x.a('<a target=_blank>', 'bootstrap', 'bootstrap_b.packages'));
-			x.p(' <div.node>', hd2 || x.a('<a>', 'semantic UI', 'javascript:alert(''comming soon...'')'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'semantic UI', 'semantic_ui_b.d'));
 			x.p(' <div.node>', hd2 || x.a('<a>', 'pure css', 'javascript:alert(''comming soon...'')'));
 			x.p(' <div.node>', hd2 || x.a('<a>', 'jQuery UI', 'javascript:alert(''comming soon...'')'));
 			x.c('</div>');
