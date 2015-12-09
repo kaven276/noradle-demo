@@ -8,7 +8,8 @@ create or replace package body index_b is
 		j.t(' <title>', 'PSP.WEB test/demo suite');
 		j.t('</head>');
 		j.t('<frameset cols=280,* frameborder=yes>');
-		j.u(' <frame name=dir scrolling=true style="border-right:1px solid gray;overflow-y:scroll;">', '@b.dir');
+		j.p(1, 'border-right:1px solid gray;overflow-y:scroll;');
+		j.u(' <frame name=dir scrolling=true style=?>', '@b.dir');
 		j.u(' <frame name=page>', '@b.page');
 		j.t('</frameset>');
 		j.t('</html>');
@@ -306,7 +307,7 @@ create or replace package body index_b is
 			x.p(' <div.node>', hd2 || x.a('<a>', 'pure css', 'javascript:alert(''comming soon...'')'));
 			x.p(' <div.node>', hd2 || x.a('<a>', 'jQuery UI', 'javascript:alert(''comming soon...'')'));
 			x.c('</div>');
-
+		
 			x.p('<div.node>', hd1 || x.p('<b>', 'chart'));
 			x.o('<div.branch.collapse>');
 			x.p(' <div.node>', hd1 || x.p('<b>', 'chart.js'));
