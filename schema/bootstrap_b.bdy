@@ -12,6 +12,7 @@ create or replace package body bootstrap_b is
 		j.u('  <script>', '[bootstrap.js]', '');
 		j.t(' </head>');
 		j.t(' <body>');
+		j.t('<h2>', j.u('<a target=_blank>', 'http://getbootstrap.com/', 'bootstrap official site'));
 	end;
 
 	procedure navs(p_type varchar2) is

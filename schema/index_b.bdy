@@ -302,10 +302,11 @@ create or replace package body index_b is
 		
 			x.p('<div.node>', hd1 || x.p('<b>', 'UI lib'));
 			x.o('<div.branch.collapse>');
-			x.p(' <div.node>', hd2 || x.a('<a target=_blank>', 'bootstrap', 'bootstrap_b.packages'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'bootstrap', 'bootstrap_b.packages'));
 			x.p(' <div.node>', hd2 || x.a('<a>', 'semantic UI', 'semantic_ui_b.d'));
-			x.p(' <div.node>', hd2 || x.a('<a>', 'pure css', 'purecss_b.d'));
-			x.p(' <div.node>', hd2 || x.a('<a>', 'jQuery UI', 'javascript:alert(''comming soon...'')'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'purecss', 'purecss_b.d'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'jQuery ui', 'jquery_ui_b.d'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'jQuery mobile', 'jquery_mobile_b.d'));
 			x.c('</div>');
 		
 			x.p('<div.node>', hd1 || x.p('<b>', 'chart'));

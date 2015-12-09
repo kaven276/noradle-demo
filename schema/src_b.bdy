@@ -117,6 +117,7 @@ create or replace package body src_b is
 			if v_type != 'html' then
 				return;
 			end if;
+			b.l('<meta name="viewport" content="width=device-width, initial-scale=1"/>');
 			x.a('<a target=_blank>', 'inspect(plain) ' || r.prog, r.url || t.tf(r.qstr is null, '?', '&') || 'inspect');
 			x.t('<br/><br/>');
 			x.a('<a target=_blank>',
