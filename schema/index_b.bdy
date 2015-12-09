@@ -299,13 +299,24 @@ create or replace package body index_b is
 		begin
 			x.o('<div.branch.collapse>');
 		
-			x.p('<div.node>', hd1 || x.p('<b>', 'chart.js'));
+			x.p('<div.node>', hd1 || x.p('<b>', 'UI lib'));
 			x.o('<div.branch.collapse>');
-			x.p(' <div.node>', hd2 || x.a('<a>', 'salary min/max by job_id', 'chart_b.salary_min_max_by_job_id'));
-			x.p(' <div.node>', hd2 || x.a('<a>', 'salary share by job_id', 'chart_b.salary_share_by_job_id'));
+			x.p(' <div.node>', hd2 || x.a('<a target=_blank>', 'bootstrap', 'bootstrap_b.packages'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'semantic UI', 'javascript:alert(''comming soon...'')'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'pure css', 'javascript:alert(''comming soon...'')'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'jQuery UI', 'javascript:alert(''comming soon...'')'));
 			x.c('</div>');
-			x.p('<div.node>', hd2 || x.a('<a target=_blank>', 'd3', 'https://github.com/mbostock/d3/wiki/Gallery'));
-			x.p('<div.node>', hd2 || x.a('<a target=_blank>', 'hcharts', 'http://www.hcharts.cn/'));
+
+			x.p('<div.node>', hd1 || x.p('<b>', 'chart'));
+			x.o('<div.branch.collapse>');
+			x.p(' <div.node>', hd1 || x.p('<b>', 'chart.js'));
+			x.o('  <div.branch.collapse>');
+			x.p('   <div.node>', hd2 || x.a('<a>', 'salary min/max by job_id', 'chart_b.salary_min_max_by_job_id'));
+			x.p('   <div.node>', hd2 || x.a('<a>', 'salary share by job_id', 'chart_b.salary_share_by_job_id'));
+			x.c('  </div>');
+			x.p(' <div.node>', hd2 || x.a('<a target=_blank>', 'd3', 'https://github.com/mbostock/d3/wiki/Gallery'));
+			x.p(' <div.node>', hd2 || x.a('<a target=_blank>', 'hcharts', 'http://www.hcharts.cn/'));
+			x.c('</div>');
 		
 			x.p('<div.node>', hd1 || x.p('<b>', 'icons'));
 			x.o('<div.branch.collapse>');
