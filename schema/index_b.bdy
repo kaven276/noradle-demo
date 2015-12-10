@@ -318,6 +318,8 @@ create or replace package body index_b is
 			x.c('  </div>');
 			x.p(' <div.node>', hd2 || x.a('<a target=_blank>', 'd3', 'https://github.com/mbostock/d3/wiki/Gallery'));
 			x.p(' <div.node>', hd2 || x.a('<a target=_blank>', 'hcharts', 'http://www.hcharts.cn/'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'highcharts', 'highcharts_b.d'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'ng-nvd3', 'ng_nvd3_b.d'));
 			x.c('</div>');
 		
 			x.p('<div.node>', hd1 || x.p('<b>', 'icons'));
