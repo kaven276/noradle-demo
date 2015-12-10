@@ -23,6 +23,9 @@ insert into ext_url_v values('jquery.mobile.css','//cdn.bootcss.com/jquery-mobil
 insert into ext_url_v values('jquery.mobile.js','//cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js');
 insert into ext_url_v values('jscdn','https://cdnjs.cloudflare.com/ajax/libs/');
 insert into ext_url_v values('knockout.js','//cdn.bootcss.com/knockout/3.3.0/knockout-min.js');
+insert into ext_url_v values('medium-editor.css','//cdn.bootcss.com/medium-editor/5.11.0/css/medium-editor.min.css');
+insert into ext_url_v values('medium-editor.js','//cdn.bootcss.com/medium-editor/5.11.0/js/medium-editor.min.js');
+insert into ext_url_v values('pjax.js','//cdn.bootcss.com/jquery.pjax/1.9.6/jquery.pjax.min.js');
 insert into ext_url_v values('pure.css','//cdn.bootcss.com/pure/0.6.0/pure-min.css');
 insert into ext_url_v values('semantic.css','//cdn.bootcss.com/semantic-ui/2.1.6/semantic.min.css');
 insert into ext_url_v values('semantic.js','//cdn.bootcss.com/semantic-ui/2.1.6/semantic.min.js');

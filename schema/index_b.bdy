@@ -335,6 +335,13 @@ create or replace package body index_b is
 			x.p(' <div.node>', hd2 || x.a('<a>', 'handsontable', 'tables_h.handsontable'));
 			x.p(' <div.node>', hd2 || x.a('<a>', 'datatables', 'tables_h.datatables'));
 			x.c('</div>');
+
+			x.p(' <div.node>', hd2 || x.a('<a>', 'pjax', 'pjax_h.d'));
+
+			x.p('<div.node>', hd1 || x.p('<b>', 'rich edit'));
+			x.o('<div.branch.collapse>');
+			x.p(' <div.node>', hd2 || x.a('<a>', 'rich edit index', 'rich_edit_h.d'));
+			x.c('</div>');
 		
 			x.c('</div>');
 		end;
