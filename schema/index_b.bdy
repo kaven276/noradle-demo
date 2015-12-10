@@ -259,6 +259,7 @@ create or replace package body index_b is
 		x.p(' <div.node>', hd2 || x.a('<a target=_blank>', 'frameset container', 'po_frameset_b.main'));
 		x.p(' <div.node>', hd2 || x.a('<a target=_blank>', 'iframe container', 'po_iframe_b.main'));
 		x.p(' <div.node>', hd2 || x.a('<a target=_blank>', 'ajaxload containver', 'po_ajaxload_b.main'));
+		x.p(' <div.node>', hd2 || x.a('<a target=_blank>', 'pjax', 'pjax_h.d'));
 		x.c('</div>');
 	
 		x.p('<div.node>', hd1 || x.p('<b>', 'oracle xml/json support'));
@@ -281,7 +282,7 @@ create or replace package body index_b is
 		x.p('<div.node>', hd1 || x.p('<b>', 'advanced SQL'));
 		begin
 			x.o('<div.branch.collapse>');
-			x.p('<div.node>', hd1 || x.p('<b>', 'reports'));
+			x.p('<div.node>', hd1 || x.p('<b>', 'SQL for aggregation'));
 			x.o('<div.branch.collapse>');
 			x.p(' <div.node>', hd2 || x.a('<a>', 'emp_managers(hierachical)', 'aggregation_b.emp_managers'));
 			x.p(' <div.node>', hd2 || x.a('<a>', 'emp_salaries(simple rollup)', 'aggregation_b.emp_salaries'));
@@ -289,9 +290,16 @@ create or replace package body index_b is
 			x.p(' <div.node>', hd2 || x.a('<a>', 'job_dept_sals(cube)', 'aggregation_b.job_dept_sals'));
 			x.p(' <div.node>', hd2 || x.a('<a>', 'dept_job_sals(cube)', 'aggregation_b.dept_job_sals'));
 			x.c('</div>');
-			x.p('<div.node>', hd1 || x.p('<b>', 'analytic SQL'));
-			x.p('<div.node>', hd1 || x.p('<b>', 'datawarehouse SQL'));
-			x.p('<div.node>', hd1 || x.p('<b>', 'statictic SQL'));
+			x.p('<div.node>', hd1 || x.a('<a>', 'SQL for analysis/reporting', 'analysis_reporting_b.d'));
+			x.o('<div.branch.collapse>');
+			x.c('</div>');
+			x.p('<div.node>', hd1 || x.a('<a>', 'SQL for pattern matching', 'pattern_matching_b.d'));
+			x.o('<div.branch.collapse>');
+			x.c('</div>');
+			x.p('<div.node>', hd1 || x.a('<a>', 'SQL for modeling', 'modeling_b.d'));
+			x.o('<div.branch.collapse>');
+			x.c('</div>');
+			x.p('<div.node>', hd1 || x.p('<b>', 'statictical SQL'));
 			x.p('<div.node>', hd1 || x.p('<b>', 'OLAP'));
 			x.c('</div>');
 		end;
