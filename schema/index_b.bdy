@@ -108,7 +108,7 @@ create or replace package body index_b is
 		x.p('<div.node>', hd1 || x.p('<b>', 'page service: html/xml print'));
 		begin
 			x.o('<div.branch.collapse>');
-			x.p('<div.node>', hd1 || x.p('<b>', 'x(tag) print'));
+			x.p('<div.node>', hd1 || x.p('<b>', 'x(tag) print(deprecated)'));
 			x.o('<div.branch.collapse>');
 			x.p(' <div.node>', hd2 || x.a('<a>', 'tags', 'x_tag_b.tags'));
 			x.p(' <div.node>', hd2 || x.a('<a>', 'tag_attr', 'x_tag_b.tag_attr'));
@@ -118,6 +118,8 @@ create or replace package body index_b is
 			x.p(' <div.node>', hd2 || x.a('<a>', 'bool_attr', 'x_tag_b.bool_attr'));
 			x.c('</div>');
 		
+			x.p('<div.node>', hd1 || x.a('<a>', 'o(ztag) print', 'o_ztag_b.d?inspect&markdown'));
+
 			x.p('<div.node>', hd1 || x.p('<b>', 'm(multi) print'));
 			x.o('<div.branch.collapse>');
 			x.p(' <div.node>', hd2 || x.a('<a>', 'wrap_each_array_value', 'm_multi_b.wrap_each_array_value'));
@@ -279,7 +281,7 @@ create or replace package body index_b is
 			x.c('</div>');
 		end;
 	
-		x.p('<div.node>', hd1 || x.p('<b>', 'advanced SQL'));
+		x.p('<div.node>', hd1 || x.p('<b>', 'advanced SQL integration'));
 		begin
 			x.o('<div.branch.collapse>');
 			x.p('<div.node>', hd1 || x.p('<b>', 'SQL for aggregation'));
