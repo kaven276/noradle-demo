@@ -117,8 +117,20 @@ create or replace package body index_b is
 			x.p(' <div.node>', hd2 || x.a('<a>', 'text', 'x_tag_b.text'));
 			x.p(' <div.node>', hd2 || x.a('<a>', 'bool_attr', 'x_tag_b.bool_attr'));
 			x.c('</div>');
-		
+
 			x.p('<div.node>', hd1 || x.a('<a>', 'o(ztag) print', 'o_ztag_b.d?inspect&markdown'));
+			x.o('<div.branch.collapse>');
+			x.p(' <div.node>', hd2 || x.a('<a>', 'tag(id/classes)', 'o_ztag_b.id_classes?inspect&markdown'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'tag(bool attr)', 'o_ztag_b.bool_attr?inspect&markdown'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'tag(value attr)', 'o_ztag_b.value_attr?inspect&markdown'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'tag(data- attr)', 'o_ztag_b.data_attr?inspect&markdown'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'tag(all attr types)', 'o_ztag_b.tag_all?inspect&markdown'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'tag with url', 'o_ztag_b.url?inspect&markdown'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'tag with value', 'o_ztag_b.val?inspect&markdown'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'tag with params', 'o_ztag_b.param?inspect&markdown'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'comments', 'o_ztag_b.comments?inspect&markdown'));
+			x.p(' <div.node>', hd2 || x.a('<a>', 'source code trace', 'o_ztag_b.trace?inspect&markdown'));
+			x.c('</div>');
 
 			x.p('<div.node>', hd1 || x.p('<b>', 'm(multi) print'));
 			x.o('<div.branch.collapse>');
