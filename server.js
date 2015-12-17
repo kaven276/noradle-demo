@@ -2,6 +2,24 @@
 /**
  * Created by cuccpkfs on 14-12-17.
  */
+
+var program = require('commander');
+
+program
+  .version(require('./package.json').version)
+  .option('-p, --listen_port [port]', 'listening port', '8888')
+  .option('-d, --dispatcher_addr [port:host]', 'dispatcher listening address', '1522:')
+  .option('--cid [client id]', 'client identifier to access dispatcher', 'demo')
+  .option('--passwd [password]', 'password for cid', 'demo')
+  .option('--dbu [database user]', 'database schema user that hold demo objects', 'demo')
+  .parse(process.argv)
+;
+
+console.log('noradle-demo server started with the following options:');
+console.log(require('text-table')('listen_port,dispatcher_addr,cid,passwd,dbu'.split(',').map(function(key, i){
+  return [key, program[key]];
+})));
+
 var marked = require('marked');
 marked.setOptions({
   renderer : new marked.Renderer(),
@@ -28,13 +46,13 @@ var noradle = require('noradle')
   , y$static = '/demo/'
   ;
 
-var dbPool = noradle.DBDriver.connect((process.argv[2] || '1522').split(':'), {
-  cid : 'demo',
-  passwd : 'demo'
+var dbPool = noradle.DBDriver.connect((program.dispatcher_addr).split(':'), {
+  cid : program.cid,
+  passwd : program.passwd
 });
 
 app.use(noradle.handlerHTTP(dbPool, {
-  x$dbu : 'demo',
+  x$dbu : program.dbu,
   url_pattern : '/i$app/x$prog',
   x$prog : 'index_b.frame',
   u$location : '/demo/',
@@ -69,7 +87,7 @@ app.get('/favicon.ico', function(req, res){
  * start a combined http server, which inclucde
  * plsql servlet, static file, harp compiler
  */
-var http_port = parseInt(process.argv[3] || 8888);
-app.listen(http_port, function(){
-  console.log('http server is listening at ' + http_port);
+
+app.listen(program.listen_port, function(){
+  console.log('http server is listening at ' + program.listen_port);
 });
