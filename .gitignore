@@ -5,6 +5,5 @@ static/csstest/
 static/jsprint/
 upload/
 *expr*
-*test*
 *.del
 Thumbs.db
