@@ -107,6 +107,9 @@ create or replace package body src_b is
 		v_pos  pls_integer;
 		v_type varchar2(100) := h.mime_type;
 	begin
+		if r.call_type in ('DATA', 'NDBC') then
+			return;
+		end if;
 		v_pos  := instrb(v_type, '/');
 		v_type := substrb(v_type, v_pos + 1);
 		if r.pack = 'db_src_b' then
