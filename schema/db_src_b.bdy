@@ -4,7 +4,7 @@ create or replace package body db_src_b is
 		cur sys_refcursor;
 	begin
 		src_b.header;
-		if not r.is_null('template') then
+		if r.not_null('template') then
 			h.convert_json_template(r.getc('template'), r.getc('engine'));
 		end if;
 	
