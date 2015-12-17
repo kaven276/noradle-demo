@@ -19,15 +19,30 @@ sqlplus "/ as sysdba" @http://static.noradle.com/repo/noradle-demo/install.sql
 
 In oracle database, configure server_control_t, and run noradle dispatcher to listen for client connection.
 
-`npm start [dispatcher_addr:=1522] [http_listen_addr:=8888]` to start the demo.
+run `noradle-demo -h` for command option help
 
-or
+```shell
+  Usage: noradle-demo [options]
 
-run `noradle-demo [dispatcher_addr:=1522] [http_listen_addr:=8888]`
+  Options:
 
-how to start noradle server, see <https://github.com/kaven276/noradle>
+    -h, --help                         output usage information
+    -V, --version                      output the version number
+    -p, --listen_port [port]           listening port
+    -d, --dispatcher_addr [port:host]  dispatcher listening address
+    --cid [client id]                  client identifier to access dispatcher
+    --passwd [password]                password for cid
+    --dbu [database user]              database schema user that hold demo objects
+```
 
-Check http://127.0.0.1:8888/demo to see if demo web app is working.
+start noradle-demo server example
+
+```shell
+noradle-demo -p 8888 -d 1522: --cid demo --passwd demo --dbu demo
+```
+
+
+Check http://127.0.0.1:8888 to see if demo web app is working.
 
 # feature exhibited
 
