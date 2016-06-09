@@ -41,6 +41,6 @@ whenever sqlerror exit
 prompt noradle-demo bundle in oracle db part have been installed successfully!
 prompt Please follow the steps below to learn from demo
 prompt 1. config server_config_t, start oracle processes and dispatcher process as in noradle document/wiki
-prompt 2. run `noradle-demo [dispatcher_addr:=1522] [http_listen_addr:=8888]`
-prompt 3. in your browser, access "http://localhost:8888/demo" (for example) to see the demo
+prompt 2. run `noradle-demo -d 1522 -p 1523 --cid demo --passwd demo --dbu &demodbu`
+prompt 3. in your browser, access "http://localhost:1523/demo" (for example) to see the demo
 spool off
