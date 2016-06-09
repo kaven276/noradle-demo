@@ -9,14 +9,15 @@ whenever sqlerror exit
 
 --------------------------------------------------------------------------------
 
-prompt Are you sure you have clean empty DEMO db user/schema already?
 prompt Noradle demo's units(tables,plsql,...) in oracle will be installed to the schema
-prompt You can try the sql scripts below to achieve the preparation required above.
-prompt drop user demo cascade;;
-prompt create user demo identified by demo default tablespace sysaux temporary tablespace temp;;
-prompt alter user demo quota unlimited on sysaux;;
-pause if not, create empty DEMO db users beforehand, and then press enter to continue
+prompt if exists, just ignore; if not exists, will be created automatically
 accept demodbu char default 'demo' prompt 'Enter the schema/User(must already exist) for noradle demo (demo) : '
+
+# try create noradle demo db user
+whenever sqlerror continue
+create user &demodbu identified by demo default tablespace sysaux temporary tablespace temp;
+alter user &demodbu quota unlimited on sysaux;
+whenever sqlerror exit
 
 prompt Installing Noracle(psp.web) demo app to schema "&demodbu"
 pause press enter to continue ...
