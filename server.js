@@ -39,9 +39,10 @@ marked.setOptions({
     });
   }
 });
-
-var noradle = require('noradle')
-  , express = require('express')
+var noradle = {
+  DBDriver : require('noradle-nodejs-client').DBDriver,
+  handlerHTTP : require('noradle-http')
+} , express = require('express')
   , app = express()
   , y$static = '/demo/'
   ;
