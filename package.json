@@ -32,8 +32,8 @@
     "express": "^4.13.3",
     "highlight.js": "^8.8.0",
     "marked": "^0.3.5",
-    "noradle/noradle-nodejs-client": "",
-    "noradle/noradle-http": "",
+    "noradle-nodejs-client": "noradle/noradle-nodejs-client",
+    "noradle-http": "noradle/noradle-http",
     "text-table": "^0.2.0"
   },
   "devDependencies": {},
